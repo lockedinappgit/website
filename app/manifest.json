@@ -1,11 +1,11 @@
-{
+﻿{
   "name": "Locked In",
   "short_name": "Locked In",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#08070d",
-  "theme_color": "#08070d",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "lang": "de",
   "icons": [
     { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
