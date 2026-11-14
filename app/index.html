@@ -41,14 +41,17 @@
 [hidden]{display:none!important}
 html,body{background:var(--bg)}
 body{color:var(--fg);font-family:var(--f);font-size:17px;line-height:1.35;letter-spacing:-.01em;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;min-height:100%}
-/* mesh gradient backdrop */
-.mesh{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(70px);opacity:.8}
-.mesh i{position:absolute;border-radius:50%;width:60vmax;height:60vmax;animation:drift 26s ease-in-out infinite alternate}
-.mesh i:nth-child(1){background:var(--blob1);left:-5%;top:-10%}
-.mesh i:nth-child(2){background:var(--blob2);right:-15%;top:10%;animation-duration:32s;animation-delay:-8s}
-.mesh i:nth-child(3){background:var(--blob3);left:10%;bottom:-20%;animation-duration:36s;animation-delay:-14s}
-.mesh i:nth-child(4){background:var(--blob4);right:-10%;bottom:5%;width:40vmax;height:40vmax;animation-duration:30s;animation-delay:-4s}
-@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.12)}}
+/* mesh gradient backdrop: weiche Farbflecken hinter dem Milchglas.
+   Früher: Kreise mit Weichzeichner (blur 70px über 140 % des Bildschirms), die sich ununterbrochen bewegten. Dadurch musste der
+   Bildschirm samt allen Milchglas-Flächen 60-mal pro Sekunde neu berechnet werden: kostete Akku und ließ den Android-Emulator
+   hängen („reagiert nicht“). Jetzt: still stehende radiale Verläufe mit derselben Wirkung, kein Filter, keine Dauer-Animation. */
+.mesh{position:fixed;inset:-20%;z-index:0;pointer-events:none;opacity:.8}
+.mesh i{position:absolute;border-radius:50%;width:60vmax;height:60vmax;transform:scale(1.5);
+  background:radial-gradient(closest-side,var(--c) 34%,color-mix(in srgb,var(--c) 50%,transparent) 67%,transparent)}
+.mesh i:nth-child(1){--c:var(--blob1);left:-5%;top:-10%}
+.mesh i:nth-child(2){--c:var(--blob2);right:-15%;top:10%}
+.mesh i:nth-child(3){--c:var(--blob3);left:10%;bottom:-20%}
+.mesh i:nth-child(4){--c:var(--blob4);right:-10%;bottom:5%;width:40vmax;height:40vmax}
 
 .wrap{position:relative;z-index:1;max-width:520px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px 56px;display:flex;flex-direction:column;gap:18px}
 button,input,textarea{font:inherit;color:inherit;letter-spacing:inherit}
@@ -1276,6 +1279,78 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
 .toast.frz-toast{width:calc(100% - 32px);max-width:400px;box-sizing:border-box;border-radius:22px;padding:12px 16px 12px 12px;line-height:1.35}
 .frz-toast .frz-ic.big{width:36px;height:40px;margin:0 2px 0 2px}
 
+/* v9: Geräte & Hersteller, Motivation („Dein Warum“), Abzeichen-Stufen */
+
+/* ----- Geräte ----- */
+.mach-chip{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;max-width:100%;margin-top:4px;padding:6px 10px 6px 9px;border-radius:999px;
+  background:var(--fill);color:var(--muted);font-size:13.5px;font-weight:700}
+.mach-chip svg{width:16px;height:16px;flex:none}
+.mach-chip .chev{width:11px;height:11px;opacity:.7}
+.mach-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.mach-chip.on{color:var(--fg);background:color-mix(in srgb,var(--tint) 14%,var(--fill))}
+.mach-chip.on svg:first-child{color:var(--tint)}
+.mlist{display:flex;flex-direction:column;background:var(--fill);border-radius:16px;overflow:hidden}
+.mrow{display:flex;align-items:center;gap:6px;padding-right:10px}
+.mrow+.mrow{border-top:1px solid var(--sep)}
+.mrow-pick{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:12px 4px 12px 14px;text-align:left;color:inherit}
+.mrow-pick .chev{width:14px;height:14px;color:var(--muted);flex:none;margin-left:auto}
+.mrow-dot{width:20px;height:20px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 2px var(--fill2)}
+.mrow.on .mrow-dot{box-shadow:inset 0 0 0 6px var(--tint)}
+.mrow-ic{width:22px;height:22px;flex:none;color:var(--tint)}.mrow-ic svg{width:100%;height:100%}
+.mrow-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mrow-t b{font-size:15.5px}
+.mfilt .fchip svg{width:14px;height:14px;color:var(--tint)}
+
+/* ----- Abzeichen: alle Stufen einer Reihe ----- */
+.bfam .bcell.cur .medal{border-radius:50%;box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--tint)}
+.bfam .bcell.cur span{color:var(--fg)}
+
+/* ----- Motivations-Karte ----- */
+.mot{position:relative;overflow:hidden;gap:12px!important;border:1px solid color-mix(in srgb,var(--tint) 40%,transparent)!important;
+  background:linear-gradient(160deg,color-mix(in srgb,var(--grad-b) 26%,var(--glass)) 0%,color-mix(in srgb,var(--grad-a) 8%,var(--glass)) 55%,var(--glass) 100%)!important}
+.mot::before{content:"";position:absolute;right:-60px;top:-70px;width:200px;height:200px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,color-mix(in srgb,var(--grad-a) 35%,transparent),transparent 70%);opacity:.7}
+.mot>*{position:relative}
+.mot-eye{font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--tint)}
+.mot-h{margin:-4px 0 0;font-size:21px;font-weight:800;line-height:1.2;letter-spacing:-.01em}
+.mot-q{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-radius:16px;background:color-mix(in srgb,var(--bg) 40%,transparent);
+  border-left:3px solid var(--tint);font-size:17px;font-weight:650;line-height:1.38}
+.mot-q cite{font-style:normal;font-size:12.5px;font-weight:600;color:var(--muted)}
+.mot-q.empty{font-size:14.5px;font-weight:500;color:var(--muted);border-left-color:var(--fill2)}
+.mot-more{align-self:flex-end;padding:0;font-size:13.5px;font-weight:700;margin-top:-2px}
+.mot-tags{display:flex;flex-wrap:wrap;gap:6px}
+.mot-tags span{font-size:12.5px;font-weight:700;color:var(--tint);background:color-mix(in srgb,var(--tint) 14%,transparent);padding:4px 10px;border-radius:999px}
+.mot-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px}
+.mot-facts>div{display:flex;flex-direction:column;gap:3px;padding:10px 11px;border-radius:14px;background:color-mix(in srgb,var(--bg) 40%,transparent);min-width:0}
+.mot-facts b{font-family:var(--f-round);font-size:20px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums}
+.mot-facts span{font-size:12px;line-height:1.25;color:var(--muted);font-weight:600}
+.mot-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mot-row .btn{height:44px;padding:0 10px;font-size:15px}
+.mot-row .btn:only-child{grid-column:1/-1}
+.mot-deal-t{text-align:center;margin-top:-4px}
+.mot-skip{align-self:center;color:var(--muted);font-size:14px}
+.mot-tip{font-size:14px;line-height:1.4;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--tint) 10%,transparent)}
+.mot.v-commit{gap:10px!important}
+.mot.v-commit .mot-h{font-size:19px}
+.mot.v-broken,.mot.v-now{border-color:color-mix(in srgb,var(--tint) 70%,transparent)!important}
+.mot.inl .mot-h{font-size:18px}
+/* Meldung */
+.mot-toast .mot-ti{width:38px;height:38px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:20px;background:linear-gradient(135deg,var(--grad-a),var(--grad-b))}
+.toast.mot-toast{width:calc(100% - 32px);max-width:400px;box-sizing:border-box;border-radius:22px;padding:12px 16px 12px 12px;line-height:1.35}
+/* Früh beenden */
+.mot-nudge{display:flex;flex-direction:column;gap:12px}
+.mn-big{font-size:15px;color:var(--muted)}
+.mn-big b{display:block;font-family:var(--f-round);font-size:30px;font-weight:800;color:var(--fg);line-height:1.1}
+/* Journal und Zusammenfassung */
+.jgym .jmsg{min-height:70px}
+.mpost{gap:12px}
+@media (max-width:360px){.mot-facts{grid-template-columns:1fr 1fr}}
+
+/* Eingabefelder in Fenstern waren unsichtbar (gleicher Hintergrund wie das Fenster) */
+.sheet .field{background:var(--fill);box-shadow:inset 0 0 0 1px var(--sep)}
+/* lange Meldungen: breit statt schmale runde Blase */
+.toast{width:max-content;border-radius:24px;box-sizing:border-box}
+
 </style>
 
 <div class="mesh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -1315,6 +1390,8 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
   </header>
 
   <div class="banner warn" id="save-warn" hidden role="alert"></div>
+  <!-- erscheint von selbst, wenn an einem Gym-Tag die Motivation fehlt (61-motivation.js) -->
+  <section class="panel glass mot" id="mot-card" hidden aria-label="Dein Warum"></section>
   <section class="panel glass dc" id="day-card" aria-label="Dein Tag"></section>
 
   <section class="quote glass" aria-label="Zitat des Tages" id="quote-card" role="button" tabindex="0">
@@ -1522,6 +1599,8 @@ function normGym(x){
   return {split:SPLITS[x.split]?x.split:"custom",templates:x.templates.filter(t=>t&&t.id).map(t=>({id:String(t.id),name:String(t.name||"Workout").slice(0,40),ex:Array.isArray(t.ex)?t.ex.map(String):[],sets:t.sets&&typeof t.sets==="object"?t.sets:{},ss:t.ss&&typeof t.ss==="object"?t.ss:{}})),
     days:x.days&&typeof x.days==="object"?x.days:{},custom:Array.isArray(x.custom)?x.custom:[],active:x.active&&x.active.start?x.active:null,imported:x.imported&&typeof x.imported==="object"?x.imported:{},notes:x.notes&&typeof x.notes==="object"?x.notes:{},mci1:!!x.mci1,mci2:!!x.mci2,mciMeta:x.mciMeta&&typeof x.mciMeta==="object"?x.mciMeta:{},rest:[60,90,120,180,240].includes(x.rest)&&(x.rest!==90||x.restV)?x.rest:120,restV:1,exRest:x.exRest&&typeof x.exRest==="object"?x.exRest:{},swaps:(()=>{const o={},s=x.swaps&&typeof x.swaps==="object"?x.swaps:{},lim=key(addDays(today(),-14));Object.keys(s).forEach(k=>{if(/^\d{4}-\d{2}-\d{2}$/.test(k)&&k>=lim&&typeof s[k]==="string")o[k]=s[k]});return o})(),timed:x.timed&&typeof x.timed==="object"?x.timed:{},plate:x.plate&&typeof x.plate==="object"?x.plate:{},
     repT:x.repT&&typeof x.repT==="object"?x.repT:{},base:x.base&&typeof x.base==="object"?x.base:{},plSide:x.plSide&&typeof x.plSide==="object"?x.plSide:{},
+    machines:(()=>{const o={},M=x.machines&&typeof x.machines==="object"?x.machines:{};Object.keys(M).forEach(k=>{const L=Array.isArray(M[k])?M[k].filter(m=>m&&m.id&&m.maker).slice(0,20).map(m=>{const r={id:String(m.id),maker:String(m.maker).slice(0,30),type:m.type==="p"?"p":"s",base:m.base!=null&&isFinite(m.base)?+m.base:null};if(m.label)r.label=String(m.label).slice(0,30);if(m.legacy)r.legacy=true;return r}):[];if(L.length)o[k]=L});return o})(),
+    mSel:x.mSel&&typeof x.mSel==="object"?x.mSel:{},
     plates:(()=>{const p=x.plates&&typeof x.plates==="object"?x.plates:{},ok=a=>Array.isArray(a)&&a.length?a.map(Number).filter(v=>v>0&&v<=100).sort((a,b)=>b-a):null;return {kg:ok(p.kg),lb:ok(p.lb)}})()};
 }
 
@@ -1952,6 +2031,7 @@ function setPage(p){
   const hs={cal:"#kalender",gym:"#training",food:"#ernaehrung",stats:"#stats",journal:"#journal",set:"#einstellungen"}[p];
   try{history.replaceState(null,"",hs||location.pathname+location.search)}catch(e){}
   if(p==="cal")renderCalPage();if(p==="gym")renderGym();if(p==="stats")renderStats();if(p==="food"&&typeof renderFood==="function")renderFood();if(p==="journal"&&typeof renderJournal==="function"){jDate=null;renderJournal()}if(p==="set"&&typeof renderSetPage==="function")renderSetPage();if(typeof syncSubbar==="function")syncSubbar();if(p!=="gym")document.querySelector(".app").classList.remove("focus");if(typeof islandTick==="function")islandTick();if(typeof tipSoon==="function")tipSoon();
+  if(p==="home"&&typeof renderMot==="function")renderMot();
   $("scroller").scrollTop=0;
 }
 function shift(n){
@@ -2218,7 +2298,7 @@ function wcard(o){
 }
 function recBar(t,at,lbl){let rec=100;try{rec=Math.round(tplRec(t,recoveryPct(at)))}catch(e){}const rc=rec>=90?"var(--ok)":rec>=70?"#ffb300":"var(--miss)";return '<div class="th-rec"><span>'+(lbl||"Zielmuskeln erholt")+'</span><i><b style="width:'+Math.max(4,rec)+'%;background:'+rc+'"></b></i><em style="color:'+rc+'">'+rec+' %</em></div>'}
 function rowsHtml(R){return '<div class="th-list">'+(R.length?R.map((r,i)=>'<div class="th-row"><span class="th-i">'+String(i+1).padStart(2,"0")+'</span><span class="th-n">'+esc(r.n)+'</span><span class="th-s">'+r.s+'</span><span class="th-w">'+r.w+'</span></div>').join(""):'<div class="foot">Noch keine Übungen.</div>')+'</div>'}
-function tplRows(tpl){return tpl.ex.map(ex=>{const n=tplSets(tpl,ex),last=lastFor(ex),w=last?Math.max(0,...last.map(s=>+s.w||0)):0,oh=overloadHint(ex),ww=oh&&oh.w?oh.w:w;return {n:exById(ex).name,s:n+' × '+(isTimed(ex)?"Zeit":repLbl(ex)),w:ww?fmt(uW(ww))+' '+UL():'–'}})}
+function tplRows(tpl){return tpl.ex.map(ex=>{const n=tplSets(tpl,ex),last=lastForDef(ex),w=last?Math.max(0,...last.map(s=>+s.w||0)):0,oh=overloadHint(ex),ww=oh&&oh.w?oh.w:w;return {n:exById(ex).name,s:n+' × '+(isTimed(ex)?"Zeit":repLbl(ex)),w:ww?fmt(uW(ww))+' '+UL():'–'}})}
 function sessRows(s){return (s.entries||[]).map(e=>{const ss=(e.sets||[]).filter(t=>t.type!=="w"),ex=exById(e.ex);if(!ss.length)return {n:ex.name,s:s.mci?"aus MCI":"–",w:"–"};
   const tm=ss.some(t=>+t.sec>0),rs=ss.map(t=>+t.r||0).filter(Boolean),lo=Math.min(...rs),hi=Math.max(...rs),w=Math.max(0,...ss.map(t=>+t.w||0));
   return {n:ex.name,s:ss.length+' × '+(tm?fmtSec(Math.max(...ss.map(t=>+t.sec||0))):rs.length?(lo===hi?lo:lo+'–'+hi):"–"),w:w?fmt(uW(w))+' '+UL():'–'}})}
@@ -2239,7 +2319,7 @@ function dayCards(k){
       rows:sessRows(s),mid:k===tk?recBar({ex:ids},null,"Zielmuskeln jetzt erholt"):"",btns:'<div class="th-btns"><button class="btn ghost" data-g-sess="'+s.id+'">Zusammenfassung</button>'+(st?'<button class="btn ghost" data-g-start="'+st.id+'">Nochmal starten</button>':'')+'</div>'});
   });
   const hero=!sess.length&&tpl&&k===tk&&!(gid&&lg.includes(gid));
-  if(hero)h+=todayHero(tpl,k);
+  if(hero)h+=(typeof motInline==="function"?motInline():"")+todayHero(tpl,k);
   else if(!sess.length&&tpl){
     const sets=tplTotalSets(tpl),est=tplMinutes(tpl),done=gid&&lg.includes(gid),last=lastSessionOf(tpl.id),sw=!done&&k>=tk&&swapCands(k).length;
     const base={attrs:'data-g-tpl="'+tpl.id+'" data-k="'+k+'" role="button" tabindex="0" aria-label="'+esc(tpl.name)+' ansehen"',name:tpl.name,mus:musOf(tpl.ex),big:est+'<small> min</small>',small:sets+' Sätze',rows:tplRows(tpl),mid:k>tk?recBar(tpl,parse(k).getTime()+17*36e5,(k===key(addDays(today(),1))?"Morgen":DOWL[w])+" voraussichtlich erholt"):k===tk?recBar(tpl):""};
@@ -2336,7 +2416,7 @@ function heroTpl(){const t=today(),k=key(t),gid=gymActId(),tp=tplById(tplIdFor(t
 function todayHero(tpl,k){
   const sets=tplTotalSets(tpl),est=tplMinutes(tpl);let rec=100;try{rec=Math.round(tplRec(tpl,recoveryPct()))}catch(e){}
   const mus=[...new Set(tpl.ex.map(id=>MUSCLES[exById(id).muscle]))].join(", "),rc=rec>=90?"var(--ok)":rec>=70?"#ffb300":"var(--miss)";
-  const rows=tpl.ex.map((ex,i)=>{const n=tplSets(tpl,ex),last=lastFor(ex),w=last?Math.max(0,...last.map(s=>+s.w||0)):0,oh=overloadHint(ex),ww=oh&&oh.w?oh.w:w,tm=isTimed(ex);
+  const rows=tpl.ex.map((ex,i)=>{const n=tplSets(tpl,ex),last=lastForDef(ex),w=last?Math.max(0,...last.map(s=>+s.w||0)):0,oh=overloadHint(ex),ww=oh&&oh.w?oh.w:w,tm=isTimed(ex);
     return '<div class="th-row"><span class="th-i">'+String(i+1).padStart(2,"0")+'</span><span class="th-n">'+esc(exById(ex).name)+'</span><span class="th-s">'+n+' × '+(tm?"Zeit":repLbl(ex))+'</span><span class="th-w">'+(ww?fmt(uW(ww))+' '+UL():'–')+'</span></div>'}).join("");
   const sw=swapCands(k);
   return '<section class="thero glass" data-g-tpl="'+tpl.id+'" data-k="'+k+'" role="button" tabindex="0" aria-label="'+esc(tpl.name)+' ansehen"><div class="th-top"><div class="th-tt"><span class="eyebrow-t">Heute · '+DOWL[wd(parse(k))]+'</span><b class="th-name">'+esc(tpl.name)+'</b><span class="foot">'+esc(mus)+'</span></div><div class="th-meta"><b>'+est+'<small> min</small></b><span>'+sets+' Sätze</span></div></div>'+
@@ -2433,7 +2513,7 @@ $("page-gym").addEventListener("click",e=>{
     st.done=!st.done;
     if(st.done){restEnd=Date.now()+g.rest*1000;const nx=a.entries[+d.gDone].sets[+d.s+1];if(nx&&!nx.done&&nx.w===""&&nx.r===""){nx.w=st.w;nx.r=st.r}}
     persist();const y=$("scroller").scrollTop;renderGym();$("scroller").scrollTop=y;return}
-  if("gBump" in d){const en=a.entries[+d.gBump],hh=overloadHint(en.ex);if(hh&&hh.w){en.sets.forEach(x=>{if(!x.done){x.w=String(hh.w);x.r="8"}});en.bumped=true;persist();const y=$("scroller").scrollTop;renderGym();$("scroller").scrollTop=y;toast("Neues Gewicht eingetragen")}return}
+  if("gBump" in d){const en=a.entries[+d.gBump],hh=overloadHint(en.ex,en.mach||null);if(hh&&hh.w){en.sets.forEach(x=>{if(!x.done){x.w=String(hh.w);x.r="8"}});en.bumped=true;persist();const y=$("scroller").scrollTop;renderGym();$("scroller").scrollTop=y;toast("Neues Gewicht eingetragen")}return}
   if("gAddset" in d){const e2=a.entries[+d.gAddset],l=e2.sets[e2.sets.length-1];e2.sets.push({w:l?l.w:"",r:l?l.r:"",done:false});syncTpl();persist();const y=$("scroller").scrollTop;renderGym();$("scroller").scrollTop=y;return}
   if("gRmset" in d){a.entries[+d.gRmset].sets.pop();syncTpl();persist();const y=$("scroller").scrollTop;renderGym();$("scroller").scrollTop=y;return}
   if("gRmex" in d){a.entries.splice(+d.gRmex,1);syncTpl();persist();renderGym();return}
@@ -2494,13 +2574,14 @@ function migrateMCI(){
 }
 const fmt2=n=>(Math.round(n*100)/100).toLocaleString("de-DE");
 const METRICS={e1:"Maximalkraft",avg:"Ø Gewicht",top:"Top-Gewicht",vol:"Volumen"};
-function exPoints(ex,metric){
-  const pts=[],own=new Set();
-  sessions.forEach(s=>{const e=s.entries.find(x=>x.ex===ex);if(!e||!e.sets.length)return;own.add(s.date);
+// mach: nur ein Gerät (siehe 62-geraete.js), null = ohne festes Gerät, weglassen = alle Geräte
+function exPoints(ex,metric,mach){
+  const pts=[],own=new Set(),one=mach!==undefined;
+  sessions.forEach(s=>{const e=s.entries.find(x=>x.ex===ex);if(!e||!e.sets.length)return;if(one&&entryMach(ex,e)!==(mach||null))return;own.add(s.date);
     const ws=e.sets.map(t=>t.w);
     const y=metric==="avg"?ws.reduce((a,b)=>a+b,0)/ws.length:metric==="e1"?Math.max(...e.sets.map(t=>e1(t.w,t.r))):metric==="top"?Math.max(...ws):e.sets.reduce((m,t)=>m+t.w*t.r,0);
     pts.push({x:s.start,y:Math.round(y*100)/100,src:"own",d:s.date,s,e})});
-  if(metric==="e1")((G().imported||{})[ex]||[]).forEach(p=>{if(!own.has(p.d))pts.push({x:parse(p.d).getTime()+12*36e5,y:p.v,src:"mci",d:p.d})});
+  if(metric==="e1"&&(!one||(mach||null)===machLegacy(ex)))((G().imported||{})[ex]||[]).forEach(p=>{if(!own.has(p.d))pts.push({x:parse(p.d).getTime()+12*36e5,y:p.v,src:"mci",d:p.d})});
   return pts.sort((a,b)=>a.x-b.x);
 }
 function exWithData(){
@@ -2551,15 +2632,23 @@ function exListHtml(){
   });
   return h;
 }
-function exPointsU(id,m){return exPoints(id,m).map(p=>Object.assign({},p,{y:uW(p.y)}))}
+function exPointsU(id,m,mach){return exPoints(id,m,mach).map(p=>Object.assign({},p,{y:uW(p.y)}))}
+// Statistik einer Übung nach Gerät filtern (nur wenn es für die Übung Geräte gibt)
+var statMach=null;
+function statMachOf(id){return statMach&&statMach.ex===id&&machList(id).length&&(statMach.m===null||machById(id,statMach.m))?statMach.m:undefined}
+function machFilterHtml(id){
+  const L=machList(id);if(!L.length)return "";const cur=statMachOf(id),opts=[["*","Alle Geräte"]].concat(L.map(m=>[m.id,machName(m)]));if(machCount(id,null))opts.push(["","Ohne festes Gerät"]);
+  return '<div class="filters mfilt">'+opts.map(o=>{const on=o[0]==="*"?cur===undefined:cur===(o[0]||null);return '<button class="fchip'+(on?" on":"")+'" data-s-mach="'+esc(o[0])+'">'+(o[0]!=="*"&&o[0]!==""?machIc():"")+esc(o[1])+'</button>'}).join("")+'</div>';
+}
 function exDetailHtml(id){
-  const ex=exById(id),now=Date.now(),win={week:7,month:30,year:365}[statRange];
-  let all=exPointsU(id,statMetric),pts=all;
+  const ex=exById(id),now=Date.now(),win={week:7,month:30,year:365}[statRange],sm=statMachOf(id),hasM=machList(id).length;
+  let all=exPointsU(id,statMetric,sm),pts=all;
   const unit=UL();
   let h='<header class="titlebar"><div style="min-width:0"><button class="linkbtn" data-s-back style="padding-left:0">‹ Statistiken</button><h1 class="brand" style="font-size:30px;overflow-wrap:anywhere">'+esc(ex.name)+'</h1><div class="date">'+MUSCLES[ex.muscle]+'</div></div></header>';
   h+=xMini(id);
   h+='<div class="seg glass" style="grid-template-columns:repeat(5,1fr)">'+[["day","Tag"],["week","Woche"],["month","Monat"],["year","Jahr"],["all","Gesamt"]].map(r=>'<button class="'+(statRange===r[0]?"on":"")+'" data-s-range="'+r[0]+'">'+r[1]+'</button>').join("")+'</div>';
   h+='<div class="filters">'+Object.keys(METRICS).map(k=>'<button class="fchip'+(statMetric===k?" on":"")+'" data-s-metric="'+k+'">'+METRICS[k]+'</button>').join("")+'</div>';
+  h+=machFilterHtml(id);
   if(statRange==="day"){
     const last=all[all.length-1];
     h+='<section class="panel glass">';
@@ -2579,7 +2668,7 @@ function exDetailHtml(id){
       '<div class="foot">'+METRICS[statMetric]+' · '+pts.length+(pts.length===1?" Training":" Trainings")+(statRange==="all"?" insgesamt":" im Zeitraum")+(pts.length?' · Bestwert '+fmt2(best)+' '+UL():"")+'</div>'+
       labelChart(pts,{h:200,year:statRange==="all"||statRange==="year"})+
       (statMetric==="e1"?'<div class="foot">Maximalkraft ist das geschätzte Gewicht für 1 Wiederholung, berechnet aus deinem besten Satz.</div>':((G().imported||{})[id]||[]).length?'<div class="foot">Deine MCI-Daten enthalten nur die Maximalkraft und erscheinen deshalb nur dort.</div>':"")+'</section>';
-    h+='<section class="panel glass"><h2 class="h2">Einträge</h2><div class="checks">'+(pts.length?pts.slice().reverse().map(p=>'<div class="check"><span class="nm">'+parse(p.d).toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"short",year:"numeric"})+'<span class="foot" style="display:block">'+(p.src==="own"?p.e.sets.map(t=>fmt(uW(t.w))+'×'+t.r).join(" · "):"aus MCI")+'</span></span><b class="prv">'+fmt2(p.y)+'<small> '+UL()+'</small></b></div>').join(""):'<div class="empty">Keine Einträge in diesem Zeitraum.</div>')+'</div></section>';
+    h+='<section class="panel glass"><h2 class="h2">Einträge</h2><div class="checks">'+(pts.length?pts.slice().reverse().map(p=>'<div class="check"><span class="nm">'+parse(p.d).toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"short",year:"numeric"})+'<span class="foot" style="display:block">'+(p.src==="own"?p.e.sets.map(t=>fmt(uW(t.w))+'×'+t.r).join(" · ")+(hasM&&sm===undefined?' · '+esc(machName(machById(id,entryMach(id,p.e)))):''):"aus MCI")+'</span></span><b class="prv">'+fmt2(p.y)+'<small> '+UL()+'</small></b></div>').join(""):'<div class="empty">Keine Einträge in diesem Zeitraum.</div>')+'</div></section>';
   }
   return h;
 }
@@ -2891,9 +2980,11 @@ function sumNums(s){return s.mci?{vol:s.meta&&s.meta.vol,dms:s.meta&&s.meta.dur?
 function strengthRows(s){
   return s.entries.map(e=>{
     const now=s.mci?e.v:Math.max(0,...e.sets.map(t=>e1(t.w,t.r)));
-    const prior=exPoints(e.ex,"e1").filter(p=>p.d<s.date);
+    // mit Geräten: nur mit früheren Trainings am selben Gerät vergleichen
+    const hasM=!s.mci&&machList(e.ex).length,mm=hasM?entryMach(e.ex,e):undefined;
+    const prior=exPoints(e.ex,"e1",mm).filter(p=>p.d<s.date);
     const prev=prior.length?prior[prior.length-1].y:null,best=prior.length?Math.max(...prior.map(p=>p.y)):0;
-    return {ex:e.ex,now,prev,pr:prior.length>0&&now>best+0.01,sets:e.sets||[]};
+    return {ex:e.ex,now,prev,pr:prior.length>0&&now>best+0.01,sets:e.sets||[],mach:hasM&&mm?machName(machById(e.ex,mm)):null};
   });
 }
 const FLAME_SVG='<svg viewBox="0 0 54 64" aria-hidden="true"><defs><linearGradient id="sfg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff7a1a" style="stop-color:var(--grad-b)"/><stop offset="1" stop-color="#ffd35a" style="stop-color:var(--grad-a)"/></linearGradient></defs><path d="M27 2c4 10 16 16 16 34a16 16 0 0 1-32 0c0-8 4-13 8-17 0 6 3 9 6 10-2-9 0-19 2-27z" fill="url(#sfg)"/><path d="M27 32c2 5 7 8 7 15a7 7 0 0 1-14 0c0-5 3-8 5-10 0 3 1 4 2 5 0-4 0-7 0-10z" fill="#000" fill-opacity=".2"/></svg>';
@@ -2906,13 +2997,14 @@ function sumHtml(s){
     '<div class="foot sum-date">'+d.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long",year:"numeric"})+(s.mci?" · aus MCI":" · "+new Date(s.start).toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})+" Uhr")+'</div>';
   h+='<section class="sweek glass">'+wk.map((k,i)=>'<span class="dw" style="grid-column:'+(i+1)+'">'+DOW[i]+'</span>').join("")+(b>a?'<span class="band" style="grid-column:'+(a+1)+' / '+(b+2)+'"></span>':"")+
     wk.map((k,i)=>'<span class="dc" style="grid-column:'+(i+1)+'"><span class="bx '+cells[i]+(k===s.date?" me":"")+'">'+(cells[i]==="on"||cells[i]==="pl"?MK_OK:cells[i]==="x"?MK_X:cells[i]==="fz"?frzIc(1):parse(k).getDate())+'</span></span>').join("")+'</section>';
+  if(typeof motPostHtml==="function")h+=motPostHtml(s);
   h+='<section class="sstats glass"><div><b>'+(n.vol?fmt(uW(Math.round(n.vol)))+" "+UL()+"":"–")+'</b><span>Bewegt</span></div><div><b>'+(n.dms?durH(n.dms):"–")+'</b><span>Dauer</span></div><div><b>'+(n.sets||"–")+'</b><span>Sätze</span></div></section>';
   h+='<section class="panel glass"><h2 class="h2">Trainierte Muskeln</h2>'+bodyPair(sessLoads(s),6,1)+'<div class="mlegend"><span>wenig</span><i></i><span>viel</span></div></section>';
   h+='<div><h2 class="h2">Maximalkraft</h2><div class="foot">Geschätztes Gewicht für 1 Wiederholung · letztes Mal → dieses Training</div></div><div class="stack" style="gap:10px">';
   h+=strengthRows(s).map((r,i)=>{
     const dlt=r.prev!=null?r.now-r.prev:0;
     const badge=r.pr?'<span class="trophy">'+ICON.trophy+fmt2(uW(r.now))+' '+UL()+'</span>':r.prev==null?'<span class="dpill neu">Neu</span>':'<span class="dpill '+(dlt>0.005?"up":dlt<-0.005?"down":"")+'">'+(dlt>=0?"+":"")+fmt(uW(dlt))+' '+UL()+'</span>';
-    return '<div class="sgroup glass"><button class="srow" data-sum-ex="'+i+'"><span class="srow-ic">'+ICON.dumbbell+'</span><span class="srow-t"><b>'+esc(exById(r.ex).name)+'</b><span class="foot">'+(r.prev!=null?fmt2(uW(r.prev))+' '+UL()+' → '+fmt2(uW(r.now))+' '+UL()+'':'Erstes Mal · '+fmt2(uW(r.now))+' '+UL()+'')+'</span></span>'+badge+(r.sets.length?'<svg class="chev" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>':"")+'</button>'+
+    return '<div class="sgroup glass"><button class="srow" data-sum-ex="'+i+'"><span class="srow-ic">'+ICON.dumbbell+'</span><span class="srow-t"><b>'+esc(exById(r.ex).name)+'</b><span class="foot">'+(r.prev!=null?fmt2(uW(r.prev))+' '+UL()+' → '+fmt2(uW(r.now))+' '+UL()+'':'Erstes Mal · '+fmt2(uW(r.now))+' '+UL()+'')+(r.mach?' · '+esc(r.mach):'')+'</span></span>'+badge+(r.sets.length?'<svg class="chev" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>':"")+'</button>'+
       (r.sets.length?'<div class="srow-sets" hidden>'+r.sets.map((t,j)=>'<span><b>Satz '+(j+1)+'</b> '+fmt(uW(t.w))+' '+UL()+' × '+t.r+' <em>≈ '+fmt(uW(e1(t.w,t.r)))+' '+UL()+' 1RM</em></span>').join("")+'</div>':"")+'</div>';
   }).join("")+'</div>';
   if(!s.mci)h+=sumAsk?'<div class="confirm"><div class="small">Dieses Workout löschen? Es verschwindet aus allen Statistiken.</div><div class="row"><button class="btn danger" data-sum-del-yes>Löschen</button><button class="btn ghost" data-sum-del-no>Abbrechen</button></div></div>':'<button class="linkbtn danger" data-sum-del style="align-self:center">Workout löschen</button>';
@@ -3030,9 +3122,11 @@ function recPair(R){return '<div class="bodies"><figure>'+bodySvg("front",R,2,RE
 // progressive overload
 function repT(ex){const t=((G().repT)||{})[ex];return t&&t.length===2?t:[8,12]}
 function repLbl(ex){const t=repT(ex);return t[0]===t[1]?String(t[0]):t[0]+"–"+t[1]}
-function overloadHint(ex){
-  const last=lastFor(ex);
-  if(!last||!last.length){const im=(G().imported||{})[ex];return im&&im.length?{kind:"info",text:"Startgewicht aus deiner MCI-Maximalkraft geschätzt. Passe es nach dem ersten Satz an."}:null}
+// m = Gerät (siehe 62-geraete.js). Ohne Angabe: das zuletzt gewählte Gerät der Übung
+function overloadHint(ex,m){
+  const hasM=machList(ex).length,mm=m===undefined?machDef(ex):(m||null),last=hasM?lastForM(ex,mm):lastFor(ex);
+  if(!last||!last.length){if(hasM&&mm)return {kind:"info",text:"Erstes Mal an diesem Gerät. Taste dich mit dem ersten Satz an dein Gewicht heran."};
+    const im=(G().imported||{})[ex];return im&&im.length&&(!hasM||mm===machLegacy(ex))?{kind:"info",text:"Startgewicht aus deiner MCI-Maximalkraft geschätzt. Passe es nach dem ersten Satz an."}:null}
   const w=Math.max(...last.map(s=>s.w)),minR=Math.min(...last.map(s=>s.r));
   const T=repT(ex),lo=T[0],hi=T[1];
   if(w>0&&minR>=hi){const inc=WST();return {kind:"up",text:"Letztes Mal überall "+hi+"+ Wdh. Zeit für "+fmt(uW(w+inc))+" "+UL()+" (+"+fmt(uW(inc))+" "+UL()+").",w:w+inc}}
@@ -3337,22 +3431,25 @@ function rndW(w){const s=WST();return Math.max(0,Math.round(w/s)*s)}
 
 // ---------- entries (override) ----------
 function newEntry(ex,n0){
-  const last=lastFor(ex)||(()=>{const im=((G().imported||{})[ex]||[]);const p=im[im.length-1];return p?[{w:Math.round(p.v*0.75*2)/2,r:10}]:null})();
+  // mit Geräten: die Werte vom zuletzt gewählten Gerät dieser Übung
+  const mach=machDef(ex),hasM=machList(ex).length;
+  const last=(hasM?lastForM(ex,mach):lastFor(ex))||(!hasM||mach===machLegacy(ex)?(()=>{const im=((G().imported||{})[ex]||[]);const p=im[im.length-1];return p?[{w:Math.round(p.v*0.75*2)/2,r:10}]:null})():null);
   const n=n0||(last?Math.max(3,last.length):3),timed=isTimed(ex);
   const e={ex,sets:Array.from({length:n},(_,i)=>{const p=last&&(last[i]||last[last.length-1]);return {w:p&&p.w?String(p.w):"",r:p&&!timed&&p.r?String(p.r):"",sec:p&&p.sec?String(p.sec):"",done:false,type:"n"}})};
-  if(state.settings.autoInc!==false&&!timed){const h=overloadHint(ex);if(h&&h.w){e.sets.forEach(s=>{s.w=String(h.w);s.r=String(repT(ex)[0])});e.auto=true;e.bumped=true}}
+  if(mach)e.mach=mach;
+  if(state.settings.autoInc!==false&&!timed){const h=overloadHint(ex,mach);if(h&&h.w){e.sets.forEach(s=>{s.w=String(h.w);s.r=String(repT(ex)[0])});e.auto=true;e.bumped=true}}
   if(!timed)e.sets.forEach(s=>{if(!s.r)s.r=String(repT(ex)[0])});
   return e;
 }
 function finishEntries(a){
   return a.entries.map(e=>{const done=e.sets.filter(s=>s.done),ws=done.filter(s=>s.type==="w").length;
     const sets=done.filter(s=>s.type!=="w"&&(num(s.r)>0||num(s.sec)>0)).map(s=>{const o={w:num(s.w),r:num(s.r),rir:s.rir==null?null:+s.rir};if(s.type&&s.type!=="n")o.type=s.type;if(num(s.sec)>0)o.sec=num(s.sec);return o});
-    const out={ex:e.ex,sets};if(ws)out.warm=ws;if(e.ss)out.ss=e.ss;return out}).filter(e=>e.sets.length);
+    const out={ex:e.ex,sets};if(ws)out.warm=ws;if(e.ss)out.ss=e.ss;if(e.mach)out.mach=e.mach;return out}).filter(e=>e.sets.length);
 }
 function hintHtml(e,ei){
   if(isTimed(e.ex))return "";
   if(e.auto){const w=num((e.sets.find(s=>s.type!=="w")||{}).w);return '<div class="ohint up">'+IC.up+'<span>Automatisch auf '+fmt(uW(w))+' '+UL()+' erhöht, weil du letztes Mal überall 12+ Wdh geschafft hast.</span></div>'}
-  const h=overloadHint(e.ex);if(!h)return "";
+  const h=overloadHint(e.ex,e.mach||null);if(!h)return "";
   return '<div class="ohint '+h.kind+'">'+(h.kind==="up"?IC.up:h.kind==="rep"?IC.target:h.kind==="info"?IC.info:IC.hold)+'<span>'+h.text+'</span>'+(h.kind==="up"&&!e.bumped?'<button class="linkbtn" data-g-bump="'+ei+'">Übernehmen</button>':"")+'</div>';
 }
 
@@ -3429,7 +3526,7 @@ function focusView(a){
     '<button class="navbtn" data-f-open="'+(focusIdx-1)+'" aria-label="Vorige Übung"'+(focusIdx>0?"":" disabled")+'>'+CHL+'</button><button class="navbtn" data-f-open="'+(focusIdx+1)+'" aria-label="Nächste Übung"'+(focusIdx<n-1?"":" disabled")+'>'+CHR+'</button></div>'+
     '<div class="fx-prog" aria-hidden="true"><i style="width:'+(totS?Math.round(dnS/totS*100):0)+'%"></i></div>'+
     '<div class="fx-exs" id="fx-exs">'+a.entries.map((e,i)=>'<button class="fx-ex'+(i===focusIdx?" on":"")+(isDoneEx(e)?" ok":"")+'" data-f-open="'+i+'">'+(isDoneEx(e)?MK_OK:'<b>'+(i+1)+'</b>')+(e.ss?'<i class="fx-ss">'+esc(String(e.ss)).slice(0,1).toUpperCase()+'</i>':"")+esc(exById(e.ex).name)+'</button>').join("")+'<button class="fx-ex add" data-g-addex aria-label="Übung hinzufügen">+</button></div>';
-  h+='<section class="fx-card glass"><div class="fx-hero"><button class="fx-thumb" data-f-info aria-label="Muskeln ansehen">'+bodyPair(exRegions(en.ex),1)+'</button><div class="fx-ht"><span class="foot">'+REG[primReg(en.ex)]+'</span><h2 class="fx-name">'+esc(ex.name)+'</h2><button class="linkbtn" data-f-info style="padding-left:0;align-self:flex-start">Muskeln ansehen</button></div></div>'+
+  h+='<section class="fx-card glass"><div class="fx-hero"><button class="fx-thumb" data-f-info aria-label="Muskeln ansehen">'+bodyPair(exRegions(en.ex),1)+'</button><div class="fx-ht"><span class="foot">'+REG[primReg(en.ex)]+'</span><h2 class="fx-name">'+esc(ex.name)+'</h2><button class="linkbtn" data-f-info style="padding-left:0;align-self:flex-start">Muskeln ansehen</button>'+machChip(en)+'</div></div>'+
     (partners.length?'<div class="sslab">'+LINK_IC+'Supersatz mit '+partners.map(esc).join(", ")+'</div>':"")+
     '<div class="fx-chips c4"><span>'+IC.bars+work+'</span><span>'+(timed?CLOCK_IC+'Zeit':F_IC.reps+repLbl(en.ex))+'</span><span id="fx-wchip">'+ICON.dumbbell+(w?fmt(uW(w)):'–')+'</span><span>'+CLOCK_IC+fmtSec(restFor(en.ex))+'</span></div>'+
     hintHtml(en,focusIdx)+warmHtml(a)+'<div class="fx-tbl" id="fx-tbl">'+fxTable(en)+'</div>';
@@ -3560,7 +3657,8 @@ function settingsInner(){
     '<div class="tgls">'+tg("autoWarm","Automatisch aufwärmen","Ist ein Muskel noch nicht aufgewärmt, setzt die App leichte Aufwärmsätze vor die erste Übung. Danach geht es ohne Pause weiter.")+'</div>'+
     (S.autoWarm!==false?'<div class="act-name">Aufwärmsätze pro Übung</div><div class="seg" style="grid-template-columns:repeat(3,1fr);background:var(--fill)">'+[1,2,3].map(n=>'<button class="'+(warmN()===n?"on":"")+'" data-g-warmn="'+n+'">'+n+(n===1?' Satz<small>Standard</small>':' Sätze')+'</button>').join("")+'</div><div class="foot">'+warmDesc(warmN())+'</div>':'')+
     '<div class="act-name">Workout-Insel</div><div class="seg" style="grid-template-columns:1fr 1fr;background:var(--fill)">'+[["top","Oben"],["bottom","Unten"]].map(o=>'<button class="'+(islPos()===o[0]?"on":"")+'" data-g-isl="'+o[0]+'">'+o[1]+'</button>').join("")+'</div><div class="foot">Gehst du während eines Workouts kurz raus, zeigt eine schwebende Insel Zeit, Übung und Pause. Tippen bringt dich zurück.</div>'+
-    '<button class="st-link" data-g-plates><span class="st-link-t"><b>Scheiben in deinem Gym</b><span class="foot">'+plateList().map(pfm).join(" · ")+' '+UL()+'</span></span>'+CHEV+'</button>';
+    '<button class="st-link" data-g-plates><span class="st-link-t"><b>Scheiben in deinem Gym</b><span class="foot">'+plateList().map(pfm).join(" · ")+' '+UL()+'</span></span>'+CHEV+'</button>'+
+    '<button class="st-link" data-g-machs><span class="st-link-t"><b>Geräte &amp; Hersteller</b><span class="foot">'+esc(machSummary())+'</span></span>'+CHEV+'</button>';
 }
 function planView(){
   const g=G(),t=today(),w=wd(t),S=SPLITS[g.split],L=planLoads(),goal=goalSets();
@@ -3822,17 +3920,28 @@ function renderBadgeCard(){
     (next?'<div class="bnext"><span class="foot">Nächstes Ziel</span><b>'+esc(next.b.name)+'</b><span class="foot">'+esc(next.b.desc)+' · '+fmt(Math.floor(Math.min(S[next.b.k]||0,next.b.goal)*10)/10)+' / '+fmt(next.b.goal)+'</span><div class="goalbar"><i style="width:'+(next.p*100)+'%;background:'+TIERC[next.b.tier]+'"></i></div></div>':"")+
     '<div class="foot">Tippe für alle '+BADGES.length+' Abzeichen</div>';
 }
+// Abzeichen: Übersicht und Detail im selben Fenster. In der Detailansicht führen ×, Tippen daneben und „‹“ zurück zur Übersicht
+// (an dieselbe Stelle), nicht ganz raus. Im Detail stehen alle Stufen derselben Reihe zum Weiterblättern.
 function openBadges(){
-  const S=lastBadgeStats||badgeStats();let sel=null;
+  const S=lastBadgeStats||badgeStats();let sel=null,y0=0;
   const body=()=>{
-    if(sel){const b=BADGES.find(x=>x.id===sel),on=state.badges[b.id],p=badgeProg(b,S);
-      return '<button class="linkbtn" data-bd-back style="align-self:flex-start;padding-left:0">‹ Alle Abzeichen</button><div class="bdet">'+medal(b,!!on,p,true)+'<h2 class="h2">'+esc(b.name)+'</h2><span class="foot">'+CAT[b.cat]+' · Stufe '+(["Bronze","Silber","Gold","Platin","Diamant"][b.tier])+'</span><div class="small">'+esc(b.desc)+'</div>'+
-        (on?'<div class="recchip ok">Freigeschaltet am '+parse(on).toLocaleDateString("de-DE",{day:"numeric",month:"long",year:"numeric"})+'</div>':'<div class="goalbar" style="width:100%"><i style="width:'+(p*100)+'%;background:'+TIERC[b.tier]+'"></i></div><span class="foot">'+fmt(Math.floor(Math.min(S[b.k]||0,b.goal)*10)/10)+' / '+fmt(b.goal)+'</span>')+'</div>'}
+    if(sel){const b=BADGES.find(x=>x.id===sel),on=state.badges[b.id],p=badgeProg(b,S),fam=BADGES.filter(x=>x.k===b.k);
+      return '<div class="bdet">'+medal(b,!!on,p,true)+'<h2 class="h2">'+esc(b.name)+'</h2><span class="foot">'+CAT[b.cat]+' · Stufe '+(["Bronze","Silber","Gold","Platin","Diamant"][b.tier])+'</span><div class="small">'+esc(b.desc)+'</div>'+
+        (on?'<div class="recchip ok">Freigeschaltet am '+parse(on).toLocaleDateString("de-DE",{day:"numeric",month:"long",year:"numeric"})+'</div>':'<div class="goalbar" style="width:100%"><i style="width:'+(p*100)+'%;background:'+TIERC[b.tier]+'"></i></div><span class="foot">'+fmt(Math.floor(Math.min(S[b.k]||0,b.goal)*10)/10)+' / '+fmt(b.goal)+'</span>')+'</div>'+
+        (fam.length>1?'<div class="row between"><span class="act-name">Alle Stufen</span><span class="foot">'+fam.filter(x=>state.badges[x.id]).length+'/'+fam.length+'</span></div><div class="bgrid bfam">'+fam.map(x=>{const o=!!state.badges[x.id];return '<button class="bcell'+(o?" on":"")+(x.id===b.id?" cur":"")+'" data-bd="'+x.id+'"'+(x.id===b.id?' aria-current="true"':'')+'>'+medal(x,o,badgeProg(x,S))+'<span>'+esc(x.name)+'</span></button>'}).join("")+'</div>':'')+
+        '<button class="btn ghost full" data-bd-back>Zurück zu allen Abzeichen</button>'}
     const got=BADGES.filter(b=>state.badges[b.id]).length;
     return '<div class="foot">'+got+' von '+BADGES.length+' freigeschaltet. Die Farbe zeigt die Stufe: Bronze, Silber, Gold, Platin, Diamant.</div>'+Object.keys(CAT).map(c=>{const bs=BADGES.filter(b=>b.cat===c),g2=bs.filter(b=>state.badges[b.id]).length;
       return '<div class="row between"><span class="act-name">'+CAT[c]+'</span><span class="foot">'+g2+'/'+bs.length+'</span></div><div class="bgrid">'+bs.map(b=>{const on=!!state.badges[b.id];return '<button class="bcell'+(on?" on":"")+'" data-bd="'+b.id+'">'+medal(b,on,badgeProg(b,S))+'<span>'+esc(b.name)+'</span></button>'}).join("")+'</div>'}).join("");
   };
-  sheet("Abzeichen",body(),e=>{const t=e.target.closest("[data-bd],[data-bd-back]");if(!t)return;sel=t.dataset.bd||null;$("sheet-body").innerHTML=body();const sh=document.querySelector("#sheet-root .sheet");if(sh)sh.scrollTop=0});
+  const head=()=>{const hd=document.querySelector("#sheet-root .sheet-in > .row.between");if(!hd)return;let bk=hd.querySelector("[data-bd-back]");
+    if(sel&&!bk){hd.insertAdjacentHTML("afterbegin",'<button class="navbtn" data-bd-back aria-label="Zurück zu allen Abzeichen">'+CHL+'</button>');hd.classList.add("hasback")}
+    if(!sel&&bk){bk.remove();hd.classList.remove("hasback")}
+    const x=hd.querySelector("[data-close]");if(x)x.setAttribute("aria-label",sel?"Zurück zu allen Abzeichen":"Schließen")};
+  const show=id=>{const sh=document.querySelector("#sheet-root .sheet");if(!sel&&id&&sh)y0=sh.scrollTop;sel=id;$("sheet-body").innerHTML=body();head();if(sh)sh.scrollTop=sel?0:y0};
+  sheet("Abzeichen",body(),e=>{const t=e.target.closest("[data-bd],[data-bd-back]");if(t)show(t.dataset.bd||null)});
+  const root=$("sheet-root"),orig=root.onclick;
+  root.onclick=e=>{if(sel&&e.target.closest("[data-close]")){e.stopPropagation();show(null);return}orig(e)};
 }
 $("badge-card").addEventListener("click",e=>{e.stopPropagation();openBadges()});
 $("badge-card").addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openBadges()}});
@@ -3978,13 +4087,13 @@ $("sum-root").addEventListener("click",e=>{const b=e.target.closest("[data-tpl-y
 // ---------- "Zuletzt" per set ----------
 function prevTxt(p){if(!p)return "–";return p.sec?fmtSec(p.sec)+(p.w?" · "+fmt(uW(p.w)):""):(p.w?fmt(uW(p.w))+"×"+p.r:p.r+" Wdh")}
 function fxTable(en){
-  const timed=isTimed(en.ex),prev=lastFor(en.ex)||[];let no=0;
+  const timed=isTimed(en.ex),prev=lastForEntry(en)||[],newM=!prev.length&&en.mach&&machById(en.ex,en.mach);let no=0;
   return '<div class="fx-row c6 hd"><span>Satz</span><span>Zuletzt</span><span>'+(timed?"Zeit":"Wdh")+'</span><span>'+UL()+'</span><span>RIR</span><span></span></div>'+
     en.sets.map((s,i)=>{const warm=s.type==="w",lab=warm?"W":String(++no),tb=s.type==="d"?'<i class="tbad">D</i>':s.type==="f"?'<i class="tbad f">V</i>':"";
       const p=warm?null:prev[no-1];let cmp="";
       if(p&&s.done&&!warm){const a=timed?num(s.sec)*(1+num(s.w)/100):e1(num(s.w),num(s.r)),b=timed?(p.sec||0)*(1+(p.w||0)/100):e1(p.w,p.r);cmp=a>b+0.01?" up":a<b-0.01?" down":" eq"}
       return '<button class="fx-row c6'+(i===focusSet?" sel":"")+(s.done?" done":"")+(warm?" warm":"")+'" data-f-sel="'+i+'" aria-label="Satz '+lab+' auswählen"><span>'+lab+tb+'</span><em class="fx-last'+cmp+'">'+(warm?"":prevTxt(p))+'</em><b>'+(timed?(num(s.sec)?fmtSec(num(s.sec)):"–"):(s.r!==""&&s.r!=null?esc(String(s.r)):"–"))+'</b><b>'+(num(s.w)?fmt(uW(num(s.w))):"–")+'</b><b>'+(warm?"":s.rir!=null?s.rir:"–")+'</b><i class="dot'+(s.done?" on":"")+'"></i></button>'}).join("")+
-    (prev.length?'<div class="foot fx-prev">„Zuletzt“ = dein letztes Training. Grün = besser als letztes Mal.</div>':"");
+    (prev.length?'<div class="foot fx-prev">„Zuletzt“ = dein letztes Training'+(en.mach&&machById(en.ex,en.mach)?' an diesem Gerät':'')+'. Grün = besser als letztes Mal.</div>':newM?'<div class="foot fx-prev">Erstes Mal an „'+esc(machName(newM))+'“. Ab dem nächsten Mal siehst du hier deine Werte von diesem Gerät.</div>':"");
 }
 
 // ---------- habits with goals ----------
@@ -4175,6 +4284,7 @@ function renderDay(){
   if(!step){let bars="";const mon=addDays(t,-wd(t));for(let i=0;i<7;i++){const dk=key(addDays(mon,i)),v=D[dk]&&D[dk].s;bars+='<div class="dc-bar'+(dk===k?" now":"")+'"><i style="height:'+(v?v*15:5)+'%"'+(v?"":' class="nil"')+'></i><span>'+DOW[i]+'</span></div>'}
     x+='<div class="dc-sleep"><div class="dc-fh">Schlaf diese Woche</div><div class="dc-bars">'+bars+'</div><div class="dc-ins">'+dcInsight(D)+'</div></div>'}
   el.innerHTML=x;
+  if(typeof renderMot==="function")renderMot();
 }
 $("day-card").addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;e.stopPropagation();const k=key(today());state.daily=state.daily||{};
@@ -4829,9 +4939,10 @@ function plCombo(target,pl){
 var PL_COL={kg:{50:"#e5484d",25:"#e5484d",20:"#3e7bfa",15:"#f2b632",10:"#2fbf71",5:"#e9e9ee",2.5:"#e5484d",2:"#3e7bfa",1.25:"#8e8e93",1:"#2fbf71",0.5:"#e9e9ee"},
   lb:{100:"#e5484d",55:"#e5484d",45:"#3e7bfa",35:"#f2b632",25:"#2fbf71",10:"#e9e9ee",5:"#e5484d",2.5:"#8e8e93",1.25:"#8e8e93"}};
 function platesHtml(en,st){
-  if(!isBarbell(en.ex))return "";const w=num(st&&st.w)||workW(en);
-  const u=UL(),lb=isLb(),wu=w?uW(w):0,bar=plBase(en.ex),one=plOne(en.ex);
-  const head='<div class="row between"><span class="act-name">'+(one?"Scheiben":"Scheiben pro Seite")+'</span><button class="linkbtn" data-f-plates style="padding:0">Anpassen</button></div>';
+  // mit gewähltem Gerät: nur bei Geräten „Mit Scheiben“, mit deren Grundgewicht
+  const m=machById(en.ex,en.mach);if(m?m.type!=="p":!isBarbell(en.ex))return "";const w=num(st&&st.w)||workW(en);
+  const u=UL(),lb=isLb(),wu=w?uW(w):0,bar=m&&m.base!=null?Math.round(uW(m.base)*10)/10:plBase(en.ex),one=plOne(en.ex);
+  const head='<div class="row between"><span class="act-name">'+(one?"Scheiben":"Scheiben pro Seite")+'</span><button class="linkbtn" '+(m?'data-f-mach-edit':'data-f-plates')+' style="padding:0">Anpassen</button></div>';
   if(!w)return '<div class="plates">'+head+'<div class="foot">Trag ein Gewicht ein, dann siehst du hier, welche Scheiben du brauchst.</div></div>';
   const P=one?plCombo(wu-bar,plateList()):platesFor(wu,bar,plateList()),cm=PL_COL[lb?"lb":"kg"],mx=Math.max(...plateList());
   const info='<div class="foot">'+fmt(wu)+' '+u+' gesamt · Grundgewicht '+fmt(bar)+' '+u+(one?' · eine Seite':'')+'</div>';
@@ -4977,6 +5088,8 @@ function renderJournal(){
     jQ("Welche Gefühle passen?",'<div class="exchips jchips">'+J_FEEL.map(f=>'<button class="fchip'+((d.feel||[]).includes(f)?" on":"")+'" data-j-feel="'+f+'">'+f+'</button>').join("")+'</div>')+
     jQ("Was hat deinen Tag beeinflusst?",'<div class="exchips jchips">'+J_FACT.map(f=>'<button class="fchip'+((d.fact||[]).includes(f)?" on":"")+'" data-j-fact="'+f+'">'+f+'</button>').join("")+'</div>')+
     '<div class="foot">Energie, Schlaf und Muskelkater sind dieselben Angaben wie im Check-in auf „Heute“.</div></section>';
+  // An Gym-Tagen: Was hat dich motiviert? (61-motivation.js)
+  if(typeof jGymHtml==="function")h+=jGymHtml(k);
   // 2) Heute geschafft
   const done=jDoneList(k);
   h+='<section class="panel glass"><h2 class="h2">'+(isT?"Heute geschafft":"An diesem Tag geschafft")+'</h2>'+(done.length?'<div class="jdone">'+done.map(x=>'<div class="jd">'+x+'</div>').join("")+'</div>':'<div class="foot">'+(isT?"Noch nichts eingetragen. Was du heute abhakst, trainierst oder isst, erscheint hier.":"An diesem Tag wurde nichts eingetragen.")+'</div>')+'</section>';
@@ -5552,6 +5665,308 @@ $("page-set").addEventListener("click",e=>{
     const root=$("sheet-root"),mo=new MutationObserver(()=>{if(!root.querySelector(".sheet")){mo.disconnect();stDraw()}});mo.observe(root,{childList:true});return}
 });
 
+// ---------- Motivation: dein Warum ----------
+// 1. Sammeln: An Gym-Tagen fragt das Journal, was dich motiviert hat, wie du dich danach gefühlt hast, und du schreibst
+//    deinem zukünftigen Ich eine Nachricht. Direkt nach dem Training fragt auch die Zusammenfassung danach.
+// 2. Erkennen (ohne Knopf): Ist heute Gym-Tag, du warst noch nicht und es sieht nach fehlender Motivation aus
+//    (später als sonst, wenig Energie, schlechte Laune, letztes Training ausgefallen, abgemachte Uhrzeit verpasst),
+//    erscheint die Motivations-Karte von selbst auf „Heute“ und im Training.
+// 3. Motivieren: deine eigenen Worte, deine echten Zahlen, was heute auf dich wartet, und ein leichter Einstieg:
+//    10-Minuten-Deal, Kurzversion oder eine feste Uhrzeit. Wer im Workout früh aufhören will, bekommt noch einen Schubs.
+// Daten im Journal-Tag: mot (Gründe), motx (eigene Worte), post (Gefühl danach 1–5), msg (Nachricht an dich),
+// skip (warum ausgefallen), mh (heute bewusst ausgelassen), cm (abgemachte Uhrzeit, z. B. 18.5 = 18:30).
+// Wird früh aufgerufen (renderDay beim Start): nur Funktionen und var, kein const/let außerhalb.
+var MOT_TAGS=["Stärker werden","Gutes Gefühl danach","Besser aussehen","Gesundheit","Stress abbauen","Disziplin","Streak halten","Neuer Rekord","Kopf frei kriegen","Mit Freunden"];
+var MOT_SKIP=["Müde","Keine Zeit","Kein Bock","Krank / verletzt","Stress","Muskelkater","Etwas kam dazwischen"];
+var MOT_POST=[["😩","Mies"],["😕","Geht so"],["😐","Okay"],["🙂","Gut"],["🔥","Stark"]];
+var motQi=0,motUi=null,motSaveT=null,motTT=null;
+function motTrained(k){const gid=gymActId();return !!((gid&&(state.log[k]||[]).includes(gid))||sessions.some(s=>s.date===k&&!s.mci))}
+function motPlanned(k){const gid=gymActId();return !!gid&&plannedFor(parse(k)).includes(gid)}
+function motHH(h){const m=Math.round(h*60);return pad(Math.floor(m/60)%24)+":"+pad(m%60)}
+// übliche Trainingszeit: Mitte deiner letzten 15 Startzeiten
+function motUsual(){const st=sessions.filter(s=>!s.mci&&s.start).slice(-15).map(s=>{const d=new Date(s.start);return d.getHours()+d.getMinutes()/60}).sort((a,b)=>a-b);return st.length>=3?st[Math.floor(st.length/2)]:null}
+// deine eigenen Worte: zuerst Nachrichten an dich, dann was dich motiviert hat
+function motWords(){const D=J().days,m=[],x=[];
+  Object.keys(D).sort().reverse().forEach(k=>{const d=D[k];if(d.msg&&String(d.msg).trim())m.push({t:String(d.msg).trim(),k,post:d.post,msg:1});if(d.motx&&String(d.motx).trim())x.push({t:String(d.motx).trim(),k,post:d.post})});
+  return m.concat(x).slice(0,40)}
+function motCount(f){const c={};Object.values(J().days).forEach(d=>(d[f]||[]).forEach(t=>{c[t]=(c[t]||0)+1}));return Object.keys(c).sort((a,b)=>c[b]-c[a]).map(t=>({t,n:c[t]}))}
+function motPostStats(){const D=J().days,v=Object.keys(D).sort().reverse().map(k=>D[k].post).filter(x=>x>=1&&x<=5).slice(0,20);return {n:v.length,good:v.filter(x=>x>=4).length}}
+function motMood(){const tr=[],rs=[];Object.keys(J().days).forEach(k=>{const s=jScore(k);if(s==null)return;(motTrained(k)?tr:rs).push(s)});
+  if(tr.length<3||rs.length<3)return null;const a=x=>x.reduce((p,q)=>p+q,0)/x.length,d=Math.round(a(tr)-a(rs));return d>=4?d:null}
+// Ist gerade ein Motivations-Moment? Liefert die Art (v) oder null
+function motCtx(){
+  if(!appReady)return null;
+  const t=today(),k=key(t),g=G();if(g.active||!motPlanned(k)||motTrained(k))return null;
+  const d=J().days[k]||{};if(d.mh)return null;
+  const now=new Date(),h=now.getHours()+now.getMinutes()/60,dl=(state.daily||{})[k]||{},u=motUsual(),lateAt=(u!=null?u:17)+1;
+  let miss=0;for(let i=1;i<=14&&miss<3;i++){const dk=key(addDays(t,-i));if(!motPlanned(dk))continue;if(motTrained(dk))break;miss++}
+  const base={k,h,u,miss,tpl:heroTpl()};
+  if(d.cm)return Object.assign(base,{v:h<d.cm?"commit":h<d.cm+.25?"now":"broken",cm:d.cm});
+  if((dl.e&&dl.e<=2||d.mood&&d.mood<=2||d.stress>=4)&&h>=Math.min(12,lateAt-4))return Object.assign(base,{v:"low"});
+  if(miss)return Object.assign(base,{v:"back"});
+  if(h>=lateAt)return Object.assign(base,{v:"late"});
+  return null;
+}
+function motTitle(c){
+  if(c.v==="commit"){const m=Math.max(1,Math.round((c.cm-c.h)*60));return "Abgemacht: "+motHH(c.cm)+" Uhr. Noch "+(m>=90?Math.round(m/60)+" Stunden":m+" Minuten")+"."}
+  if(c.v==="now")return "Es ist "+motHH(c.cm)+" Uhr. Jetzt ist deine Zeit.";
+  if(c.v==="broken")return motHH(c.cm)+" Uhr ist vorbei. Du hast es dir versprochen.";
+  if(c.v==="low")return "Wenig Energie? Genau dafür gibt es den 10-Minuten-Deal.";
+  if(c.v==="back")return c.miss>=2?"Comeback-Tag. "+c.miss+" Trainings sind ausgefallen, heute holst du dir den Rhythmus zurück.":"Comeback-Tag. Letztes Mal ist es ausgefallen, heute holst du es dir zurück.";
+  return c.u!=null?"Sonst bist du um "+motHH(c.u)+" Uhr schon im Gym.":"Dein Training wartet noch auf dich.";
+}
+function motQuote(){
+  const W=motWords();
+  if(!W.length){const T=motCount("mot").slice(0,3).map(x=>x.t);
+    return T.length?'<div class="mot-q"><span>Du gehst ins Gym für: '+T.map(esc).join(", ")+'.</span><cite>Deine Gründe aus dem Journal</cite></div>'
+      :'<div class="mot-q empty">Noch keine eigenen Worte gespeichert. Schreib nach dem nächsten Training im Journal, was dich motiviert hat. Dann steht genau das hier, wenn du es brauchst.</div>'}
+  const w=W[motQi%W.length],p=w.post?MOT_POST[w.post-1]:null;
+  return '<div class="mot-q"><span>„'+esc(w.t)+'“</span><cite>Du, '+(w.msg?"als Nachricht an dich, ":"")+parse(w.k).toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"short"})+(p?' · danach '+p[0]+' '+p[1]:'')+'</cite>'+(W.length>1?'<button class="linkbtn mot-more" data-mot-next>Noch eine</button>':'')+'</div>';
+}
+function motFacts(c){
+  const F=[],P=motPostStats(),r=streakCalc(),tpl=c.tpl;
+  if(P.n>=3)F.push([P.good+"/"+P.n,"Trainings fühlten sich danach gut an"]);
+  if(tpl){const up=tpl.ex.find(ex=>{const o=overloadHint(ex);return o&&o.kind==="up"});
+    if(up)F.push([fmt(uW(overloadHint(up).w))+" "+UL(),esc(exById(up).name)+": neuer Rekord wartet"]);
+    else{let rec=null;try{rec=Math.round(tplRec(tpl,recoveryPct()))}catch(e){}if(rec!=null&&rec>=80)F.push([rec+" %","Zielmuskeln erholt und bereit"])}}
+  if(r.cur>0)F.push([String(r.cur),(r.cur===1?"Tag":"Tage")+" Streak"]);
+  const md=motMood();if(md&&F.length<3)F.push(["+"+md,"Stimmung an Trainingstagen"]);
+  if(!F.length)return "";
+  return '<div class="mot-facts">'+F.slice(0,3).map(f=>'<div><b>'+f[0]+'</b><span>'+f[1]+'</span></div>').join("")+'</div>'+(P.n<3?'<div class="foot">Die meisten unterschätzen, wie gut sie sich nach dem Training fühlen, weil sie nur an den zähen Anfang denken (Ruby u. a., 2011).</div>':'');
+}
+function motMinutes(tpl,short){if(!tpl)return 30;const sets=tpl.ex.reduce((n,ex)=>n+(short?Math.min(2,tplSets(tpl,ex)):tplSets(tpl,ex)),0);return Math.max(15,Math.round(sets*((G().rest||120)+40)/60/5)*5)}
+function motTimes(){const n=new Date(),h=n.getHours()+n.getMinutes()/60,o=[];let x=Math.ceil((h+.25)*2)/2;while(o.length<5&&x<=23.5){o.push(x);x+=x-h<1.5?.5:1}return o}
+function motActs(c,inl){
+  const tpl=c.tpl,nm=tpl?tpl.name:"Training";
+  if(motUi==="later")return '<div class="act-name">Wann gehst du heute?</div><div class="exchips">'+motTimes().map(x=>'<button class="fchip" data-mot-at="'+x+'">'+motHH(x)+' Uhr</button>').join("")+'</div>'+
+    '<div class="foot">Wer sich vorher festlegt, wann und wo er trainiert, zieht es laut Studien deutlich öfter durch (Milne u. a., 2002).</div><button class="linkbtn" data-mot-cancel style="align-self:center">Abbrechen</button>';
+  if(motUi==="skip"){const r=streakCalc();
+    return '<div class="act-name">Was hält dich heute ab?</div><div class="exchips">'+MOT_SKIP.map(x=>'<button class="fchip" data-mot-why="'+esc(x)+'">'+esc(x)+'</button>').join("")+'</div>'+
+      '<div class="foot">Ehrlich sein hilft: Locked In merkt sich, was dich abhält, und hilft dir beim nächsten Mal. '+(r.on&&r.tok?'Dein Streak-Schutz fängt den Tag ab.':r.cur>0?'Achtung: Deine Streak von '+r.cur+(r.cur===1?' Tag':' Tagen')+' endet dann.':'')+'</div><button class="linkbtn" data-mot-cancel style="align-self:center">Doch nicht</button>'}
+  if(c.v==="commit")return '<div class="mot-row"><button class="btn" data-mot-deal>Jetzt schon los</button><button class="btn ghost" data-mot-later>Zeit ändern</button></div>';
+  const top=motCount("skip")[0];
+  return (top&&top.n>=2&&!inl?'<div class="mot-tip">Am häufigsten hält dich <b>„'+esc(top.t)+'“</b> ab. Dann hilft die Kurzversion: '+motMinutes(tpl,true)+' Minuten, zählt voll für deine Streak.</div>':'')+
+    '<button class="btn full big" data-mot-deal><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg> 10-Minuten-Deal: '+esc(nm)+'</button>'+
+    '<div class="foot mot-deal-t">Fang an und gib dir 10 Minuten. Willst du danach aufhören, hör auf, es zählt trotzdem. Meistens bleibst du.</div>'+
+    '<div class="mot-row"><button class="btn ghost" data-mot-short>Kurzversion · '+motMinutes(tpl,true)+' min</button>'+(inl?'':'<button class="btn ghost" data-mot-later>Ich gehe um …</button>')+'</div>'+
+    (inl?'':'<button class="linkbtn mot-skip" data-mot-skip>Heute geht wirklich nicht</button>');
+}
+function motHtml(c,inl){
+  const T=motCount("mot").slice(0,3);
+  return '<div class="mot-eye">⚡ Dein Warum</div><h2 class="mot-h">'+esc(motTitle(c))+'</h2>'+
+    (c.v==="commit"?'':motQuote()+(T.length&&motWords().length?'<div class="mot-tags">'+T.map(x=>'<span>'+esc(x.t)+'</span>').join("")+'</div>':'')+(inl?'':motFacts(c)))+motActs(c,inl);
+}
+function renderMot(){
+  const el=$("mot-card");if(!el||!appReady)return;const c=motCtx();
+  el.hidden=!c;if(!c){el.innerHTML="";motUi=null;return}
+  el.className="panel glass mot v-"+c.v;el.innerHTML=motHtml(c,false);
+}
+function motInline(){const c=motCtx();if(!c||c.v==="commit")return "";return '<section class="panel glass mot inl v-'+c.v+'" id="mot-inl">'+motHtml(c,true)+'</section>'}
+function motToast(t,x){$("toast-root").innerHTML='<div class="toast glass btoast mot-toast" role="status"><span class="mot-ti">⚡</span><span><b>'+esc(t)+'</b><br>'+esc(x)+'</span></div>';
+  clearTimeout(motTT);motTT=setTimeout(()=>{if($("toast-root").querySelector(".mot-toast"))$("toast-root").innerHTML=""},5200)}
+// 10-Minuten-Deal / Kurzversion: Workout von heute starten
+function motStart(short){
+  const tpl=heroTpl();setPage("gym");startWorkout(tpl?tpl.id:null);const a=G().active;if(!a)return;
+  a.deal=Date.now();if(short){a.short=1;a.entries.forEach(en=>{let n=0;en.sets=en.sets.filter(s=>s.type==="w"||(++n)<=2)})}
+  persist();renderGym();renderMot();
+  motToast(short?"Kurzversion":"Deal: 10 Minuten",short?"2 Sätze pro Übung. Zählt voll für deine Streak.":"Nur anfangen. Nach 10 Minuten entscheidest du, ob du weitermachst.");
+}
+function motClick(e){
+  const b=e.target.closest("button");if(!b)return false;const d=b.dataset,k=key(today());
+  if("motDeal" in d){motUi=null;motStart(false);return true}
+  if("motShort" in d){motUi=null;motStart(true);return true}
+  if("motNext" in d){motQi++;renderMot();if(page==="gym")rgKeep();return true}
+  if("motLater" in d){motUi="later";renderMot();if(page==="gym")rgKeep();return true}
+  if("motSkip" in d){motUi="skip";renderMot();return true}
+  if("motCancel" in d){motUi=null;renderMot();if(page==="gym")rgKeep();return true}
+  if("motAt" in d){const x=jDay(k,true);x.cm=+d.motAt;persist();motUi=null;renderMot();if(page==="gym")rgKeep();toast("Abgemacht: "+motHH(x.cm)+" Uhr. Locked In erinnert dich hier daran.");return true}
+  if("motWhy" in d){const x=jDay(k,true);x.skip=jToggle(x.skip,d.motWhy);x.mh=1;delete x.cm;persist();motUi=null;renderMot();const r=streakCalc();
+    motToast("Okay, heute Pause","Ruh dich aus. Morgen ist Comeback-Tag."+(r.on&&r.tok?" Dein Streak-Schutz fängt heute ab.":""));return true}
+  return false;
+}
+$("mot-card").addEventListener("click",e=>{if(motClick(e))e.stopPropagation()});
+$("page-gym").addEventListener("click",e=>{if(e.target.closest("#mot-inl"))motClick(e)});
+// Zeit-Auslöser (später als sonst, abgemachte Uhrzeit) auch bei offener App
+setInterval(()=>{if(appReady&&page==="home"&&!document.hidden)renderMot()},60000);
+// 10-Minuten-Deal: nach 10 Minuten melden
+setInterval(()=>{const a=G().active;if(!a||!a.deal||a.dealOk)return;if(Date.now()-a.deal>=600000){a.dealOk=1;persist();motToast("10 Minuten geschafft 💪","Du bist drin. Weitermachen oder beenden, beides zählt.")}},15000);
+// Früh beenden? Noch ein Schubs (einmal pro Workout)
+function motNudge(a,dn,all){
+  const ni=a.entries.findIndex(en=>!isDoneEx(en)),ne=ni>=0?a.entries[ni]:null,ns=ne?ne.sets.filter(s=>!s.done&&s.type!=="w").length:0,mins=Math.max(3,Math.round(ns*((restFor(ne?ne.ex:"")||120)+40)/60));
+  const td=J().days[key(today())]||{},W=motWords(),w=td.motx?{t:td.motx}:W[0],left=a.deal&&!a.dealOk?Math.max(1,Math.ceil((600000-(Date.now()-a.deal))/60000)):0;
+  const body='<div class="mot-nudge"><div class="mn-big"><b>'+dn+' von '+all+'</b> Sätzen geschafft</div>'+
+    (left?'<div class="small">Dein Deal waren 10 Minuten. Noch <b>'+left+(left===1?' Minute':' Minuten')+'</b>.</div>':'')+
+    (w?'<div class="mot-q"><span>„'+esc(w.t)+'“</span><cite>'+(td.motx&&w.t===td.motx?"Dein Grund heute":"Du, an dich selbst")+'</cite></div>':'')+
+    (ne?'<div class="small">Mach wenigstens noch <b>'+esc(exById(ne.ex).name)+'</b> fertig: '+ns+(ns===1?' Satz':' Sätze')+', etwa '+mins+' Minuten.</div>':'')+'</div>'+
+    (ne?'<button class="btn full big" data-mn-go="'+ni+'">Eine Übung noch</button>':'')+'<button class="btn ghost full" data-mn-end>Trotzdem beenden</button><div class="foot" style="text-align:center">Auch eine kurze Einheit zählt voll für deine Streak.</div>';
+  sheet("Schon Schluss?",body,(e,close)=>{
+    const g=e.target.closest("[data-mn-go]");if(g){a.nudged=1;persist();close();focusIdx=+g.dataset.mnGo;focusSet=firstOpenSet(a.entries[focusIdx]);noteEdit=false;renderGym();$("scroller").scrollTop=0;return}
+    if(e.target.closest("[data-mn-end]")){a.nudged=1;close();finishWorkout()}
+  });
+}
+$("page-gym").addEventListener("click",e=>{
+  const b=e.target.closest("[data-g-finish]");if(!b)return;const a=G().active;if(!a||a.nudged||woMin)return;
+  let all=0,dn=0;a.entries.forEach(en=>en.sets.forEach(s=>{if(s.type==="w")return;all++;if(s.done)dn++}));
+  if(!dn||!all||dn/all>=.6)return;
+  if(a.deal&&Date.now()-a.deal>=600000)return;
+  e.stopPropagation();e.preventDefault();motNudge(a,dn,all);
+},true);
+// Journal: Abschnitt „Dein Training“ an Gym-Tagen
+function jGymHtml(k){
+  const tk=key(today()),tr=motTrained(k),pl=motPlanned(k),d=jDay(k);
+  if(tr)return '<section class="panel glass jgym"><h2 class="h2">Dein Training</h2>'+
+    jQ("Was hat dich heute motiviert, ins Gym zu gehen?",'<div class="exchips jchips">'+MOT_TAGS.map(t=>'<button class="fchip'+((d.mot||[]).includes(t)?" on":"")+'" data-jm-tag="'+esc(t)+'">'+esc(t)+'</button>').join("")+'</div>'+
+      '<input class="field jin" data-jm-t="motx" maxlength="200" placeholder="In deinen Worten (optional)" value="'+esc(d.motx||"")+'">')+
+    jQ("Wie hast du dich nach dem Training gefühlt?",jOpts("data-jm-post",MOT_POST,d.post))+
+    jQ("Nachricht an dein Ich, wenn es mal keinen Bock hat",'<textarea class="fnote jta jmsg" data-jm-t="msg" maxlength="300" placeholder="z. B. Du bereust es nie. Zieh einfach die Schuhe an.">'+esc(d.msg||"")+'</textarea>')+
+    '<div class="foot">Fehlt dir mal die Motivation, zeigt dir Locked In genau diese Worte. Von dir, für dich.</div></section>';
+  if(pl&&(k<tk||d.mh))return '<section class="panel glass jgym"><h2 class="h2">Training ausgefallen</h2>'+
+    jQ("Was hat dich abgehalten?",'<div class="exchips jchips">'+MOT_SKIP.map(t=>'<button class="fchip'+((d.skip||[]).includes(t)?" on":"")+'" data-jm-skip="'+esc(t)+'">'+esc(t)+'</button>').join("")+'</div>')+
+    '<div class="foot">Ehrlich sein hilft: Wenn du weißt, was dich abhält, findest du leichter einen Weg. Locked In nutzt das beim nächsten Mal.</div></section>';
+  if(pl&&k===tk)return '<section class="panel glass jgym"><h2 class="h2">Heute ist Gym-Tag</h2><div class="foot">Nach dem Training fragt dich das Journal hier, was dich motiviert hat. Fehlt dir gerade die Motivation, schau auf „Heute“.</div></section>';
+  return "";
+}
+$("page-journal").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;const d=b.dataset,k=jKey();
+  if("jmTag" in d){const x=jDay(k,true);x.mot=jToggle(x.mot,d.jmTag);if(!x.mot.length)delete x.mot;x.ts=Date.now();persist();jKeep();return}
+  if("jmPost" in d){const x=jDay(k,true),v=+d.jmPost;x.post=x.post===v?undefined:v;x.ts=Date.now();persist();jKeep();return}
+  if("jmSkip" in d){const x=jDay(k,true);x.skip=jToggle(x.skip,d.jmSkip);if(!x.skip.length)delete x.skip;persist();jKeep();return}
+});
+function motSet(k,f,v,max){const x=jDay(k,true);v=String(v).slice(0,max);if(v.trim())x[f]=v;else delete x[f];x.ts=Date.now();clearTimeout(motSaveT);motSaveT=setTimeout(persist,400)}
+$("page-journal").addEventListener("input",e=>{const f=e.target.dataset&&e.target.dataset.jmT;if(f)motSet(jKey(),f,e.target.value,f==="msg"?300:200)});
+// Zusammenfassung direkt nach dem Training: Wie fühlst du dich? Nachricht an dich
+function motPostHtml(s){
+  if(s.mci||s.date<key(addDays(today(),-1)))return "";const d=jDay(s.date),p=d.post;
+  return '<section class="panel glass mpost"><h2 class="h2">Wie fühlst du dich jetzt?</h2>'+jOpts("data-mp-post",MOT_POST,p)+
+    (p>=4?'<div class="act-name">Halt das fest</div><textarea class="fnote jta" data-mp-msg maxlength="300" placeholder="Schreib deinem Ich, das mal keinen Bock hat, einen Satz. Zum Beispiel: Du bereust es nie.">'+esc(d.msg||"")+'</textarea><div class="foot">Fehlt dir mal die Motivation, zeigt dir Locked In genau diesen Satz.</div>'
+      :p?'<div class="foot">Gespeichert. Gerade die zähen Tage machen dich stärker.</div>':'<div class="foot">Deine Antwort hilft dir später, wenn die Motivation mal fehlt.</div>')+'</section>';
+}
+$("sum-root").addEventListener("click",e=>{const b=e.target.closest("[data-mp-post]");if(!b||!sumId)return;const s=sessionById(sumId);if(!s)return;
+  const x=jDay(s.date,true),v=+b.dataset.mpPost;x.post=x.post===v?undefined:v;x.ts=Date.now();persist();drawSummary()});
+$("sum-root").addEventListener("input",e=>{if(!e.target.dataset||!("mpMsg" in e.target.dataset)||!sumId)return;const s=sessionById(sumId);if(s)motSet(s.date,"msg",e.target.value,300)});
+
+// ---------- Geräte & Hersteller: verschiedene Maschinen pro Übung ----------
+// Jeder Hersteller baut anders (Hebel, Übersetzung, Schlitten), deshalb sind Gewichte zwischen Maschinen nicht vergleichbar.
+// Pro Übung lassen sich Geräte anlegen. „Zuletzt“, Gewichtsvorschläge, Scheibenrechner, Rekorde und Statistik gelten pro Gerät.
+// Daten: G().machines[ex] = [{id, maker, label, type: "s" (Steckgewicht) | "p" (Scheiben), base (kg) | null, legacy}]
+//        G().mSel[ex] = zuletzt gewähltes Gerät. Im Workout: entry.mach, im gespeicherten Training: entry.mach
+// legacy: Diesem Gerät gehören die alten Einträge ohne Gerät (Trainings von bevor es Geräte gab).
+// Wird früh aufgerufen (overloadHint beim Start): nur Funktionen und var, kein const/let außerhalb.
+var MACH_MAKERS=["Gym80","Technogym","Life Fitness","Hammer Strength","Matrix","Panatta","eGym","Precor","Cybex","Nautilus","Star Trac","Impulse"];
+function machIc(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="11" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 8h11M5 12.5h11M5 17h11" stroke="currentColor" stroke-width="1.8"/><path d="M13 12.5h7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>'}
+function machList(ex){const m=(G().machines||{})[ex];return Array.isArray(m)?m:[]}
+function machById(ex,id){return id?machList(ex).find(m=>m.id===id)||null:null}
+function machLegacy(ex){const m=machList(ex).find(m=>m.legacy);return m?m.id:null}
+function machDef(ex){const id=(G().mSel||{})[ex];return machById(ex,id)?id:null}
+function machName(m){return m?(m.maker||"Gerät")+(m.label?" · "+m.label:""):"Ohne festes Gerät"}
+// zu welchem Gerät gehört ein gespeicherter Übungseintrag? (gelöschtes Gerät = ohne Gerät)
+function entryMach(ex,e){if(e&&e.mach)return machById(ex,e.mach)?e.mach:null;return machLegacy(ex)}
+function lastForM(ex,m){m=m||null;for(let i=sessions.length-1;i>=0;i--){const e=sessions[i].entries.find(x=>x.ex===ex);if(e&&e.sets.length&&entryMach(ex,e)===m)return e.sets}return null}
+function lastForEntry(en){return machList(en.ex).length?lastForM(en.ex,en.mach||null):lastFor(en.ex)}
+function lastForDef(ex){return machList(ex).length?lastForM(ex,machDef(ex)):lastFor(ex)}
+function machCount(ex,m){m=m||null;let n=0;sessions.forEach(s=>{const e=s.entries.find(x=>x.ex===ex);if(e&&e.sets.length&&entryMach(ex,e)===m)n++});return n}
+function machLastTxt(ex,m){const l=lastForM(ex,m);if(!l)return "Noch keine Trainings";const t=l.slice().sort((a,b)=>(b.w-a.w)||(b.r-a.r))[0];
+  return "Zuletzt "+(t.sec?fmtSec(t.sec):t.w?fmt(uW(t.w))+" "+UL()+" × "+t.r:t.r+" Wdh")}
+function machInfo(m){return m.type==="p"?"Mit Scheiben"+(m.base!=null?" · Grundgewicht "+fmt(uW(m.base))+" "+UL():""):"Steckgewicht"}
+// Chip unter dem Übungsnamen im Workout
+function machChip(en){const m=machById(en.ex,en.mach),n=machList(en.ex).length;
+  return '<button class="mach-chip'+(m?" on":"")+'" data-f-mach aria-label="Gerät wählen">'+machIc()+'<span>'+(m?esc(machName(m)):n?"Ohne festes Gerät":"Gerät / Hersteller")+'</span>'+CHEV+'</button>'}
+// Sätze, die noch nicht erledigt sind, mit den Werten von diesem Gerät füllen (wie beim Start eines Workouts)
+function machFill(en){
+  const ex=en.ex,tm=isTimed(ex),last=lastForM(ex,en.mach||null),work=en.sets.filter(s=>s.type!=="w"&&!s.done);
+  delete en.auto;delete en.bumped;
+  work.forEach((s,i)=>{const p=last&&(last[i]||last[last.length-1]);s.w=p&&p.w?String(p.w):"";if(!tm)s.r=p&&p.r?String(p.r):String(repT(ex)[0]);if(tm)s.sec=p&&p.sec?String(p.sec):""});
+  if(last&&state.settings.autoInc!==false&&!tm){const h=overloadHint(ex,en.mach||null);if(h&&h.w){work.forEach(s=>{s.w=String(h.w);s.r=String(repT(ex)[0])});en.auto=true;en.bumped=true}}
+}
+function machPick(ex,en,id){
+  const g=G();g.mSel=g.mSel||{};if(id)g.mSel[ex]=id;else delete g.mSel[ex];
+  if(en){if(id)en.mach=id;else delete en.mach;if(!en.sets.some(s=>s.done&&s.type!=="w"))machFill(en)}
+  persist();
+}
+function machForm(m){return {id:m.id,maker:m.maker,label:m.label||"",type:m.type,baseTxt:m.base!=null?fmt(uW(m.base)):"",legacy:!!m.legacy}}
+function openMach(ex,en,onBack,editId){
+  const g=G();let mode="list",ed=null,ask=false;
+  {const m=machById(ex,editId);if(m){ed=machForm(m);mode="form"}}
+  const read=()=>{if(!ed)return;const a=$("m-maker"),b=$("m-label"),c=$("m-base");if(a)ed.maker=a.value;if(b)ed.label=b.value;if(c)ed.baseTxt=c.value};
+  const body=()=>{
+    const L=machList(ex),cur=en?(en.mach||null):machDef(ex);
+    if(mode==="list"){
+      const rows=[];if(!L.length||machCount(ex,null))rows.push(null);L.forEach(m=>rows.push(m));
+      return '<div class="foot">Jede Maschine ist anders gebaut, deshalb lassen sich Gewichte zwischen Herstellern nicht vergleichen. Locked In merkt sich deine Werte pro Gerät: „Zuletzt“, Gewichtsvorschläge, Rekorde und Statistik.</div>'+
+        '<div class="mlist">'+rows.map(m=>{const id=m?m.id:"",on=(m?m.id:null)===cur;
+          return '<div class="mrow'+(on?" on":"")+'"><button class="mrow-pick" data-m-pick="'+id+'" aria-pressed="'+on+'"><span class="mrow-dot"></span><span class="mrow-t"><b>'+esc(machName(m))+'</b><span class="foot">'+(m?esc(machInfo(m))+' · ':'')+esc(machLastTxt(ex,m?m.id:null))+'</span></span></button>'+
+            (m?'<button class="iconbtn2" data-m-edit="'+m.id+'" aria-label="'+esc(machName(m))+' bearbeiten">'+F_IC.pen+'</button>':'')+'</div>'}).join("")+'</div>'+
+        '<button class="btn ghost full" data-m-new>+ Neues Gerät</button>';
+    }
+    const m=ed,first=m.isNew&&!L.length,n=first?machCount(ex,null):0;
+    let h='<div class="act-name" style="margin-top:0">Hersteller</div><div class="exchips">'+MACH_MAKERS.map(x=>'<button class="fchip'+(m.maker===x?" on":"")+'" data-m-maker="'+esc(x)+'">'+esc(x)+'</button>').join("")+'</div>'+
+      '<input class="field" id="m-maker" maxlength="30" placeholder="Anderer Hersteller oder eigener Name" value="'+esc(m.maker||"")+'" autocomplete="off" style="flex:none">'+
+      '<div class="act-name">Zusatz (optional)</div><input class="field" id="m-label" maxlength="30" placeholder="z. B. Studio Mitte, links am Fenster" value="'+esc(m.label||"")+'" autocomplete="off" style="flex:none">'+
+      '<div class="act-name">Art</div><div class="seg" style="grid-template-columns:1fr 1fr;background:var(--fill)"><button class="'+(m.type!=="p"?"on":"")+'" data-m-type="s">Steckgewicht</button><button class="'+(m.type==="p"?"on":"")+'" data-m-type="p">Mit Scheiben</button></div>'+
+      (m.type==="p"?'<div class="act-name">Grundgewicht</div><div class="row st-hrow"><input class="field" id="m-base" inputmode="decimal" placeholder="z. B. 52,5" value="'+esc(m.baseTxt||"")+'"><b>'+UL()+'</b></div><div class="foot">So viel wiegt die Maschine ohne Scheiben, z. B. der Schlitten einer Beinpresse. Steht oft auf einem Schild an der Maschine. Der Scheibenrechner rechnet damit. <button class="linkbtn" data-m-plates style="padding:0">Scheiben in deinem Gym</button></div>'
+        :'<div class="foot">Steckgewicht heißt: Du steckst einen Stift in den Gewichtsblock. Bei Maschinen, die du mit Scheiben belädst, wähl „Mit Scheiben“, dann hilft dir der Scheibenrechner.</div>');
+    if(n)h+='<div class="act-name">'+(n===1?'Dein bisheriges Training':'Deine bisherigen '+n+' Trainings')+'</div><div class="seg" style="grid-template-columns:1fr 1fr;background:var(--fill)"><button class="'+(m.legacy?"on":"")+'" data-m-leg="1">An diesem Gerät</button><button class="'+(!m.legacy?"on":"")+'" data-m-leg="0">An einem anderen</button></div>'+
+      '<div class="foot">'+(m.legacy?"Deine bisherigen Werte zählen ab jetzt zu diesem Gerät.":"Deine bisherigen Werte bleiben bei „Ohne festes Gerät“. An diesem Gerät startest du neu.")+'</div>';
+    h+='<button class="btn full" data-m-save>'+(m.isNew?"Gerät anlegen":"Speichern")+'</button>';
+    if(!m.isNew)h+=ask?'<div class="confirm"><div class="small"><b>'+esc(machName(m))+'</b> löschen? Die Trainings an diesem Gerät zählen dann als „Ohne festes Gerät“.</div><div class="row"><button class="btn danger" data-m-del-yes>Löschen</button><button class="btn ghost" data-m-del-no>Abbrechen</button></div></div>'
+      :'<button class="linkbtn danger" data-m-del style="align-self:center">Gerät löschen</button>';
+    else h+='<button class="linkbtn" data-m-cancel style="align-self:center">Abbrechen</button>';
+    return h;
+  };
+  const redraw=()=>{$("sheet-body").innerHTML=body();const sh=document.querySelector("#sheet-root .sheet");if(sh)sh.scrollTop=0};
+  const done=(close,msg)=>{close();if(en)rgKeep();if(typeof stDraw==="function")stDraw();if(msg)toast(msg);if(!en&&onBack)onBack()};
+  sheet("Gerät: "+exById(ex).name,body(),(e,close)=>{
+    if(e.target.closest("[data-ex-back]")){close();onBack&&onBack();return}
+    const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+    if("mPick" in d){machPick(ex,en,d.mPick||null);const m=machById(ex,d.mPick);
+      done(close,m?machName(m)+" gewählt. „Zuletzt“ zeigt deine Werte an diesem Gerät.":"Ohne festes Gerät");return}
+    if("mNew" in d){ed={isNew:true,maker:"",label:"",type:"s",baseTxt:"",legacy:true};ask=false;mode="form";redraw();return}
+    if("mEdit" in d){const m=machById(ex,d.mEdit);if(!m)return;ed=machForm(m);ask=false;mode="form";redraw();return}
+    if("mPlates" in d){close();openPlates(null,true);return}
+    if("mCancel" in d){mode="list";redraw();return}
+    if("mMaker" in d){read();ed.maker=d.mMaker;redraw();return}
+    if("mType" in d){read();ed.type=d.mType;redraw();return}
+    if("mLeg" in d){read();ed.legacy=d.mLeg==="1";redraw();return}
+    if("mDel" in d){read();ask=true;redraw();return}
+    if("mDelNo" in d){ask=false;redraw();return}
+    if("mDelYes" in d){g.machines[ex]=machList(ex).filter(m=>m.id!==ed.id);if(!g.machines[ex].length)delete g.machines[ex];
+      if((g.mSel||{})[ex]===ed.id)delete g.mSel[ex];if(en&&en.mach===ed.id){delete en.mach;if(!en.sets.some(s=>s.done&&s.type!=="w"))machFill(en)}
+      persist();mode="list";redraw();if(en)rgKeep();toast("Gerät gelöscht");return}
+    if("mSave" in d){read();const mk=String(ed.maker||"").trim().slice(0,30);if(!mk){toast("Wähl einen Hersteller oder gib einen Namen ein.");return}
+      let base=null;if(ed.type==="p"&&String(ed.baseTxt||"").trim()){const v=num(String(ed.baseTxt).replace(",","."));if(!(v>=0&&v<=500)){toast("Bitte ein Grundgewicht zwischen 0 und 500 eingeben.");return}base=fromU(v)}
+      const lab=String(ed.label||"").trim().slice(0,30);g.machines=g.machines||{};const L=g.machines[ex]=machList(ex).slice();
+      if(ed.isNew){const m={id:"m"+uid(),maker:mk,type:ed.type==="p"?"p":"s",base};if(lab)m.label=lab;if(!L.length&&ed.legacy&&machCount(ex,null))m.legacy=true;L.push(m);
+        if(m.type==="p"){g.plate=g.plate||{};g.plate[ex]=true}
+        machPick(ex,en,m.id);done(close,machName(m)+" angelegt und gewählt");return}
+      const m=L.find(x=>x.id===ed.id);if(m){m.maker=mk;if(lab)m.label=lab;else delete m.label;m.type=ed.type==="p"?"p":"s";m.base=base;if(m.type==="p"){g.plate=g.plate||{};g.plate[ex]=true}}
+      persist();mode="list";redraw();if(en)rgKeep();toast("Gespeichert");return}
+  });
+  sheetBack(onBack);
+}
+// Überblick in den Einstellungen: alle Übungen mit Geräten
+function machSummary(){const M=G().machines||{},ks=Object.keys(M).filter(k=>machList(k).length),n=ks.reduce((s,k)=>s+machList(k).length,0);
+  return n?n+(n===1?" Gerät":" Geräte")+" bei "+ks.length+(ks.length===1?" Übung":" Übungen"):"Z. B. die Beinpresse von Gym80 und die von Technogym"}
+function openMachAll(){
+  const body=()=>{const M=G().machines||{},ks=Object.keys(M).filter(k=>machList(k).length).sort((a,b)=>exById(a).name.localeCompare(exById(b).name,"de"));
+    return '<div class="foot">Gleiche Übung, andere Maschine: Leg für eine Übung mehrere Geräte an, z. B. für zwei Studios. Im Workout wählst du das Gerät direkt unter dem Namen der Übung.</div>'+
+      (ks.length?'<div class="mlist">'+ks.map(k=>'<div class="mrow"><button class="mrow-pick" data-ma-ex="'+esc(k)+'"><span class="mrow-ic">'+machIc()+'</span><span class="mrow-t"><b>'+esc(exById(k).name)+'</b><span class="foot">'+machList(k).map(m=>esc(machName(m))).join(" · ")+'</span></span>'+CHEV+'</button></div>').join("")+'</div>':'')+
+      '<button class="btn ghost full" data-ma-add>+ Gerät für eine Übung anlegen</button>'};
+  sheet("Geräte & Hersteller",body(),(e,close)=>{
+    const x=e.target.closest("[data-ma-ex]");if(x){openMach(x.dataset.maEx,null,openMachAll);return}
+    if(e.target.closest("[data-ma-add]")){openExPicker(ex=>openMach(ex,null,openMachAll),[],openMachAll);return}
+  });
+}
+// Klicks: Gerät im Workout wählen, Überblick aus den Einstellungen (Einstellungen-Seite und Training → Einstellungen)
+$("page-gym").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  if("fMach" in b.dataset||"fMachEdit" in b.dataset){const a=G().active;if(!a||woMin||focusIdx==null)return;const en=a.entries[focusIdx];if(en)openMach(en.ex,en,null,"fMachEdit" in b.dataset?en.mach:null);return}
+  if("gMachs" in b.dataset){openMachAll();return}
+});
+$("page-set").addEventListener("click",e=>{const b=e.target.closest("[data-g-machs]");if(b)openMachAll()});
+// Statistik einer Übung: nach Gerät filtern
+$("page-stats").addEventListener("click",e=>{const b=e.target.closest("[data-s-mach]");if(!b||!statDetail)return;const v=b.dataset.sMach;
+  statMach=v==="*"?null:{ex:statDetail,m:v||null};const y=$("scroller").scrollTop;renderStats();$("scroller").scrollTop=y});
+
 // ---------- Start: läuft als Allerletztes, wenn alle Teile der App geladen sind ----------
 // Alles, was andere Teile braucht (Leiste, Startseite, Workout-Insel), gehört hierher und nicht in die einzelnen Dateien.
 appReady=true;
@@ -5560,6 +5975,7 @@ buildTabs();
 {const T=tabCfg(),hp={"#kalender":"cal","#training":"gym","#ernaehrung":"food","#stats":"stats","#journal":"journal","#einstellungen":"set"}[location.hash];
   if(hp)setPage(hp);else if(!T.includes(page))setPage(T[0]);}
 islandTick();
+renderMot();
 setTimeout(()=>placeInd(true),60);
 storeBoot();
 if(typeof tipSoon==="function")tipSoon(1600);
