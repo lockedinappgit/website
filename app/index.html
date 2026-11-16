@@ -1418,6 +1418,86 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
 .cb-step+.cb-step{border-top:1px solid var(--sep)}
 .cb-step b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font-family:var(--f-round);background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
 
+/* v11: Muskel-Ränge (Tab „Ränge“), Funken, Abfrage beim Start */
+.rk-em{width:38px;height:38px;flex:none;display:block}
+.rk-em.xl{width:76px;height:76px;filter:drop-shadow(0 8px 18px color-mix(in srgb,var(--rc,#888) 45%,transparent))}
+.fk{width:18px;height:18px;flex:none;display:inline-block;vertical-align:-3px}
+.fk.big{width:38px;height:38px}
+.fk.xl{width:64px;height:64px}
+.rk-pill{gap:5px;padding:7px 14px 7px 10px;color:inherit}
+.rk-pill .fk{width:22px;height:22px}
+.rk-bar{display:block;height:7px;border-radius:4px;background:var(--fill);overflow:hidden;width:100%}
+.rk-bar i{display:block;height:100%;border-radius:4px}
+/* Gesamtrang */
+.rk-hero{background:linear-gradient(165deg,color-mix(in srgb,var(--rc) 22%,var(--glass)) 0%,var(--glass) 62%)!important;border:1px solid color-mix(in srgb,var(--rc) 38%,transparent)!important}
+.rk-hero-top{display:flex;align-items:center;gap:16px}
+.rk-hero-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.rk-hero-t>b{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-family:var(--f-round)}
+/* Körper */
+.rk-bodies{max-width:270px;width:100%;align-self:center}
+.rk-bodies [data-rk-m]{cursor:pointer}
+.rk-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;font-size:12px;font-weight:600;color:var(--muted)}
+.rk-legend span{display:inline-flex;align-items:center;gap:5px}
+.rk-legend i{width:10px;height:10px;border-radius:3px;display:block}
+/* Listen */
+.rk-list{display:flex;flex-direction:column;border-radius:16px;background:var(--fill);overflow:hidden}
+.rk-row,.rk-up{display:flex;align-items:center;gap:12px;padding:10px 12px;text-align:left;width:100%;box-sizing:border-box;color:inherit;min-width:0}
+.rk-row+.rk-row,.rk-up+.rk-up{border-top:1px solid var(--sep)}
+.rk-row>svg:last-child{width:14px;height:14px;flex:none;color:var(--muted)}
+.rk-row-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.rk-row-t>b{font-size:15px;font-weight:700}
+.rk-rn{font-size:13px;font-weight:700}
+.rk-row .rk-bar{margin-top:3px}
+.rk-row.none .rk-row-t>b{color:var(--muted)}
+.rk-pos{width:18px;flex:none;text-align:center;font-size:13px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;margin-right:-4px}
+.rk-up .nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.rk-up .nm b{font-size:15px}
+.rk-up .tag{flex:none;font-size:11px}
+.rk-fkn{display:inline-flex;align-items:center;gap:3px;font-weight:800;font-family:var(--f-round);flex:none}
+.rk-sorts{margin:0 -4px;padding:0 4px}
+/* Stärkster / Baustelle */
+.rk-duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rk-duo button{display:flex;flex-direction:column;align-items:center;gap:5px;padding:14px 10px;border-radius:22px;text-align:center;color:inherit;min-width:0}
+.rk-duo b{font-size:15px;line-height:1.2}
+.rk-duo .rk-em{width:46px;height:46px}
+/* Hinweise */
+.rk-ins{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;box-sizing:border-box;padding:12px 14px;border-radius:16px;font-size:14px;line-height:1.4;color:inherit;background:color-mix(in srgb,#ffb300 14%,var(--glass))}
+.rk-ins>svg{width:18px;height:18px;flex:none;margin-top:1px;color:#e69a00}
+.rk-ins b{display:block}
+.rk-off{align-items:center;text-align:center;--rc:#d99a00}
+/* Detail */
+.rk-det{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.rk-det>b{font-size:24px;font-weight:800;font-family:var(--f-round)}
+.rk-det .rk-bar{max-width:260px;margin-top:4px}
+.rk-goal{background:color-mix(in srgb,var(--tint) 13%,transparent)}
+.rk-ladder{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.rk-ladder.two{grid-template-columns:1fr 1fr}
+.rk-ladder>div{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;border-radius:14px;background:var(--fill);opacity:.5;text-align:center}
+.rk-ladder>div.on{opacity:1}
+.rk-ladder>div.cur{box-shadow:inset 0 0 0 2px var(--tint)}
+.rk-ladder b{font-size:13px}
+.rk-ladder span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+/* Meldung und Zusammenfassung */
+.rk-toast .rk-em{width:42px;height:42px}
+.rk-sum .rk-up{padding:6px 0}
+.rk-sum .rk-up+.rk-up{border-top:1px solid var(--sep)}
+/* Abfrage beim Start */
+.rk-ask{z-index:26}
+.rk-ask-top{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.rk-new{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#fff;background:linear-gradient(90deg,var(--grad-a),var(--grad-b));padding:3px 10px;border-radius:99px}
+.rk-ask-fig{display:flex;flex-direction:column;gap:12px;padding:16px 12px;border-radius:24px;background:var(--glass-strong)}
+.rk-ask-fig .rk-bodies{max-width:250px}
+.rk-ask-fig figcaption{display:none}
+.rk-ask-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.rk-ask-chips span{display:inline-flex;align-items:center;gap:5px;padding:3px 10px 3px 4px;border-radius:99px;font-size:12px;font-weight:700;background:color-mix(in srgb,var(--c) 18%,transparent)}
+.rk-ask-chips .rk-em{width:20px;height:20px}
+.rk-ask-pts{display:flex;flex-direction:column;gap:12px}
+.rk-ask-pts>div{display:flex;align-items:center;gap:12px;font-size:14px;line-height:1.35;color:var(--muted)}
+.rk-ask-pts b{display:block;color:var(--fg);font-size:15px}
+.rk-ask-pts .rk-em,.rk-ask-pts .fk,.rk-ask-ic{width:38px;height:38px;flex:none}
+.rk-ask-ic{display:grid;place-items:center;color:var(--tint)}
+.rk-ask-ic svg{width:30px;height:30px}
+
 </style>
 
 <div class="mesh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -1578,6 +1658,11 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
   <header class="titlebar" style="padding-top:8px"><div><div class="date" id="j-sub">Heute</div><h1 class="brand">Journal</h1></div>
     <div class="navs"><button class="navbtn glass" id="j-cal" aria-label="Stimmungskalender öffnen"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8.5" cy="14.5" r="1.6" fill="currentColor"/><circle cx="12" cy="14.5" r="1.6" fill="currentColor" opacity=".6"/><circle cx="15.5" cy="14.5" r="1.6" fill="currentColor" opacity=".3"/></svg></button><button class="navbtn glass" id="j-prev" aria-label="Vorheriger Tag"><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="navbtn glass" id="j-next" aria-label="Nächster Tag"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></header>
   <div id="journal-body" class="stack"></div>
+</div>
+<div class="wrap" id="page-rank" hidden>
+  <header class="titlebar" style="padding-top:8px"><div><div class="date">Muskel-Ränge</div><h1 class="brand">Ränge</h1></div>
+    <button class="streakpill glass rk-pill" id="rank-fk" data-rk-fk aria-label="Deine Funken" hidden></button></header>
+  <div id="rank-body" class="stack"></div>
 </div>
 <div class="wrap" id="page-set" hidden>
   <header class="titlebar" style="padding-top:8px"><div><div class="date">Locked In</div><h1 class="brand">Einstellungen</h1></div></header>
@@ -1755,6 +1840,7 @@ function normalize(s){
   o.daily=s.daily&&typeof s.daily==="object"&&!Array.isArray(s.daily)?s.daily:{};
   o.journal=normJournal(s.journal);
   o.sick=normSick(s.sick);
+  o.ranks=normRanks(s.ranks);
   o.plans.sort((a,b)=>a.from<b.from?-1:1);
   for(const k of Object.keys(o.log)){if(!Array.isArray(o.log[k])||!o.log[k].length)delete o.log[k]}
   return o;
@@ -1944,7 +2030,7 @@ function renderSync(){
   injectAvatars();applyTheme();
   if(syncMode!=="pending")setTimeout(maybeOnboard,0);
 }
-function render(){renderHeader();renderToday();renderCal();renderPlan();renderSync();if(typeof renderCalPage==="function")renderCalPage();if(typeof renderGym==="function"){renderGym();renderStats()}if(typeof renderMusHome==="function")renderMusHome();if(typeof renderFood==="function")renderFood();if(typeof renderBadgeCard==="function")renderBadgeCard();if(typeof scheduleBadges==="function")scheduleBadges();if(typeof renderJournal==="function")renderJournal()}
+function render(){renderHeader();renderToday();renderCal();renderPlan();renderSync();if(typeof renderCalPage==="function")renderCalPage();if(typeof renderGym==="function"){renderGym();renderStats()}if(typeof renderMusHome==="function")renderMusHome();if(typeof renderFood==="function")renderFood();if(typeof renderBadgeCard==="function")renderBadgeCard();if(typeof scheduleBadges==="function")scheduleBadges();if(typeof renderJournal==="function")renderJournal();if(typeof rkTick==="function")rkTick()}
 
 // ---------- actions ----------
 function toggle(k,id,btn){
@@ -2118,11 +2204,11 @@ function fill(ids){
 }
 function setPage(p){
   page=p;
-  ["home","cal","gym","food","stats","journal","set"].forEach(x=>{const el=$("page-"+x);if(el)el.hidden=x!==p});if(typeof syncTabs==="function")syncTabs();
+  ["home","cal","gym","food","stats","rank","journal","set"].forEach(x=>{const el=$("page-"+x);if(el)el.hidden=x!==p});if(typeof syncTabs==="function")syncTabs();
   document.querySelectorAll(".tabbar [data-page]").forEach(b=>b.classList.toggle("on",b.dataset.page===p));
-  const hs={cal:"#kalender",gym:"#training",food:"#ernaehrung",stats:"#stats",journal:"#journal",set:"#einstellungen"}[p];
+  const hs={cal:"#kalender",gym:"#training",food:"#ernaehrung",stats:"#stats",journal:"#journal",set:"#einstellungen",rank:"#raenge"}[p];
   try{history.replaceState(null,"",hs||location.pathname+location.search)}catch(e){}
-  if(p==="cal")renderCalPage();if(p==="gym")renderGym();if(p==="stats")renderStats();if(p==="food"&&typeof renderFood==="function")renderFood();if(p==="journal"&&typeof renderJournal==="function"){jDate=null;renderJournal()}if(p==="set"&&typeof renderSetPage==="function")renderSetPage();if(typeof syncSubbar==="function")syncSubbar();if(p!=="gym")document.querySelector(".app").classList.remove("focus");if(typeof islandTick==="function")islandTick();if(typeof tipSoon==="function")tipSoon();
+  if(p==="cal")renderCalPage();if(p==="gym")renderGym();if(p==="stats")renderStats();if(p==="food"&&typeof renderFood==="function")renderFood();if(p==="journal"&&typeof renderJournal==="function"){jDate=null;renderJournal()}if(p==="set"&&typeof renderSetPage==="function")renderSetPage();if(p==="rank"&&typeof renderRank==="function")renderRank();if(typeof syncSubbar==="function")syncSubbar();if(p!=="gym")document.querySelector(".app").classList.remove("focus");if(typeof islandTick==="function")islandTick();if(typeof tipSoon==="function")tipSoon();
   if(p==="home"&&typeof renderMot==="function"){renderMot();renderSick()}
   $("scroller").scrollTop=0;
 }
@@ -2345,6 +2431,7 @@ function finishWorkout(){
   if(!gid){gid="gym";const ex=act("gym");if(ex)ex.archived=false;else state.activities.push({id:"gym",name:"Gym",color:COLORS[0],archived:false});syncGymDays()}
   if(gid){const l=(state.log[sess.date]||[]).slice();if(!l.includes(gid)){l.push(gid);state.log[sess.date]=l}}
   if(typeof sickCbDone==="function")sickCbDone(a);
+  if(typeof rkCheck==="function")rkCheck(sess.id);   // Muskel-Ränge: Aufstiege aus diesem Training (65-raenge.js)
   persist();render();openSummary(sess.id);
 }
 function showSummary(s,prs){
@@ -3096,6 +3183,7 @@ function sumHtml(s){
   h+='<section class="sweek glass">'+wk.map((k,i)=>'<span class="dw" style="grid-column:'+(i+1)+'">'+DOW[i]+'</span>').join("")+(b>a?'<span class="band" style="grid-column:'+(a+1)+' / '+(b+2)+'"></span>':"")+
     wk.map((k,i)=>'<span class="dc" style="grid-column:'+(i+1)+'"><span class="bx '+cells[i]+(k===s.date?" me":"")+'">'+(cells[i]==="on"||cells[i]==="pl"?MK_OK:cells[i]==="x"?MK_X:cells[i]==="fz"?frzIc(1):cells[i]==="sk"?skIc():parse(k).getDate())+'</span></span>').join("")+'</section>';
   if(typeof motPostHtml==="function")h+=motPostHtml(s);
+  if(typeof rkSumHtml==="function")h+=rkSumHtml(s);
   h+='<section class="sstats glass"><div><b>'+(n.vol?fmt(uW(Math.round(n.vol)))+" "+UL()+"":"–")+'</b><span>Bewegt</span></div><div><b>'+(n.dms?durH(n.dms):"–")+'</b><span>Dauer</span></div><div><b>'+(n.sets||"–")+'</b><span>Sätze</span></div></section>';
   h+='<section class="panel glass"><h2 class="h2">Trainierte Muskeln</h2>'+bodyPair(sessLoads(s),6,1)+'<div class="mlegend"><span>wenig</span><i></i><span>viel</span></div></section>';
   h+='<div><h2 class="h2">Maximalkraft</h2><div class="foot">Geschätztes Gewicht für 1 Wiederholung · letztes Mal → dieses Training</div></div><div class="stack" style="gap:10px">';
@@ -4792,6 +4880,7 @@ function stBody(){
     sec("Training",'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',settingsInner()+
       '<button class="btn ghost full" data-st-quiz>Ziele &amp; Plan neu einrichten</button>')+
     sec("Streak",'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 5 7 7 7 13a7 7 0 0 1-14 0c0-4 2-6 4-8 0 3 1 4 3 5-1-4 0-7 0-10z" fill="currentColor"/></svg>',frzSetHtml())+
+    sec("Muskel-Ränge",rkTabIc(),rkSetHtml())+
     '<div id="st-slot-plan" class="st-slot"></div>'+
     sec("Feedback",'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>',
       '<div class="foot">Du hast eine Idee, einen Wunsch oder einen Fehler gefunden? Schreib uns, gern mit Screenshot.</div><button class="btn full" data-st-fb>Verbesserung vorschlagen</button>')+
@@ -4880,7 +4969,7 @@ function startOnboarding(re){
   let root=$("onb");if(!root){root=document.createElement("div");root.id="onb";root.className="onb";root.setAttribute("role","dialog");root.setAttribute("aria-label","Einrichtung");document.body.appendChild(root)}
   root.onclick=obClick;obRender();
 }
-function closeOnb(){const r=$("onb");if(r)r.remove();ob=null}
+function closeOnb(){const r=$("onb");if(r)r.remove();ob=null;if(typeof rkTick==="function")rkTick()}
 function obOpt(attr,k,title,txt,on,badge){return '<button class="opt'+(on?" on":"")+'" '+attr+'="'+k+'"><b>'+esc(title)+(badge?'<i class="rec">'+badge+'</i>':'')+'</b><span>'+esc(txt)+'</span></button>'}
 function obRender(){
   const root=$("onb");if(!root||!ob)return;const st=OB_STEPS[ob.step],n=OB_STEPS.length-1;
@@ -5300,9 +5389,10 @@ var TAB_DEF={
   food:["Ernährung",'<svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2.2 1.2-3.5 4-3.5 7.5V13H17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'],
   stats:["Stats",'<svg viewBox="0 0 24 24"><path d="M5 20V12M10 20V6M15 20v-9M20 20V4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>'],
   journal:["Journal",J_IC],
+  rank:["Ränge",rkTabIc()],
   set:["Einstellungen",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>']};
-var TAB_ORDER=["home","cal","gym","food","stats","journal","set"];
-function tabCfg(){let t=state.settings.tabs;if(!Array.isArray(t)||!t.length)t=TAB_ORDER.slice();t=t.filter((x,i)=>TAB_DEF[x]&&t.indexOf(x)===i);if(!t.includes("set"))t.push("set");if(t.length<2)t=["home","set"];return t}
+var TAB_ORDER=["home","cal","gym","food","stats","rank","journal","set"];
+function tabCfg(){let t=state.settings.tabs;if(!Array.isArray(t)||!t.length)t=TAB_ORDER.slice();t=t.filter((x,i)=>TAB_DEF[x]&&t.indexOf(x)===i&&(x!=="rank"||rkOn()));if(!t.includes("set"))t.push("set");if(t.length<2)t=["home","set"];return t}
 function navEl(){return document.querySelector(".tabbar")}
 function buildTabs(){
   const nav=navEl();if(!nav)return;
@@ -5311,7 +5401,7 @@ function buildTabs(){
 }
 function syncTabs(instant){
   if(!appReady)return;const nav=navEl();if(!nav)return;const T=tabCfg();
-  nav.style.setProperty("--tbcols",T.map(id=>id===page?"1.55fr":"1fr").join(" "));
+  nav.style.setProperty("--tbcols",T.map(id=>id===page?(T.length>7?"2fr":"1.55fr"):"1fr").join(" "));
   nav.querySelectorAll("[data-page]").forEach(b=>{const on=b.dataset.page===page;b.classList.toggle("on",on);if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
   placeInd(instant);
 }
@@ -5354,7 +5444,7 @@ function syncSubbar(){const sb=$("stats-sub");if(!sb)return;const show=page==="s
   if(show)gnPlace(sb,was);if(typeof islandTick==="function")islandTick()}
 // ----- Einstellungen als eigene Seite -----
 function tabCfgHtml(){
-  const T=tabCfg(),off=TAB_ORDER.filter(id=>!T.includes(id)),up='<svg viewBox="0 0 16 16"><path d="M3.5 10l4.5-4.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',dn='<svg viewBox="0 0 16 16"><path d="M3.5 6l4.5 4.5 4.5-4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const T=tabCfg(),off=TAB_ORDER.filter(id=>!T.includes(id)&&(id!=="rank"||rkOn())),up='<svg viewBox="0 0 16 16"><path d="M3.5 10l4.5-4.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',dn='<svg viewBox="0 0 16 16"><path d="M3.5 6l4.5 4.5 4.5-4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const row=(id,on,i)=>'<div class="tcr'+(on?"":" off")+'"><span class="tcr-ic">'+TAB_DEF[id][1]+'</span><span class="tcr-n">'+TAB_DEF[id][0]+(id==="set"?'<small>bleibt immer in der Leiste</small>':'')+'</span>'+
     (on?'<button class="tcr-b" data-tc-mv="'+id+'" data-d="-1" aria-label="'+TAB_DEF[id][0]+' weiter nach links"'+(i===0?" disabled":"")+'>'+up+'</button><button class="tcr-b" data-tc-mv="'+id+'" data-d="1" aria-label="'+TAB_DEF[id][0]+' weiter nach rechts"'+(i===T.length-1?" disabled":"")+'>'+dn+'</button>':'')+
     (id==="set"?'<span class="tcr-sp"></span>':'<button class="tgl tcr-tg'+(on?" on":"")+'" data-tc-tg="'+id+'" role="switch" aria-checked="'+on+'" aria-label="'+TAB_DEF[id][0]+' anzeigen"><i></i></button>')+'</div>';
@@ -5633,7 +5723,7 @@ function tipMark(id){state.settings.tips=Object.assign({},state.settings.tips||{
 function tipSoon(ms){if(!appReady)return;clearTimeout(tipT);tipT=setTimeout(tipCheck,ms==null?900:ms)}
 function tipVisible(el){if(!el||!el.isConnected)return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight}
 function tipCheck(){
-  if(!appReady||tipCur||!state.settings.onboarded||$("onb")||$("boot-err"))return;
+  if(!appReady||tipCur||!state.settings.onboarded||$("onb")||$("boot-err")||$("rk-ask"))return;
   if(document.querySelector("#sheet-root .sheet")){tipSoon(1500);return}
   const nav=navEl(),isl=$("island"),sub=$("stats-sub");
   const C=[["island",isl&&!isl.hidden?isl:null],
@@ -6274,12 +6364,290 @@ $("page-set").addEventListener("click",e=>{
   state.settings.home=c;persist();applyHome();stDraw();
 });
 
+// ---------- Muskel-Ränge: eigener Tab „Ränge“, Funken (Credits), Abfrage beim ersten Start ----------
+// state.ranks = {on:true|false|null (noch nicht gefragt), lv:{muskel:höchste erreichte Stufe}, fk:Funken, log:[Aufstiege], init}
+// Stufen 0–24: 8 Ränge mit je 3 Stufen (I, II, III) und ganz oben „Olymp“.
+// Stärke eines Muskels = beste Übung, die ihn direkt trifft: geschätzte Maximalkraft im Verhältnis zum Körpergewicht,
+// verglichen mit einem Richtwert pro Übung (rkRefs). 100 % = Olymp.
+// Wird früh gebraucht (normalize beim Start, tabCfg): außerhalb von Funktionen nur „var“ und Funktionen, kein const/let.
+var rkT=null,rkAskT=null,rkTT=null,rkSort="top",rkUid=0,rkMemo=null,RK_R=null;
+function rkBounds(){return [0,.22,.32,.43,.55,.67,.79,.9,1]}
+function rkTiers(){return [["Rohling","#7d838d","#b4bac4"],["Eisen","#5f7189","#a3b4ca"],["Bronze","#b3632a","#e9a66a"],["Stahl","#2f86bf","#8ed2f7"],["Gold","#d99a00","#ffdc5e"],["Titan","#0fa893","#79f0d6"],["Diamant","#3470f5","#8fd3ff"],["Obsidian","#6f35e6","#c8a0ff"],["Olymp","#ff3355","#ffb347"]]}
+function normRanks(r){
+  r=r&&typeof r==="object"?r:{};
+  const o={on:r.on===true?true:r.on===false?false:null,lv:{},fk:Math.max(0,Math.round(+r.fk||0)),log:[]};
+  if(r.lv&&typeof r.lv==="object")for(const k in r.lv){const v=Math.round(+r.lv[k]);if(v>=0&&v<=24)o.lv[k]=v}
+  if(Array.isArray(r.log))o.log=r.log.filter(x=>x&&x.r&&x.d).slice(-60).map(x=>{const e={d:String(x.d),r:String(x.r),lv:+x.lv||0,f:+x.f||0};if(x.sid)e.sid=String(x.sid);return e});
+  if(r.init)o.init=1;
+  return o;
+}
+function RK(){if(!state.ranks||typeof state.ranks!=="object")state.ranks=normRanks(null);return state.ranks}
+function rkOn(){return RK().on===true}
+function rkSyncOk(){return syncMode!=="pending"&&!(sbUser&&syncMode!=="cloud")}
+function rkLv(f){if(f>=1)return 24;const B=rkBounds();let t=0;while(t<7&&f>=B[t+1])t++;return t*3+Math.min(2,Math.max(0,Math.floor((f-B[t])/(B[t+1]-B[t])*3)))}
+function rkLo(lv){if(lv>=24)return 1;const B=rkBounds(),t=Math.floor(lv/3);return B[t]+(B[t+1]-B[t])*(lv%3)/3}
+function rkName(lv){if(lv<0)return "Ohne Rang";if(lv>=24)return "Olymp";return rkTiers()[Math.floor(lv/3)][0]+" "+["I","II","III"][lv%3]}
+function rkCol(lv){return lv<0?"var(--muted)":rkTiers()[Math.min(8,Math.floor(lv/3))][1]}
+function rkFkFor(from,to){let f=0;for(let l=from+1;l<=to;l++)f+=l>0&&l%3===0?50:10;return f}
+// Richtwerte: Maximalkraft als Vielfaches des Körpergewichts für „Olymp“ (Mann, 80 kg). Kurzhanteln und einseitige Übungen pro Seite.
+// [x,k] = Übung mit eigenem Körpergewicht (k = Anteil des Körpergewichts, der bewegt wird), {t:Sekunden} = Halteübung, 0 = wird nicht gewertet.
+function rkRefs(){return RK_R||(RK_R={
+  bank:2,schraeg:.85,butterfly:1.9,dips:[2,1],klimmzug:[1.8,1],chinup:[1.85,1],klimmzug_ass:0,latzug:1.75,latzug_eng:1.75,rudern_breit:1.8,rudern:1.75,kabelrudern:1.85,kreuzheben:3.2,
+  schulterdr:1.4,seitheben:.42,facepull:1.3,kniebeuge:2.7,beinpresse:5,rdl:2.6,beinstrecker:2.2,beinbeuger:1.6,beinbeuger_s:1.7,waden:3.4,abduktor:2.3,adduktor:2.4,
+  curls:.9,hammer:.55,trizepskabel:1.45,french:.9,kabelcrunch:1.8,schraeg_lh:1.75,negativ:2.1,bank_smith:2,schraeg_smith:1.75,schraeg_m:1.9,crossover:.7,fly_kh:.6,liegestuetz:[1.25,.64],pullover:.7,
+  bank_kh_1:.9,brustpresse_1:1.1,fly_kabel_1:.6,latzug_1:.95,kh_rudern_1:1.05,meadows_1:1.1,kabelrudern_1:1,rudern_m_1:1,tbar:1.9,rudern_eng_m:1.8,pendlay:1.75,straightarm:1,inverted:[1.2,.6],shrugs:3,
+  hyperext:[1.2,.45],goodmorning:1.8,military:1.4,kh_schulter:.75,arnold:.65,kh_schulter_1:.75,landmine_1:.9,pushpress_1:.85,seitheben_kabel_1:.35,seitheben_m:1.4,frontheben:.42,reversefly_m:1.4,reversefly_kh:.38,reversefly_1:.32,aufrecht:1.2,
+  sz_curls:1.1,schraeg_curls:.5,scott:1,scott_1:.48,konz_1:.5,kabel_curls:1.1,kabel_curls_1:.5,hammer_1:.55,spider:.9,reverse_curls:.8,unterarm:1,
+  enges_bank:1.75,skull:1,trizeps_seil:1.3,ueberkopf_kabel:1.15,ueberkopf_kh:.8,ueberkopf_kh_1:.45,kickback:.38,trizeps_1:.65,ueberkopf_kabel_1:.55,kickback_1:.38,trizeps_m:1.9,bankdips:[1.3,.5],
+  frontsquat:2.25,hack:3.5,goblet:1.1,smith_squat:2.7,sumo:3.2,hipthrust:3.5,glutebridge:3.5,nordic:[1.2,.7],waden_sitz:2.2,waden_bp:4.5,
+  bulgarian_1:.85,ausfall_1:.8,ausfall_rueck_1:.8,walking_1:.75,seitausfall_1:.6,cossack_1:.6,stepup_1:.7,pistol_1:[1.5,.9],beinpresse_1:2.7,beinstrecker_1:1.15,beinbeuger_1:.85,rdl_1:.8,hipthrust_1:1.7,
+  kickback_kabel_1:.85,abduktion_kabel_1:.5,adduktion_kabel_1:.6,waden_1:[2,1],plank:{t:300},seitstuetz_1:{t:180},crunch:[.9,.3],situp_neg:[1,.4],russian:.5,abroller:[1,.5],beinheben_l:[.7,.3],deadbug:[.5,.2],
+  pallof_1:.6,holzhacker_1:.85,suitcase_1:0,farmer:0,beinheben:[1,.4]})}
+function rkRefOf(id){
+  const T=rkRefs();let v;
+  if(id in T)v=T[id];
+  else{
+    const ex=exById(id),n=String(ex.name||"").toLowerCase(),kh=/kurzhantel|\bkh\b|dumbbell/.test(n),ma=/maschine|machine/.test(n),h=ex.uni?.52:1;
+    const N=[[/assist/,0],[/beinpresse|leg press/,5*h],[/hack/,3.5],[/kniebeug|squat/,kh?1.1:2.7],[/kreuzheb|deadlift/,kh?1.1:3.2],[/hip ?thrust|glute bridge|beckenheb/,3.5*h],[/beinstreck|leg ext/,2.2*h],[/beinbeug|leg curl/,1.6*h],
+      [/wade|calf/,3.4*h],[/abdukt|addukt/,2.3],[/rückenstreck|rueckenstreck|hyperext/,2.6],[/bauch|crunch/,1.9],[/dip/,2.4],[/reverse.?curl|obergriff/,.8],[/reverse|rear|hintere/,kh?.38:1.4],[/seitheb|lateral/,ma?1.4:.42],[/frontheb/,.42],
+      [/schulterdr|schulterpres|overhead press|military/,kh?.75:1.5*h],[/überkopf|ueberkopf|french|skull/,kh?.8:1.15*h],[/trizep|pushdown/,1.45*h],[/hammer/,.55],[/curl/,kh?.55:1.1*h],[/latzieh|latzug|pull ?down/,1.75*h],[/klimmz|pull-?up|chin/,[1.8,1]],
+      [/rudern|row/,kh?1.05:1.85*h],[/shrug/,kh?1.3:3],[/butterfly|fly|crossover|fliegende/,kh?.6:/kabel|cable/.test(n)?.7:1.9],[/schr[äa]g|incline/,kh?.85:1.75*h],[/liegest|push-?up/,[1.25,.64]],[/bank|brustpresse|chest press|brust/,kh?.9:/presse|press/.test(n)?2.1*h:2*h]];
+    const hit=N.find(x=>x[0].test(n));
+    v=hit?hit[1]:({brust:2,ruecken:1.8,schultern:1.2,beine:2.7,bizeps:1,trizeps:1.3,core:1.8}[ex.muscle]||1.8)*h;
+  }
+  if(!v)return null;
+  if(Array.isArray(v))return {ref:v[0],k:v[1]};
+  if(typeof v==="object")return {t:v.t};
+  return {ref:v,k:0};
+}
+function rkBw(){const w=(state.body&&state.body.w||[]).slice().sort((a,b)=>a.d<b.d?-1:1).pop();return w&&w.kg>0?w.kg:0}
+function rkLeg(id){return exById(id).muscle==="beine"}
+function rkCalc(){
+  const bw=rkBw(),sex=(prof()||{}).sex,ls=sessions.length?sessions[sessions.length-1]:null,mk=sessions.length+"|"+(ls?ls.id+ls.entries.length:"")+"|"+stRev+"|"+bw+"|"+sex+"|"+key(today());
+  if(rkMemo&&rkMemo.k===mk&&rkMemo.s===state)return rkMemo.v;
+  const BW=bw||(sex==="f"?62:75),scale=80*Math.pow(BW/80,.67),best={},refs={};
+  const R=id=>id in refs?refs[id]:(refs[id]=rkRefOf(id));
+  const den=id=>{const r=R(id);if(r.t)return r.t;const sf=sex==="f"?(rkLeg(id)?.74:.6):sex==="d"?(rkLeg(id)?.87:.8):1;return r.ref*sf*scale};
+  const put=(id,v,o)=>{if(!(v>0))return;const b=best[id];if(!b||v>b.v)best[id]=Object.assign({v},o)};
+  sessions.forEach(s=>s.entries.forEach(e=>{const r=R(e.ex);if(!r)return;
+    (e.sets||[]).forEach(t=>{if(t.type==="w")return;
+      if(r.t){const sec=+t.sec||0;if(sec>0)put(e.ex,sec,{sec,d:s.date});return}
+      const w=num(t.w),n=Math.round(num(t.r)),load=w+r.k*BW;if(!(load>0)||!(n>0))return;
+      put(e.ex,e1(load,Math.min(20,n)),{w,r:n,d:s.date})})}));
+  const im=(typeof G==="function"&&G().imported)||{};
+  for(const id in im){const r=R(id);if(!r||r.t||r.k)continue;(im[id]||[]).forEach(p=>put(id,+p.v||0,{imp:1,d:p.d}))}
+  const M={},list=[];
+  Object.keys(REG).forEach(r=>{M[r]={r,f:0,ex:null,lv:-1,prog:0,list:[]}});
+  for(const id in best){const b=best[id];b.den=den(id);b.R=R(id);b.f=b.v/b.den;
+    let reg;try{reg=exRegions(id)}catch(x){continue}
+    for(const r in reg){const w=reg[r],m=M[r];if(!m||!(w>=.5))continue;const g=.8+.2*(Math.min(1,w)-.5)/.5,f=b.f*g;m.list.push({id,f,g});if(f>m.f){m.f=f;m.ex=id}}}
+  Object.keys(M).forEach(r=>{const m=M[r];m.list.sort((a,b)=>b.f-a.f);
+    if(m.ex){m.lv=rkLv(m.f);m.prog=m.lv>=24?1:Math.max(0,Math.min(1,(m.f-rkLo(m.lv))/(rkLo(m.lv+1)-rkLo(m.lv))))}list.push(m)});
+  const rk=list.filter(m=>m.lv>=0),sum=rk.reduce((n,m)=>n+m.lv+(m.lv>=24?0:m.prog),0),avg=rk.length?sum/rk.length:0;
+  const v={M,list,best,BW,noBw:!bw,ranked:rk.length,all:rk.length?{lv:Math.min(24,Math.floor(avg)),prog:avg>=24?1:avg-Math.floor(avg)}:{lv:-1,prog:0}};
+  rkMemo={k:mk,s:state,v};return v;
+}
+// Was fehlt bis zur nächsten Stufe? Konkretes Ziel an der besten Übung dieses Muskels.
+function rkGoal(m,C){
+  if(m.lv<0||m.lv>=24||!m.ex)return null;const b=C.best[m.ex],it=m.list.find(x=>x.id===m.ex);if(!b||!it)return null;
+  const need=rkLo(m.lv+1)/it.g*b.den,nm=exById(m.ex).name;
+  if(b.R.t)return {ex:nm,txt:"Halte "+fmtSec(Math.ceil(need/5)*5)+" min"};
+  const k=b.R.k*C.BW;
+  if(k>0&&!(b.w>0)){const n=Math.ceil(30*(need/k-1)-1e-6);if(n<=20)return {ex:nm,txt:"Schaffe "+Math.max(n,(b.r||0)+1)+" Wiederholungen am Stück"};
+    const x=Math.ceil((need/(1+8/30)-k)/2.5)*2.5;return {ex:nm,txt:"Schaffe 8 Wiederholungen mit "+fmt(uW(x))+" "+UL()+" Zusatzgewicht"}}
+  const r0=b.r?Math.max(1,Math.min(12,b.r)):8,raw=(r0===1?need:need/(1+r0/30))-k,st=raw<20?1:2.5;let w=Math.ceil(raw/st-1e-6)*st;
+  if(b.w&&w<=b.w&&r0>=(b.r||0))w=b.w+st;
+  return {ex:nm,txt:"Schaffe "+fmt(uW(w))+" "+UL()+" × "+r0+(k>0?" (Zusatzgewicht)":"")};
+}
+function rkBestTxt(b){
+  if(b.R.t)return fmtSec(b.sec)+" min gehalten";
+  if(b.imp)return "≈ "+fmt(uW(b.v))+" "+UL()+" Maximalkraft";
+  return (b.w>0?fmt(uW(b.w))+" "+UL()+" × "+b.r:b.r+" Wdh.")+(b.R.k?" · mit Körpergewicht":" · ≈ "+fmt(uW(b.v))+" "+UL()+" 1RM");
+}
+// ----- Symbole -----
+function rkFk(c){const id="fkg"+(++rkUid);return '<svg class="fk'+(c?" "+c:"")+'" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="'+id+'" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ff5a1f"/><stop offset="1" stop-color="#ffd35a"/></linearGradient></defs><path fill="url(#'+id+')" d="M11 2C12 8.5 14.5 11 21 12 14.500 13 12 15.500 11 22 10 15.500 7.500 13 1 12 7.500 11 10 8.500 11 2Z"/><path fill="#ffd35a" d="M19.500 1.500c.4 2 1 2.600 3 3-2 .4-2.600 1-3 3-.4-2-1-2.600-3-3 2-.4 2.600-1 3-3Z"/></svg>'}
+function rkEmblem(lv,c){
+  const id="rkg"+(++rkUid),cls='class="rk-em'+(c?" "+c:"")+'"',hex="M24 3 42 13.5v21L24 45 6 34.5v-21Z";
+  if(lv<0)return '<svg '+cls+' viewBox="0 0 48 48" aria-hidden="true"><path d="'+hex+'" fill="var(--fill2)" stroke="var(--sep)" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M19.500 19.500a4.500 4.500 0 1 1 6.500 4c-1.400.8-2 1.600-2 3M24 31.500v.5" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"/></svg>';
+  const t=Math.min(8,Math.floor(lv/3)),d=lv%3,T=rkTiers()[t];
+  const ys=t===8?[]:d===0?[29]:d===1?[25,33]:[21.5,28.5,35.5];
+  const inner=t===8?'<path d="M24 11.500l3.700 7.900 8.600 1-6.400 5.900 1.800 8.500L24 30.500l-7.700 4.300 1.800-8.500-6.400-5.900 8.600-1z" fill="#fff"/>':ys.map(y=>'<path d="M15.500 '+y+'l8.500-6.500 8.500 6.500" fill="none" stroke="#fff" stroke-width="3.400" stroke-linecap="round" stroke-linejoin="round"/>').join("");
+  return '<svg '+cls+' viewBox="0 0 48 48" role="img" aria-label="'+rkName(lv)+'"><defs><linearGradient id="'+id+'" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="'+T[1]+'"/><stop offset="1" stop-color="'+T[2]+'"/></linearGradient></defs><path d="'+hex+'" fill="url(#'+id+')"/><path d="M24 6.500 39 15.200v17.600L24 41.500 9 32.800V15.200Z" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.200"/>'+inner+'</svg>';
+}
+function rkTabIc(){return '<svg viewBox="0 0 24 24"><path d="M12 2.800 19.500 7v10L12 21.200 4.500 17V7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.500 13.500 12 10.500l3.500 3" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg>'}
+// Körper, jeder Muskel in der Farbe seines Rangs. C = {muskel:{lv}}
+function rkBody(view,C){
+  const MIR=' transform="matrix(-1 0 0 1 100 0)"',B="var(--body)";
+  const sil='<g style="fill:'+B+';stroke:'+B+'">'+SIL_C.map(e=>'<'+e+' style="stroke-width:0"/>').join("")+'<g>'+SIL_S.map(e=>'<'+e+'/>').join("")+'</g><g'+MIR+'>'+SIL_S.map(e=>'<'+e+'/>').join("")+'</g></g>';
+  let mus=hairEl(view);
+  (view==="front"?FRONT:BACK).forEach(([regs,els,center])=>{
+    let bst=regs[0];const L=r=>C[r]?C[r].lv:-1;regs.forEach(r=>{if(L(r)>L(bst))bst=r});
+    const lv=L(bst),st=lv<0?'fill:var(--musc)':'fill:'+rkCol(lv)+';fill-opacity:'+(lv>=24?1:[.6,.8,1][lv%3]);
+    const draw=els.map(e=>'<'+e+' style="fill:var(--musc);stroke:'+B+';stroke-width:.5"/><'+e+' data-rk-m="'+bst+'" style="'+st+';stroke:'+B+';stroke-width:.5"/>').join("");
+    mus+=center?draw:'<g>'+draw+'</g><g'+MIR+'>'+draw+'</g>';
+  });
+  const lines=view==="front"?'<path d="M50 56v34M44 64h12M44 72.5h12M44 81h12" style="fill:none;stroke:'+B+';stroke-width:.9;pointer-events:none"/>':"";
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="15 3 70 199" width="140" height="398" role="img" aria-label="'+(view==="front"?"Vorderseite":"Rückseite")+'">'+sil+mus+lines+'</svg>';
+}
+function rkBodies(C){return '<div class="bodies rk-bodies"><figure>'+rkBody("front",C)+'<figcaption>Vorne</figcaption></figure><figure>'+rkBody("back",C)+'<figcaption>Hinten</figcaption></figure></div>'}
+function rkBar(p,lv){return '<span class="rk-bar"><i style="width:'+Math.round(Math.max(.03,p)*100)+'%;background:'+rkCol(lv)+'"></i></span>'}
+// ----- Aufstiege prüfen, Funken vergeben -----
+function rkCheck(sid){
+  if(!rkOn()||!rkSyncOk())return [];
+  let C;try{C=rkCalc()}catch(e){return []}
+  const K=RK(),ups=[],init=!K.init,tk=key(today());
+  C.list.forEach(m=>{if(m.lv<0)return;const old=K.lv[m.r]==null?-1:K.lv[m.r];if(m.lv<=old)return;
+    const f=init?10:rkFkFor(old,m.lv);K.lv[m.r]=m.lv;/* beim Einschalten pauschal 10 pro Muskel, damit spätere Aufstiege etwas wert bleiben */K.fk+=f;ups.push({r:m.r,from:old,lv:m.lv,f})});
+  if(!ups.length&&!init)return [];
+  if(!init)ups.forEach(u=>{const e={d:tk,r:u.r,lv:u.lv,f:u.f};if(sid)e.sid=sid;K.log.push(e)});
+  K.log=K.log.slice(-60);K.init=1;persist();
+  const sum=ups.reduce((n,u)=>n+u.f,0);
+  if(init){if(ups.length)rkToast(Math.max(...ups.map(u=>u.lv)),ups.length+(ups.length===1?" Muskel":" Muskeln")+" gerankt","Startguthaben: "+sum+" Funken")}
+  else if(ups.length){const u=ups.slice().sort((a,b)=>b.lv-a.lv)[0],big=Math.floor(u.lv/3)>Math.floor(Math.max(0,u.from)/3)||u.from<0;
+    rkToast(u.lv,(big?"Neuer Rang: ":"Aufstieg: ")+REG[u.r],rkName(u.lv)+(ups.length>1?" und "+(ups.length-1)+" weitere":"")+" · +"+sum+" Funken")}
+  return ups;
+}
+function rkToast(lv,t,x){
+  $("toast-root").innerHTML='<div class="toast glass btoast rk-toast" role="status">'+rkEmblem(lv)+'<span><b>'+esc(t)+'</b><br>'+esc(x)+'</span></div>';
+  clearTimeout(rkTT);rkTT=setTimeout(()=>{if($("toast-root").querySelector(".rk-toast"))$("toast-root").innerHTML=""},4800);
+}
+function rkTick(){if(!appReady)return;clearTimeout(rkT);rkT=setTimeout(()=>{const u=rkCheck();rkAskMaybe();if(page==="rank")renderRank();if(u.length&&page==="set"&&typeof stDraw==="function")stDraw()},800)}
+function rkEnable(on){
+  const K=RK(),S=state.settings;K.on=!!on;
+  if(on&&Array.isArray(S.tabs)&&!S.tabs.includes("rank")){const i=S.tabs.indexOf("set");S.tabs.splice(i<0?S.tabs.length:i,0,"rank")}
+  persist();buildTabs();if(on)rkCheck();
+}
+// Workout-Zusammenfassung: Aufstiege aus diesem Training
+function rkSumHtml(s){
+  if(!rkOn()||!s)return "";const L=RK().log.filter(x=>x.sid===s.id);if(!L.length)return "";
+  return '<section class="panel glass rk-sum"><div class="row between"><h2 class="h2">Rang-Aufstiege</h2><span class="rk-fkn">'+rkFk()+'+'+L.reduce((n,x)=>n+x.f,0)+'</span></div>'+
+    L.map(x=>'<div class="rk-up">'+rkEmblem(x.lv)+'<span class="nm"><b>'+esc(REG[x.r]||x.r)+'</b><span class="foot" style="color:'+rkCol(x.lv)+'">'+rkName(x.lv)+'</span></span><span class="foot">+'+x.f+'</span></div>').join("")+'</section>';
+}
+// ----- Abfrage beim ersten Start / nach dem Update -----
+function rkAskMaybe(){
+  if(!appReady||RK().on!==null||$("rk-ask"))return;
+  if(!state.settings.onboarded||!rkSyncOk()){return}
+  if($("onb")||$("boot-err")||document.querySelector("#sheet-root .sheet")||$("sum-root").children.length||G().active||(typeof tipCur!=="undefined"&&tipCur)){clearTimeout(rkAskT);rkAskT=setTimeout(rkAskMaybe,3000);return}
+  const demo={},D={chest_up:13,chest:16,chest_low:14,delt_front:12,delt_side:9,delt_rear:7,lats:11,upper_back:10,traps:8,lowback:6,bi_long:10,biceps:12,brachialis:8,tri_long:9,triceps:13,tri_med:11,forearms:5,abs:4,obliques:3,quads:15,rf:13,hams:7,ham_in:8,glutes:10,abductors:6,adductors:5,calves:4,soleus:3};
+  for(const k in D)demo[k]={lv:D[k]};
+  const T=rkTiers(),root=document.createElement("div");root.id="rk-ask";root.className="onb rk-ask";root.setAttribute("role","dialog");root.setAttribute("aria-label","Muskel-Ränge");
+  root.innerHTML='<div class="onb-in"><div class="rk-ask-top"><span class="rk-new">Neu</span><h2>Wie stark ist jeder deiner Muskeln?</h2><p class="onb-sub">Mit den Muskel-Rängen bekommt jeder Muskel einen eigenen Rang, von <b>Rohling</b> bis <b>Olymp</b>.</p></div>'+
+    '<div class="rk-ask-fig">'+rkBodies(demo)+'<div class="rk-ask-chips">'+T.map((t,i)=>'<span style="--c:'+t[1]+'">'+rkEmblem(Math.min(24,i*3+2))+t[0]+'</span>').join("")+'</div></div>'+
+    '<div class="rk-ask-pts"><div>'+rkEmblem(14)+'<span><b>Aus deinen Trainingsdaten</b>Je mehr Gewicht du im Verhältnis zu deinem Körpergewicht bewegst, desto höher der Rang.</span></div>'+
+    '<div>'+rkFk("big")+'<span><b>Funken sammeln</b>Für jeden Aufstieg gibt es Funken. Später kannst du sie für Extras einlösen.</span></div>'+
+    '<div><span class="rk-ask-ic">'+rkTabIc()+'</span><span><b>Eigener Tab „Ränge“</b>Mit Körperansicht, Rangliste und deinen nächsten Zielen.</span></div></div>'+
+    '<div class="onb-foot"><button class="btn full" data-rk-yes>Ja, Muskeln ranken</button><button class="btn ghost full" data-rk-no>Nein, danke</button><div class="foot" style="text-align:center">Du kannst das jederzeit unter Einstellungen → Muskel-Ränge ändern.</div></div></div>';
+  root.addEventListener("click",e=>{
+    const y=e.target.closest("[data-rk-yes]"),n=e.target.closest("[data-rk-no]");if(!y&&!n)return;e.stopPropagation();root.remove();
+    if(y){rkEnable(true);setPage("rank")}else{rkEnable(false);toast("Alles klar. Einschalten kannst du die Ränge unter Einstellungen → Muskel-Ränge.")}
+    if(typeof stDraw==="function")stDraw();
+  });
+  document.body.appendChild(root);
+}
+// ----- Tab „Ränge“ -----
+function rkRow(m,C,goal){
+  const g=goal?rkGoal(m,C):null;
+  if(m.lv<0){const s=exFor(m.r,1)[0];return '<button class="rk-row none" data-rk-m="'+m.r+'">'+rkEmblem(-1)+'<span class="rk-row-t"><b>'+esc(REG[m.r])+'</b><span class="foot">'+(s?"Trainiere z. B. "+esc(s.name):"Noch keine passende Übung eingetragen")+'</span></span>'+CHR+'</button>'}
+  return '<button class="rk-row" data-rk-m="'+m.r+'">'+rkEmblem(goal&&m.lv<24?m.lv+1:m.lv)+'<span class="rk-row-t"><b>'+esc(REG[m.r])+'</b>'+
+    (g?'<span class="rk-rn" style="color:'+rkCol(m.lv+1)+'">→ '+rkName(m.lv+1)+' · noch '+Math.max(1,Math.round((1-m.prog)*100))+' %</span><span class="foot">'+esc(g.ex)+': '+esc(g.txt)+'</span>'
+      :'<span class="rk-rn" style="color:'+rkCol(m.lv)+'">'+rkName(m.lv)+'</span>')+rkBar(m.prog,m.lv)+'</span>'+CHR+'</button>';
+}
+function rkInsights(C){
+  const M=C.M,out=[],best=k=>Array.isArray(k)?k.map(x=>M[x]).sort((a,b)=>b.lv-a.lv)[0]:M[k];
+  [[["quads","rf"],["hams","ham_in"],"Quadrizeps","Beinbeuger","Ein starker Beinbeuger schützt deine Knie."],[["chest","chest_up","chest_low"],["lats","upper_back"],"Brust","Rücken","Gleich starkes Drücken und Ziehen hält die Schultern gesund."],
+   [["biceps","bi_long"],["triceps","tri_long","tri_med"],"Bizeps","Trizeps","Beide zusammen machen den Arm."],["delt_front","delt_rear","Vordere Schulter","Hintere Schulter","Die hintere Schulter kommt oft zu kurz und ist wichtig für die Haltung."]].forEach(p=>{
+    const a=best(p[0]),b=best(p[1]);if(!a||!b||a.lv<0||b.lv<0)return;const d=a.lv-b.lv;if(Math.abs(d)<3)return;
+    const hi=d>0?p[2]:p[3],lo=d>0?p[3]:p[2],lm=d>0?b:a;
+    out.push('<button class="rk-ins" data-rk-m="'+lm.r+'">'+IC.warn+'<span><b>'+lo+' hinkt hinterher</b>'+hi+' ist '+rkName(Math.max(a.lv,b.lv))+', '+lo+' erst '+rkName(Math.min(a.lv,b.lv))+'. '+p[4]+'</span></button>')});
+  return out.slice(0,2).join("");
+}
+function renderRank(){
+  if(!appReady||page!=="rank")return;const el=$("rank-body");if(!el)return;const pill=$("rank-fk");
+  if(!rkOn()){if(pill)pill.hidden=true;
+    el.innerHTML='<section class="panel glass rk-off">'+rkEmblem(14,"xl")+'<h2 class="h2">Muskel-Ränge sind aus</h2><div class="foot">Schalte sie ein, dann bekommt jeder Muskel einen Rang aus deinen Trainingsdaten.</div><button class="btn full" data-rk-on>Muskel-Ränge einschalten</button></section>';return}
+  const C=rkCalc(),K=RK(),T=rkTiers(),A=C.all,rk=C.list.filter(m=>m.lv>=0),un=C.list.filter(m=>m.lv<0);
+  if(pill){pill.hidden=false;pill.innerHTML=rkFk()+'<b>'+K.fk+'</b>'}
+  let h='<section class="panel glass rk-hero" style="--rc:'+(A.lv<0?"var(--muted)":rkCol(A.lv))+'"><div class="rk-hero-top">'+rkEmblem(A.lv,"xl")+'<div class="rk-hero-t"><span class="eyebrow-t">Gesamtrang</span><b>'+(A.lv<0?"Noch ohne Rang":rkName(A.lv))+'</b>'+
+    '<span class="foot">'+C.ranked+' von '+C.list.length+' Muskeln gerankt</span></div></div>'+
+    (A.lv<0?'<div class="foot">Trag bei deinem nächsten Training Gewicht und Wiederholungen ein. Danach bekommt jeder trainierte Muskel hier seinen ersten Rang.</div>'
+      :rkBar(A.prog,A.lv)+(A.lv<24?'<div class="foot">Noch '+Math.max(1,Math.round((1-A.prog)*100))+' % bis '+rkName(A.lv+1)+'. Der Gesamtrang ist der Durchschnitt aller gerankten Muskeln.</div>':'<div class="foot">Höher geht es nicht. Du bist ganz oben.</div>'))+'</section>';
+  h+='<section class="panel glass">'+rkBodies(C.M)+'<div class="rk-legend">'+T.map((t,i)=>'<span><i style="background:'+t[1]+'"></i>'+t[0]+'</span>').join("")+'<span><i style="background:var(--musc)"></i>ohne Rang</span></div>'+
+    '<div class="foot" style="text-align:center">Tippe auf einen Muskel für Details. Kräftigere Farbe = höhere Stufe im Rang.</div></section>';
+  if(C.noBw)h+='<button class="rk-ins" data-rk-bw>'+IC.info+'<span><b>Körpergewicht fehlt</b>Gerade wird mit '+fmt(uW(C.BW))+' '+UL()+' geschätzt. Trag dein Gewicht ein, damit deine Ränge genau stimmen.</span></button>';
+  const nx=rk.filter(m=>m.lv<24).sort((a,b)=>b.prog-a.prog).slice(0,3);
+  if(nx.length)h+='<section class="panel glass"><div><h2 class="h2">Nächste Aufstiege</h2><div class="foot">Diese Muskeln sind am nächsten dran. So schaffst du die nächste Stufe:</div></div><div class="rk-list">'+nx.map(m=>rkRow(m,C,true)).join("")+'</div></section>';
+  if(rk.length>=2){const s=rk.slice().sort((a,b)=>b.f-a.f),hi=s[0],lo=s[s.length-1];
+    h+='<div class="rk-duo"><button class="glass" data-rk-m="'+hi.r+'"><span class="foot">Stärkster Muskel</span>'+rkEmblem(hi.lv)+'<b>'+esc(REG[hi.r])+'</b><span class="foot" style="color:'+rkCol(hi.lv)+'">'+rkName(hi.lv)+'</span></button>'+
+      '<button class="glass" data-rk-m="'+lo.r+'"><span class="foot">Größte Baustelle</span>'+rkEmblem(lo.lv)+'<b>'+esc(REG[lo.r])+'</b><span class="foot" style="color:'+rkCol(lo.lv)+'">'+rkName(lo.lv)+'</span></button></div>'}
+  h+=rkInsights(C);
+  const order=Object.keys(REG),sorted=rkSort==="low"?rk.slice().sort((a,b)=>a.f-b.f):rkSort==="next"?rk.slice().sort((a,b)=>(a.lv>=24)-(b.lv>=24)||b.prog-a.prog):rkSort==="body"?rk.slice().sort((a,b)=>order.indexOf(a.r)-order.indexOf(b.r)):rk.slice().sort((a,b)=>b.f-a.f);
+  h+='<section class="panel glass" id="rk-all"><div class="row between"><h2 class="h2">Deine Muskeln</h2><span class="foot">'+rk.length+' gerankt</span></div>'+
+    '<div class="filters rk-sorts">'+[["top","Höchste zuerst"],["low","Schwächste zuerst"],["next","Kurz vor Aufstieg"],["body","Von Kopf bis Fuß"]].map(x=>'<button class="fchip'+(rkSort===x[0]?" on":"")+'" data-rk-sort="'+x[0]+'">'+x[1]+'</button>').join("")+'</div>'+
+    (sorted.length?'<div class="rk-list">'+sorted.map((m,i)=>rkRow(m,C,false).replace('<span class="rk-row-t">','<span class="rk-pos">'+(i+1)+'</span><span class="rk-row-t">')).join("")+'</div>':'<div class="empty">Noch kein Muskel gerankt.</div>')+
+    (un.length?'<div class="act-name" style="margin-top:6px">Noch ohne Rang · '+un.length+'</div><div class="foot">Ein Muskel bekommt seinen Rang, sobald du eine Übung einträgst, die ihn direkt trifft.</div><div class="rk-list">'+un.map(m=>rkRow(m,C,false)).join("")+'</div>':'')+'</section>';
+  const L=K.log.slice(-8).reverse();
+  if(L.length)h+='<section class="panel glass"><h2 class="h2">Letzte Aufstiege</h2><div class="rk-list">'+L.map(x=>'<div class="rk-up">'+rkEmblem(x.lv)+'<span class="nm"><b>'+esc(REG[x.r]||x.r)+'</b><span class="foot"><span style="color:'+rkCol(x.lv)+'">'+rkName(x.lv)+'</span> · '+parse(x.d).toLocaleDateString("de-DE",{day:"numeric",month:"long"})+'</span></span><span class="rk-fkn">'+rkFk()+'+'+x.f+'</span></div>').join("")+'</div></section>';
+  h+='<button class="linkbtn" data-rk-info style="align-self:center">So funktionieren die Ränge</button>';
+  el.innerHTML=h;
+}
+function openRankMuscle(r){
+  const C=rkCalc(),m=C.M[r];if(!m)return;const D=PDESC(),g=rkGoal(m,C),T=rkTiers();
+  let h='<div class="rk-det" style="--rc:'+rkCol(m.lv)+'">'+rkEmblem(m.lv,"xl")+'<b style="color:'+rkCol(m.lv)+'">'+rkName(m.lv)+'</b>'+
+    (m.lv>=0?'<span class="foot">Stärke-Wert '+Math.min(100,Math.round(m.f*100))+' von 100</span>'+rkBar(m.prog,m.lv)+(m.lv<24?'<span class="foot">'+Math.round(m.prog*100)+' % auf dem Weg zu '+rkName(m.lv+1)+'</span>':''):'')+'</div>';
+  if(g)h+='<div class="sk-tip rk-goal"><b>Nächste Stufe: '+rkName(m.lv+1)+'</b><br>'+esc(g.ex)+': '+esc(g.txt)+'. Das bringt '+rkFkFor(Math.max(m.lv,RK().lv[r]==null?-1:RK().lv[r]),m.lv+1)+' Funken.</div>';
+  if(D[r])h+='<div class="foot">'+esc(D[r])+'</div>';
+  if(m.list.length){
+    h+='<div class="act-name">Das zählt für diesen Muskel</div><div class="rk-list">'+m.list.slice(0,6).map((x,i)=>{const b=C.best[x.id],lv=rkLv(x.f);
+      return '<div class="rk-up">'+rkEmblem(lv)+'<span class="nm"><b>'+esc(exById(x.id).name)+'</b><span class="foot">'+esc(rkBestTxt(b))+(x.g<.99?' · trifft den Muskel anteilig':'')+'</span></span>'+(i===0?'<span class="tag simt">bestimmt den Rang</span>':'<span class="foot" style="color:'+rkCol(lv)+'">'+rkName(lv)+'</span>')+'</div>'}).join("")+'</div>'+
+      '<div class="foot">Es zählt immer deine beste Übung für diesen Muskel. Aufwärmsätze werden nicht gewertet.</div>';
+    const b=C.best[m.ex],it=m.list[0];
+    if(b&&!b.R.t&&!b.R.k)h+='<div class="act-name">Rang-Leiter mit „'+esc(exById(m.ex).name)+'“</div><div class="rk-ladder">'+T.map((t,i)=>{const need=rkLo(i*3)/it.g*b.den,on=m.lv>=i*3;
+      return '<div class="'+(on?"on":"")+(Math.floor(m.lv/3)===i?" cur":"")+'">'+rkEmblem(Math.min(24,i*3))+'<b>'+t[0]+'</b><span>'+(i?"ab "+fmt(uW(Math.ceil(need)))+" "+UL():"Start")+'</span></div>'}).join("")+'</div><div class="foot">Angegeben ist die geschätzte Maximalkraft (1RM) für dein Körpergewicht von '+fmt(uW(C.BW))+' '+UL()+'.</div>';
+  }else{const s=exFor(r,3);h+='<div class="sk-tip"><b>Noch ohne Rang.</b> Dieser Muskel wurde noch von keiner eingetragenen Übung direkt getroffen.'+(s.length?' Gute Übungen dafür: '+s.map(x=>esc(x.name)).join(", ")+'.':'')+'</div>'}
+  sheet(REG[r],h);
+}
+function openRankInfo(){
+  const T=rkTiers(),B=rkBounds();
+  sheet("So funktionieren die Ränge",
+    '<div class="small">Für jeden Muskel zählt die <b>beste Übung, die ihn direkt trifft</b>. Aus Gewicht und Wiederholungen wird deine Maximalkraft geschätzt und ins Verhältnis zu deinem <b>Körpergewicht</b> gesetzt. Das Ergebnis ist dein Stärke-Wert von 0 bis 100.</div>'+
+    '<div class="rk-ladder">'+T.map((t,i)=>'<div class="on">'+rkEmblem(Math.min(24,i*3+(i<8?2:0)))+'<b>'+t[0]+'</b><span>'+(i<8?"ab "+Math.round(B[i]*100):"100")+'</span></div>').join("")+'</div>'+
+    '<div class="small">Jeder Rang hat drei Stufen: <b>I, II und III</b>. Nach Stufe III kommt der nächste Rang. Zur Einordnung: <b>Gold</b> entspricht ungefähr einem soliden Fortgeschrittenen, <b>Olymp</b> der absoluten Spitze.</div>'+
+    '<div class="act-name">Funken '+rkFk()+'</div><div class="small">Jede neue Stufe bringt <b>10 Funken</b>, ein neuer Rang <b>50 Funken</b>. Funken gibt es nur für Stufen, die du zum ersten Mal erreichst. Später kannst du sie für Extras einlösen.</div>'+
+    '<div class="foot">Gut zu wissen: Die Werte sind eine Schätzung. Geräte verschiedener Hersteller sind unterschiedlich schwer, darum kann ein Rang an einer Maschine etwas zu hoch oder zu niedrig ausfallen. Bei Kurzhanteln und einseitigen Übungen zählt das Gewicht pro Seite. Wirst du schwerer, ohne stärker zu werden, kann ein Rang auch sinken.</div>');
+}
+function openFk(){
+  const K=RK(),L=K.log.slice(-6).reverse();
+  sheet("Funken",'<div class="rk-det">'+rkFk("xl")+'<b>'+K.fk+' Funken</b><span class="foot">Deine Belohnung für jeden Rang-Aufstieg</span></div>'+
+    '<div class="rk-ladder two"><div class="on">'+rkEmblem(10)+'<b>Neue Stufe</b><span>+10</span></div><div class="on">'+rkEmblem(12)+'<b>Neuer Rang</b><span>+50</span></div></div>'+
+    (L.length?'<div class="act-name">Zuletzt verdient</div><div class="rk-list">'+L.map(x=>'<div class="rk-up">'+rkEmblem(x.lv)+'<span class="nm"><b>'+esc(REG[x.r]||x.r)+'</b><span class="foot">'+rkName(x.lv)+'</span></span><span class="rk-fkn">'+rkFk()+'+'+x.f+'</span></div>').join("")+'</div>':'')+
+    '<div class="sk-tip"><b>Bald:</b> Mit Funken kannst du dir später Extras für die App holen. Bis dahin: sammeln.</div>');
+}
+function rkSetHtml(){
+  const on=rkOn(),K=RK();
+  return '<div class="tgls"><button class="tgl'+(on?" on":"")+'" data-rk-tg role="switch" aria-checked="'+on+'"><span class="tg-t"><b>Muskel-Ränge</b><span class="foot">Jeder Muskel bekommt einen Rang aus deinen Trainingsdaten, mit eigenem Tab „Ränge“ und Funken für Aufstiege.</span></span><i></i></button></div>'+
+    (on?'<button class="st-link" data-rk-go><span class="st-link-t"><b>Zu deinen Rängen</b><span class="foot">'+K.fk+' Funken gesammelt</span></span>'+CHR+'</button>':'');
+}
+$("page-rank").addEventListener("click",e=>{
+  const t=e.target.closest("[data-rk-m],[data-rk-sort],[data-rk-info],[data-rk-fk],[data-rk-bw],[data-rk-on]");if(!t)return;e.stopPropagation();const d=t.dataset;
+  if("rkSort" in d){rkSort=d.rkSort;const y=$("scroller").scrollTop;renderRank();$("scroller").scrollTop=y;return}
+  if("rkInfo" in d){openRankInfo();return}
+  if("rkFk" in d){openFk();return}
+  if("rkBw" in d){statTab="body";statDetail=null;setPage("stats");return}
+  if("rkOn" in d){rkEnable(true);renderRank();return}
+  openRankMuscle(t.getAttribute("data-rk-m"));
+});
+$("page-set").addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t)return;
+  if("rkTg" in t.dataset){const on=!rkOn();rkEnable(on);stDraw();if(!on)toast("Muskel-Ränge aus. Deine Ränge und Funken bleiben gespeichert.");return}
+  if("rkGo" in t.dataset){setPage("rank")}
+});
+
 // ---------- Start: läuft als Allerletztes, wenn alle Teile der App geladen sind ----------
 // Alles, was andere Teile braucht (Leiste, Startseite, Workout-Insel), gehört hierher und nicht in die einzelnen Dateien.
 appReady=true;
 stPark();
 buildTabs();
-{const T=tabCfg(),hp={"#kalender":"cal","#training":"gym","#ernaehrung":"food","#stats":"stats","#journal":"journal","#einstellungen":"set"}[location.hash];
+{const T=tabCfg(),hp={"#kalender":"cal","#training":"gym","#ernaehrung":"food","#stats":"stats","#journal":"journal","#einstellungen":"set","#raenge":"rank"}[location.hash];
   if(hp)setPage(hp);else if(!T.includes(page))setPage(T[0]);}
 islandTick();
 renderMot();
@@ -6288,6 +6656,7 @@ setTimeout(()=>placeInd(true),60);
 storeBoot();
 if(typeof tipSoon==="function")tipSoon(1600);
 frzSoon(1800);
+rkTick();
 window.__liReady=true;
 
 })();
