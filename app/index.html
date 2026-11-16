@@ -1434,7 +1434,7 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
 .rk-hero-t{display:flex;flex-direction:column;gap:2px;min-width:0}
 .rk-hero-t>b{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1.15;font-family:var(--f-round)}
 /* Körper */
-.rk-bodies{max-width:270px;width:100%;align-self:center}
+.bodies.three.rk-bodies{max-width:350px;width:100%;margin:0;align-self:center}
 .rk-bodies [data-rk-m]{cursor:pointer}
 .rk-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;font-size:12px;font-weight:600;color:var(--muted)}
 .rk-legend span{display:inline-flex;align-items:center;gap:5px}
@@ -1486,7 +1486,7 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
 .rk-ask-top{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .rk-new{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#fff;background:linear-gradient(90deg,var(--grad-a),var(--grad-b));padding:3px 10px;border-radius:99px}
 .rk-ask-fig{display:flex;flex-direction:column;gap:12px;padding:16px 12px;border-radius:24px;background:var(--glass-strong)}
-.rk-ask-fig .rk-bodies{max-width:250px}
+.rk-ask-fig .bodies.three.rk-bodies{max-width:320px}
 .rk-ask-fig figcaption{display:none}
 .rk-ask-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
 .rk-ask-chips span{display:inline-flex;align-items:center;gap:5px;padding:3px 10px 3px 4px;border-radius:99px;font-size:12px;font-weight:700;background:color-mix(in srgb,var(--c) 18%,transparent)}
@@ -1497,7 +1497,31 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
 .rk-ask-pts .rk-em,.rk-ask-pts .fk,.rk-ask-ic{width:38px;height:38px;flex:none}
 .rk-ask-ic{display:grid;place-items:center;color:var(--tint)}
 .rk-ask-ic svg{width:30px;height:30px}
-
+/* Abzeichen-Meldung: antippen klappt sie auf */
+.toast.btap{pointer-events:auto;cursor:pointer;display:block;width:min(380px,calc(100vw - 24px));max-width:none;padding:8px 12px 8px 8px;border-radius:26px;text-align:left;font-weight:500;
+  -webkit-tap-highlight-color:transparent;transition:opacity .24s ease,transform .24s ease}
+.toast.btap.out{opacity:0;transform:translate(-50%,-14px) scale(.97);pointer-events:none}
+.bt-top{display:flex;align-items:center;gap:10px}
+.btap .bt-top .medal{width:42px;height:42px;flex:none;transition:width .34s cubic-bezier(.3,.8,.3,1),height .34s cubic-bezier(.3,.8,.3,1)}
+.btap.open .bt-top .medal{width:54px;height:54px}
+.bt-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.3}
+.bt-t b{font-weight:700}
+.bt-t span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bt-chev{width:16px;height:16px;flex:none;color:var(--muted);margin-right:2px;transition:transform .34s cubic-bezier(.3,.8,.3,1)}
+.btap.open .bt-chev{transform:rotate(180deg)}
+.bt-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.3,.8,.3,1)}
+.btap.open .bt-more{grid-template-rows:1fr}
+.bt-in{overflow:hidden;min-height:0;opacity:0;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.4;transition:opacity .16s}
+.btap.open .bt-in{opacity:1;transition:opacity .3s .1s}
+.bt-box{margin-top:10px;padding:10px 12px;border-radius:16px;background:var(--fill);display:flex;flex-direction:column;gap:4px}
+.bt-eye{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.bt-next{font-size:13px;color:var(--muted)}
+.bt-next b{color:var(--fg)}
+.bt-row{display:flex;align-items:center;gap:10px}
+.bt-row .medal{width:32px;height:32px;flex:none}
+.bt-row span{display:flex;flex-direction:column;min-width:0;font-size:13px;color:var(--muted)}
+.bt-row b{color:var(--fg);font-size:14px}
+.bt-all{align-self:center;font-size:14px;font-weight:600;color:var(--tint);padding:6px 10px 4px}
 </style>
 
 <div class="mesh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -4094,8 +4118,31 @@ function checkBadges(){
   if(fresh.length){if(init)toast(fresh.length+" Abzeichen für deine bisherigen Erfolge freigeschaltet");else badgeToast(fresh)}
   renderBadgeCard();
 }
+// Meldung „Abzeichen freigeschaltet“: antippen klappt sie auf und erklärt das Abzeichen, Tippen daneben (oder noch einmal darauf) schließt sie.
 var btoastT;
-function badgeToast(fresh){const b=fresh[fresh.length-1];$("toast-root").innerHTML='<div class="toast glass btoast" role="status">'+medal(b,true,1)+'<span><b>Abzeichen freigeschaltet</b><br>'+esc(b.name)+(fresh.length>1?' und '+(fresh.length-1)+' weitere':'')+'</span></div>';clearTimeout(btoastT);btoastT=setTimeout(()=>{$("toast-root").innerHTML=""},3800)}
+function badgeToastHide(){
+  clearTimeout(btoastT);const el=$("toast-root").querySelector(".btap");if(!el||el.classList.contains("out"))return;
+  el.classList.add("out");setTimeout(()=>{if(el.isConnected)el.remove()},260);
+}
+function badgeToast(fresh){
+  const L=fresh.slice().reverse(),b=L[0],TN=["Bronze","Silber","Gold","Platin","Diamant"],nx=BADGES.find(x=>x.k===b.k&&x.goal>b.goal&&!(state.badges||{})[x.id]);
+  const rest=L.slice(1,4).map(x=>'<div class="bt-row">'+medal(x,true,1)+'<span><b>'+esc(x.name)+'</b>'+esc(x.desc)+'</span></div>').join("");
+  $("toast-root").innerHTML='<div class="toast glass btoast btap" role="button" tabindex="0" aria-expanded="false" aria-label="Abzeichen freigeschaltet: '+esc(b.name)+'. Tippen für Details">'+
+    '<div class="bt-top">'+medal(b,true,1)+'<span class="bt-t"><b>Abzeichen freigeschaltet</b><span>'+esc(b.name)+(L.length>1?' und '+(L.length-1)+' weitere':'')+'</span></span>'+
+    '<svg class="bt-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 6l4.5 4.5 4.5-4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
+    '<div class="bt-more"><div class="bt-in"><div class="bt-box"><span class="bt-eye" style="color:'+TIERC[b.tier]+'">'+CAT[b.cat]+' · Stufe '+TN[b.tier]+'</span><div class="bt-desc"><b>Dafür hast du es bekommen:</b> '+esc(b.desc)+'</div>'+
+    (nx?'<div class="bt-next">Nächste Stufe: <b>'+esc(nx.name)+'</b> · '+esc(nx.desc)+'</div>':'')+'</div>'+
+    (rest?'<div class="bt-eye">Außerdem freigeschaltet</div>'+rest:'')+'<button type="button" class="bt-all" data-bt-all>Alle Abzeichen ansehen</button></div></div></div>';
+  clearTimeout(btoastT);btoastT=setTimeout(badgeToastHide,4500);
+}
+$("toast-root").addEventListener("click",e=>{
+  const el=e.target.closest(".btap");if(!el)return;e.stopPropagation();
+  if(e.target.closest("[data-bt-all]")){badgeToastHide();openBadges();return}
+  if(el.classList.contains("open")){badgeToastHide();return}
+  clearTimeout(btoastT);el.classList.add("open");el.setAttribute("aria-expanded","true");
+});
+$("toast-root").addEventListener("keydown",e=>{const el=e.target.closest&&e.target.closest(".btap");if(el&&(e.key==="Enter"||e.key===" ")){e.preventDefault();el.click()}if(el&&e.key==="Escape")badgeToastHide()});
+document.addEventListener("pointerdown",e=>{const el=$("toast-root").querySelector(".btap.open");if(el&&!el.contains(e.target))badgeToastHide()},true);
 function badgeProg(b,S){return Math.min(1,(S[b.k]||0)/b.goal)}
 function renderBadgeCard(){
   if(!v3Ready)return;const el=$("badge-card");if(!el)return;const S=lastBadgeStats,got=BADGES.filter(b=>state.badges&&state.badges[b.id]);
@@ -6489,7 +6536,19 @@ function rkBody(view,C){
   const lines=view==="front"?'<path d="M50 56v34M44 64h12M44 72.5h12M44 81h12" style="fill:none;stroke:'+B+';stroke-width:.9;pointer-events:none"/>':"";
   return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="15 3 70 199" width="140" height="398" role="img" aria-label="'+(view==="front"?"Vorderseite":"Rückseite")+'">'+sil+mus+lines+'</svg>';
 }
-function rkBodies(C){return '<div class="bodies rk-bodies"><figure>'+rkBody("front",C)+'<figcaption>Vorne</figcaption></figure><figure>'+rkBody("back",C)+'<figcaption>Hinten</figcaption></figure></div>'}
+// Seitenansicht, gleiche Färbung (Aufbau wie bodySide in 17-muscles.js: Arm liegt vor dem Rumpf)
+function rkSide(C){
+  const B="var(--body)",arms=["delt_rear","delt_side","delt_front","bi_long","brachialis","biceps","triceps","tri_long","tri_med","forearms"];
+  const sil='<g style="fill:'+B+';stroke:'+B+'">'+SIL_SIDE.map(e=>'<'+e+' style="stroke-width:0"/>').join("")+'</g>',arm='<g style="fill:'+B+';stroke:'+B+'">'+SIL_SIDE_S.map(e=>'<'+e+'/>').join("")+'</g>';
+  let back=hairEl("side"),front="";
+  SIDE.forEach(([regs,els])=>{
+    let bst=regs[0];const L=r=>C[r]?C[r].lv:-1;regs.forEach(r=>{if(L(r)>L(bst))bst=r});
+    const lv=L(bst),st=lv<0?'fill:var(--musc)':'fill:'+rkCol(lv)+';fill-opacity:'+(lv>=24?1:[.6,.8,1][lv%3]);
+    const d=els.map(e=>'<'+e+' style="fill:var(--musc);stroke:'+B+';stroke-width:.5"/><'+e+' data-rk-m="'+bst+'" style="'+st+';stroke:'+B+';stroke-width:.5"/>').join("");
+    if(arms.includes(regs[0]))front+=d;else back+=d});
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="29 3 42 199" width="84" height="398" role="img" aria-label="Seitenansicht">'+sil+back+arm+front+'</svg>';
+}
+function rkBodies(C){return '<div class="bodies three rk-bodies"><figure>'+rkBody("front",C)+'<figcaption>Vorne</figcaption></figure><figure>'+rkSide(C)+'<figcaption>Seite</figcaption></figure><figure>'+rkBody("back",C)+'<figcaption>Hinten</figcaption></figure></div>'}
 function rkBar(p,lv){return '<span class="rk-bar"><i style="width:'+Math.round(Math.max(.03,p)*100)+'%;background:'+rkCol(lv)+'"></i></span>'}
 // ----- Aufstiege prüfen, Funken vergeben -----
 function rkCheck(sid){
