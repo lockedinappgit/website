@@ -1351,6 +1351,73 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
 /* lange Meldungen: breit statt schmale runde Blase */
 .toast{width:max-content;border-radius:24px;box-sizing:border-box}
 
+/* Startseite anpassen: Reihenfolge über CSS order (Kopf 0, Warnungen/Krank/Motivation 1–3, Karten ab 10) */
+#page-home>#save-warn{order:1}#page-home>#sick-card{order:2}#page-home>#mot-card{order:3}#page-home>#bw-remind{order:4}
+#page-home>.hc-off{display:none!important}
+.hc-ic{font-size:17px;display:grid;place-items:center}
+/* v10: Krankheits-Modus (ruhiges Lila), Comeback-Plan */
+:root{--sick:#8b6cf0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sick:#a993ff}}
+:root[data-theme="dark"]{--sick:#a993ff}
+.sk-ic{width:16px;height:16px;flex:none;color:var(--sick)}
+
+/* Streak-Karte: pausiert */
+.sick-start{grid-column:1/-1;justify-self:center;font-size:14px;color:var(--muted);padding:2px 6px;margin-top:-2px}
+.streak.paused{border-color:color-mix(in srgb,var(--sick) 45%,transparent)!important}
+.streak.paused .flame{filter:grayscale(.8) brightness(.95);opacity:.7}
+.streak.paused .streak-num{background:linear-gradient(120deg,color-mix(in srgb,var(--sick) 70%,#fff),var(--sick));-webkit-background-clip:text;background-clip:text}
+.streak.paused .streak-num small{color:var(--sick);-webkit-text-fill-color:var(--sick)}
+
+.streakpill.paused svg{filter:grayscale(.8);opacity:.7}
+.streakpill.paused b{color:var(--sick)}
+
+/* Karte „Gute Besserung“ */
+.sickc{gap:12px!important;border:1px solid color-mix(in srgb,var(--sick) 40%,transparent)!important;
+  background:linear-gradient(165deg,color-mix(in srgb,var(--sick) 20%,var(--glass)) 0%,var(--glass) 60%)!important}
+.sickc .eyebrow,.sk-inl .eyebrow{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--sick)}
+.sickc .dc-opts button.on{background:color-mix(in srgb,var(--sick) 22%,var(--fill));box-shadow:inset 0 0 0 2px var(--sick)}
+.sickc .dc-opts button.on small{color:var(--fg)}
+.sickc .dc-fh{color:var(--sick)}
+.sickc .dc-bar i{background:var(--sick)}
+.sk-tip{font-size:14.5px;line-height:1.45;padding:11px 13px;border-radius:14px;background:color-mix(in srgb,var(--sick) 13%,transparent)}
+.sk-tip b{color:var(--fg)}
+.sk-todo .check.on .box{background:var(--sick);border-color:var(--sick)}
+.sk-water{display:flex;align-items:center;gap:10px}
+.sk-water .nm{display:flex;flex-direction:column;gap:5px;flex:1;min-width:0}
+.sk-water .btn{height:36px;padding:0 14px;font-size:14px;flex:none}
+.sk-note{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.4;background:color-mix(in srgb,var(--sick) 14%,transparent)}
+.sk-note .sk-ic{margin-top:1px}
+.sk-hist{display:flex;flex-direction:column;border-radius:14px;background:var(--fill);overflow:hidden}
+.sk-hist>div{display:flex;flex-direction:column;gap:1px;padding:10px 12px}
+.sk-hist>div+div{border-top:1px solid var(--sep)}
+/* Training-Tab */
+.sk-inl{gap:10px!important;border:1px solid color-mix(in srgb,var(--sick) 40%,transparent)!important}
+.sk-inl.cb{border-color:color-mix(in srgb,var(--ok) 40%,transparent)!important}
+.sk-inl.cb .eyebrow{color:var(--ok)}
+.thero.k-sk{background:linear-gradient(165deg,color-mix(in srgb,var(--sick) 14%,var(--glass)) 0%,var(--glass) 58%)!important;border-color:color-mix(in srgb,var(--sick) 30%,transparent)!important}
+.wc-badge.sk{background:color-mix(in srgb,var(--sick) 22%,transparent)}
+.wc-badge.sk .sk-ic{width:18px;height:18px}
+.ws-d.sick .ws-c .sk-ic{width:22px;height:22px}
+.cbnote{font-size:14px;line-height:1.4;padding:9px 12px;border-radius:12px;background:color-mix(in srgb,var(--ok) 13%,transparent)}
+/* Kalender */
+.mc2.miss.sick::after{display:none}
+.mc2 .sk-ic{position:absolute;bottom:1px;left:50%;width:13px;height:13px;margin-left:-6.5px}
+.sq.miss.sick{background:color-mix(in srgb,var(--sick) 55%,transparent)}
+.pill.skp{background:color-mix(in srgb,var(--sick) 16%,transparent);color:var(--sick);gap:4px}
+.pill.skp .sk-ic{width:13px;height:13px}
+.callegend i.lk{background:var(--sick);border-radius:50%;width:9px;height:9px}
+.wk.miss.sick i{background:var(--sick);opacity:.8}
+.bx.sk{background:color-mix(in srgb,var(--sick) 18%,transparent)}
+.bx.sk .sk-ic{width:18px;height:18px}
+/* Comeback */
+.cb-hero{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.cb-hero>b{font-size:21px}
+.cb-big{font-size:46px;line-height:1}
+.cb-list{display:flex;flex-direction:column;gap:2px;border-radius:16px;background:var(--fill);overflow:hidden}
+.cb-step{display:flex;align-items:center;gap:12px;padding:11px 14px}
+.cb-step+.cb-step{border-top:1px solid var(--sep)}
+.cb-step b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;font-family:var(--f-round);background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+
 </style>
 
 <div class="mesh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -1386,10 +1453,13 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
         <div class="stat"><span>Gesamt</span><b id="st-total">0</b></div>
         <button class="stat frz-stat" id="frz-stat" hidden aria-label="Streak-Schutz"><span>Schutz</span><b id="frz-ic"></b></button>
       </div>
+      <button class="linkbtn sick-start" id="sick-start">Krank oder verletzt? Streak pausieren</button>
     </div>
   </header>
 
   <div class="banner warn" id="save-warn" hidden role="alert"></div>
+  <!-- Krankheits-Modus: „Gute Besserung“ (63-krank.js) -->
+  <section class="panel glass sickc" id="sick-card" hidden aria-label="Krankheits-Modus"></section>
   <!-- erscheint von selbst, wenn an einem Gym-Tag die Motivation fehlt (61-motivation.js) -->
   <section class="panel glass mot" id="mot-card" hidden aria-label="Dein Warum"></section>
   <section class="panel glass dc" id="day-card" aria-label="Dein Tag"></section>
@@ -1401,7 +1471,7 @@ button.linkish{font:inherit;font-weight:600;text-align:left;color:var(--fg);padd
   </section>
   <div id="bw-remind" hidden></div>
 
-  <section class="panel glass" aria-labelledby="h-today">
+  <section class="panel glass" id="today-card" aria-labelledby="h-today">
     <div class="row between"><h2 class="h2" id="h-today">Heute</h2><span class="small muted" id="today-sub"></span></div>
     <div class="checks" id="today-list"></div>
     <div class="week" id="week"></div>
@@ -1684,6 +1754,7 @@ function normalize(s){
   o.hv=s.hv&&typeof s.hv==="object"?s.hv:{};o.reviews=s.reviews&&typeof s.reviews==="object"?s.reviews:{};
   o.daily=s.daily&&typeof s.daily==="object"&&!Array.isArray(s.daily)?s.daily:{};
   o.journal=normJournal(s.journal);
+  o.sick=normSick(s.sick);
   o.plans.sort((a,b)=>a.from<b.from?-1:1);
   for(const k of Object.keys(o.log)){if(!Array.isArray(o.log[k])||!o.log[k].length)delete o.log[k]}
   return o;
@@ -1737,21 +1808,41 @@ function firstLog(){const ks=Object.keys(state.log).filter(done).sort();return k
 // Alles wird aus dem Verlauf berechnet: auf jedem Gerät gleich, und wer einen Tag nachträgt, bekommt den Schutz zurück.
 // Eingesetzt wird ein Schutz erst ab dem Tag, seit dem es die Funktion gibt (FRZ_START). Ältere Lücken bleiben, wie sie waren.
 var FRZ_MAX=2,FRZ_EVERY=7,FRZ_START="2026-11-13",stRev=0,stMemo=null;
+// ---------- Krankheits-Modus (Daten) ----------
+// state.sick = [{id, from, to (null = läuft noch), kind "k" krank | "v" verletzt, sym:[…], f:{Tag: Befinden 1–5}, c:{Tag:[erledigt]}, fever}]
+// An Krankheitstagen pausiert die Streak: Geplante Tage zählen nicht als verpasst und brauchen keinen Schutz. Die UI steht in 63-krank.js.
+function normSick(a){
+  if(!Array.isArray(a))return [];const D=/^\d{4}-\d{2}-\d{2}$/,out=[];
+  a.forEach(p=>{if(!p||!D.test(p.from))return;const to=D.test(p.to)?p.to:null;if(to&&to<p.from)return;
+    const f={},c={};if(p.f&&typeof p.f==="object")Object.keys(p.f).forEach(k=>{const v=+p.f[k];if(D.test(k)&&v>=1&&v<=5)f[k]=v});
+    if(p.c&&typeof p.c==="object")Object.keys(p.c).forEach(k=>{if(D.test(k)&&Array.isArray(p.c[k]))c[k]=p.c[k].map(String).slice(0,10)});
+    out.push({id:String(p.id||"k"+p.from),from:p.from,to,kind:p.kind==="v"?"v":"k",sym:Array.isArray(p.sym)?p.sym.map(String).slice(0,12):[],f,c})});
+  out.sort((x,y)=>x.from<y.from?-1:1);
+  // höchstens ein laufender Zeitraum: ältere offene werden am Tag vor dem nächsten Beginn beendet
+  for(let i=0;i<out.length-1;i++)if(!out[i].to){const e=key(addDays(parse(out[i+1].from),-1));out[i].to=e<out[i].from?out[i].from:e}
+  return out.slice(-50);
+}
+function sickList(){return Array.isArray(state.sick)?state.sick:[]}
+function sickNow(){const tk=key(today());return sickList().find(p=>!p.to&&p.from<=tk)||null}
+function sickDay(k){const tk=key(today());return sickList().some(p=>k>=p.from&&k<=(p.to||tk)&&k<=tk)}
 function frzOn(){return state.settings.frz!==false}
 function streakCalc(){
   const tk=key(today());
   if(stMemo&&stMemo.st===state&&stMemo.rev===stRev&&stMemo.tk===tk)return stMemo.r;
-  const first=firstLog(),on=frzOn(),from=state.settings.frzFrom||FRZ_START,pe=planIsEmpty(),prot=[],earn=[],runAt={};
+  const first=firstLog(),on=frzOn(),from=state.settings.frzFrom||FRZ_START,pe=planIsEmpty(),prot=[],earn=[],runAt={},sk=[];
+  const SR=sickList().map(p=>[p.from,p.to||tk]),isSk=k=>SR.some(x=>k>=x[0]&&k<=x[1]);
   let run=0,best=0,tok=0,lb="";
   if(first)for(let d=parse(first),k=first;k<=tk;d=addDays(d,1),k=key(d)){
     if(done(k)){run++;if(run>best)best=run;if(run%FRZ_EVERY===0&&tok<FRZ_MAX){tok++;earn.push(k)}}
     else if(k!==tk&&(pe||plannedFor(d).some(counts))){
-      if(on&&k>=from&&tok>0){tok--;prot.push(k)}else{run=0;tok=0;lb=k}
+      // krank: Streak pausiert (kein Bruch, kein Schutz verbraucht)
+      if(isSk(k))sk.push(k);
+      else if(on&&k>=from&&tok>0){tok--;prot.push(k)}else{run=0;tok=0;lb=k}
     }
     runAt[k]=run;
   }
-  // lb = letzter Tag, an dem die Streak geendet hat
-  const r={cur:run,best:Math.max(best,run),tok,max:FRZ_MAX,every:FRZ_EVERY,on,prot,ps:new Set(prot),earn,runAt,lb,
+  // lb = letzter Tag, an dem die Streak geendet hat; paused = Krankheits-Modus läuft gerade
+  const r={cur:run,best:Math.max(best,run),tok,max:FRZ_MAX,every:FRZ_EVERY,on,prot,ps:new Set(prot),earn,runAt,lb,paused:!!sickNow(),sk:new Set(sk),
     next:tok>=FRZ_MAX?0:FRZ_EVERY-run%FRZ_EVERY};
   stMemo={st:state,rev:stRev,tk,r};
   return r;
@@ -1770,15 +1861,16 @@ var quoteIdx=0,quoteOff=0;
 function renderHeader(){
   const t=today();
   $("today-date").textContent=t.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"});
-  const s=streaks();
-  $("streak-num").innerHTML=s.cur+"<small>"+(s.cur===1?"Tag":"Tage")+" Streak</small>";
-  $("flame").classList.toggle("cold",s.cur===0);
+  const s=streaks(),pz=streakCalc().paused;
+  $("streak-num").innerHTML=s.cur+"<small>"+(s.cur===1?"Tag":"Tage")+(pz?" · pausiert":" Streak")+"</small>";
+  $("flame").classList.toggle("cold",s.cur===0&&!pz);
   $("st-best").textContent=s.best;
+  // Woche: Krankheitstage zählen nicht als geplant (außer du hast trotzdem trainiert)
   let plan=0,hit=0;const mon=addDays(t,-wd(t));
-  for(let i=0;i<7;i++){const d=addDays(mon,i);if(plannedFor(d).some(counts))plan++;if(done(key(d)))hit++}
+  for(let i=0;i<7;i++){const d=addDays(mon,i),dk=key(d);if(plannedFor(d).some(counts)&&(!sickDay(dk)||done(dk)))plan++;if(done(dk))hit++}
   $("st-week").textContent=hit+"/"+plan;
   $("st-total").textContent=Object.values(state.log).reduce((n,a)=>n+a.filter(counts).length,0);
-  frzRender();frzSoon();
+  frzRender();frzSoon();sickHeader();applyHome();
   const sa=(state.settings.streakActs||[]).filter(id=>act(id));
   $("streak-for").textContent=sa.length?sa.map(id=>act(id).name).join(", "):"Alle Aktivitäten";
   const start=new Date(2026,0,1),day=Math.floor((t-start)/864e5);
@@ -2031,7 +2123,7 @@ function setPage(p){
   const hs={cal:"#kalender",gym:"#training",food:"#ernaehrung",stats:"#stats",journal:"#journal",set:"#einstellungen"}[p];
   try{history.replaceState(null,"",hs||location.pathname+location.search)}catch(e){}
   if(p==="cal")renderCalPage();if(p==="gym")renderGym();if(p==="stats")renderStats();if(p==="food"&&typeof renderFood==="function")renderFood();if(p==="journal"&&typeof renderJournal==="function"){jDate=null;renderJournal()}if(p==="set"&&typeof renderSetPage==="function")renderSetPage();if(typeof syncSubbar==="function")syncSubbar();if(p!=="gym")document.querySelector(".app").classList.remove("focus");if(typeof islandTick==="function")islandTick();if(typeof tipSoon==="function")tipSoon();
-  if(p==="home"&&typeof renderMot==="function")renderMot();
+  if(p==="home"&&typeof renderMot==="function"){renderMot();renderSick()}
   $("scroller").scrollTop=0;
 }
 function shift(n){
@@ -2067,8 +2159,8 @@ function renderCalPage(){
         weeks.forEach(w=>{const dd=addDays(w,r),k=key(dd);
           if(dd.getFullYear()!==y||dd.getMonth()<m0||dd.getMonth()>m1){g+='<i class="sq x"></i>';return}
           const ids=idsFor(k);ids.forEach(id=>{tally[id]=(tally[id]||0)+1;total++});
-          const pl=!ids.length&&k>=tk&&plannedF(dd).length,ms=!ids.length&&k<tk&&plannedF(dd).length,fz=ms&&FZ.has(k);
-          g+='<button class="sq'+(pl?" plan":"")+(ms?" miss":"")+(fz?" frz":"")+(k===tk?" t":"")+(dd.getDate()===1?" m1":"")+'" style="'+fill(ids)+'" data-goto-day="'+k+'" aria-label="'+dd.toLocaleDateString("de-DE")+(ids.length?": "+ids.map(id=>act(id).name).join(", "):fz?": Streak geschützt":"")+'"></button>'});
+          const pl=!ids.length&&k>=tk&&plannedF(dd).length,ms=!ids.length&&k<tk&&plannedF(dd).length,sk=ms&&sickDay(k),fz=ms&&!sk&&FZ.has(k);
+          g+='<button class="sq'+(pl?" plan":"")+(ms?" miss":"")+(fz?" frz":"")+(sk?" sick":"")+(k===tk?" t":"")+(dd.getDate()===1?" m1":"")+'" style="'+fill(ids)+'" data-goto-day="'+k+'" aria-label="'+dd.toLocaleDateString("de-DE")+(ids.length?": "+ids.map(id=>act(id).name).join(", "):sk?": krank, Streak pausiert":fz?": Streak geschützt":"")+'"></button>'});
       });
       return g+'</div>';
     };
@@ -2085,25 +2177,25 @@ function renderCalPage(){
     html+='<div class="foot">'+(show.length<7?"Gezählt werden nur die angezeigten Tage. ":"")+'Tippe auf ein Feld, um den Tag zu öffnen.</div>';
   }else if(cv==="month"){
     const m=d.getMonth();$("cv-sub").textContent="Monatsansicht";$("cv-title").textContent=MONTHS[m]+" "+y;
-    const first=new Date(y,m,1),n=new Date(y,m+1,0).getDate();let cnt=0,nfz=0;
+    const first=new Date(y,m,1),n=new Date(y,m+1,0).getDate();let cnt=0,nfz=0,nsk=0;
     if(!cvSel||cvSel.slice(0,7)!==key(first).slice(0,7))cvSel=key(t).slice(0,7)===key(first).slice(0,7)?tk:key(first);
     // Kennzahlen für den Monat (Gym bzw. gefilterte Aktivität)
     const aid=cvFilter||gymActId();let done=0,plan=0,pPast=0,pHit=0,used=new Set();
     for(let i=1;i<=n;i++){const dd=new Date(y,m,i),k=key(dd),lg=state.log[k]||[],pl=aid?plannedFor(dd).includes(aid):false,did=aid?lg.includes(aid):false;
-      if(did)done++;if(pl)plan++;if(pl&&k<=tk&&(k<tk||did)){pPast++;if(did)pHit++}(state.log[k]||[]).forEach(id=>{if(act(id))used.add(id)})}
+      if(did)done++;if(pl)plan++;if(pl&&k<=tk&&(k<tk||did)&&(did||!sickDay(k))){pPast++;if(did)pHit++}(state.log[k]||[]).forEach(id=>{if(act(id))used.add(id)})}
     const an=aid&&act(aid)?act(aid).name:"Trainings";
     html='<div class="calstats"><div><b>'+done+(plan?'<small>/'+plan+'</small>':'')+'</b><span>'+esc(an==="Gym"?"Trainings":an)+'</span></div><div><b class="tint">'+streaks().cur+'</b><span>Tage Streak</span></div><div><b>'+(pPast?Math.round(pHit/pPast*100):"–")+(pPast?'<small>%</small>':'')+'</b><span>Plan gehalten</span></div></div>';
     html+='<div class="mg2">'+DOW.map(x=>'<div class="dow">'+x+'</div>').join("");
     for(let i=0;i<wd(first);i++)html+='<div class="mc2 x"></div>';
     for(let i=1;i<=n;i++){const dd=new Date(y,m,i),k=key(dd),ids=idsFor(k);cnt+=ids.length;
-      const pl=!ids.length&&plannedF(dd).length&&k>=tk,ms=!ids.length&&plannedF(dd).length&&k<tk,fz=ms&&FZ.has(k);if(fz)nfz++;
-      html+='<button class="mc2'+(ids.length?" filled":"")+(pl?" plan":"")+(ms?" miss":"")+(fz?" frz":"")+(k===tk?" t":"")+(k===cvSel?" sel":"")+'" style="'+(ids.length?fill(ids):"")+'" data-cal-sel="'+k+'" aria-label="'+dd.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"})+(ids.length?": "+ids.map(id=>act(id).name).join(", "):fz?": verpasst, Streak geschützt":ms?": verpasst":pl?": geplant":"")+'">'+i+(fz?frzIc(1,"mfz"):"")+'</button>';}
-    html+='</div><div class="callegend">'+[...used].filter(id=>!cvFilter||id===cvFilter).slice(0,5).map(id=>'<span><i style="background:'+act(id).color+'"></i>'+esc(act(id).name)+'</span>').join("")+'<span><i class="lp"></i>Geplant</span><span><i class="lm"></i>Verpasst</span>'+(nfz?'<span><i class="lf"></i>Geschützt</span>':'')+'</div>';
+      const pl=!ids.length&&plannedF(dd).length&&k>=tk,ms=!ids.length&&plannedF(dd).length&&k<tk,sk=ms&&sickDay(k),fz=ms&&!sk&&FZ.has(k);if(fz)nfz++;if(sk)nsk++;
+      html+='<button class="mc2'+(ids.length?" filled":"")+(pl?" plan":"")+(ms?" miss":"")+(fz?" frz":"")+(sk?" sick":"")+(k===tk?" t":"")+(k===cvSel?" sel":"")+'" style="'+(ids.length?fill(ids):"")+'" data-cal-sel="'+k+'" aria-label="'+dd.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"})+(ids.length?": "+ids.map(id=>act(id).name).join(", "):sk?": krank, Streak pausiert":fz?": verpasst, Streak geschützt":ms?": verpasst":pl?": geplant":"")+'">'+i+(fz?frzIc(1,"mfz"):"")+(sk?skIc():"")+'</button>';}
+    html+='</div><div class="callegend">'+[...used].filter(id=>!cvFilter||id===cvFilter).slice(0,5).map(id=>'<span><i style="background:'+act(id).color+'"></i>'+esc(act(id).name)+'</span>').join("")+'<span><i class="lp"></i>Geplant</span><span><i class="lm"></i>Verpasst</span>'+(nfz?'<span><i class="lf"></i>Geschützt</span>':'')+(nsk?'<span><i class="lk"></i>Krank</span>':'')+'</div>';
     // Details zum gewählten Tag
     const sd=parse(cvSel),sk=cvSel,slg=state.log[sk]||[],spl=plannedFor(sd),sids=[...new Set([...spl,...slg])].filter(id=>act(id)&&(!cvFilter||id===cvFilter));
     html+='<div class="calday"><div class="row between"><h2 class="h2">'+sd.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"})+'</h2><span class="foot">'+(sk===tk?"Heute":"")+'</span></div>'+
-      (FZ.has(sk)?frzNote():"")+
-      (sids.length?'<div class="checks">'+sids.map(id=>checkRow(act(id),slg.includes(id),spl.includes(id)?(sk>tk?"Geplant":slg.includes(id)?"":"Verpasst"):"Extra",sk)).join("")+'</div>':'<div class="foot">'+(sk>tk?"Laut Plan nichts geplant.":"An diesem Tag ist nichts eingetragen.")+'</div>')+
+      (FZ.has(sk)?frzNote():"")+sickNote(sk)+
+      (sids.length?'<div class="checks">'+sids.map(id=>checkRow(act(id),slg.includes(id),spl.includes(id)?(sk>tk?"Geplant":slg.includes(id)?"":sickDay(sk)?"Krank":"Verpasst"):"Extra",sk)).join("")+'</div>':'<div class="foot">'+(sk>tk?"Laut Plan nichts geplant.":"An diesem Tag ist nichts eingetragen.")+'</div>')+
       '<div class="btnrow"><button class="btn ghost" data-open-day="'+sk+'">Etwas eintragen</button><button class="btn ghost" data-goto-day="'+sk+'">Tag öffnen</button></div></div>';
     html+='<div class="foot">'+cnt+(cnt===1?" Einheit":" Einheiten")+' in diesem Monat. Tippe auf einen Tag für Details, auf einen Haken zum Abhaken.</div>';
   }else if(cv==="week"){
@@ -2116,6 +2208,7 @@ function renderCalPage(){
         ids.map(id=>'<span class="pill" style="background:'+act(id).color+'">✓ '+esc(act(id).name)+'</span>').join("")+
         pl.map(id=>'<span class="pill ghost'+(k<tk?" missp":"")+'">'+(k<tk?"✕ ":"")+esc(act(id).name)+(k<tk?" verpasst":"")+'</span>').join("")+
         (FZ.has(k)?'<span class="pill frzp">'+frzIc(1)+'Streak geschützt</span>':"")+
+        (sickDay(k)?'<span class="pill skp">'+skIc()+'Krank · Streak pausiert</span>':"")+
         (!ids.length&&!pl.length?'<span class="muted small">Ruhetag</span>':"")+
         '</span><svg class="chev" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>';}
     html+='</div>';
@@ -2123,7 +2216,7 @@ function renderCalPage(){
     const k=key(d),pl=plannedFor(d),lg=state.log[k]||[];
     $("cv-sub").textContent=d.toLocaleDateString("de-DE",{weekday:"long"})+(k===tk?" · Heute":"");
     $("cv-title").textContent=d.getDate()+". "+MONTHS[d.getMonth()]+" "+y;
-    html=(FZ.has(k)?frzNote():"")+'<div class="foot">'+(pl.length?"Geplant: "+pl.map(id=>esc(act(id).name)).join(", "):"Laut Plan Ruhetag")+'. Tippe an, was du gemacht hast.</div>'+
+    html=(FZ.has(k)?frzNote():"")+sickNote(k)+'<div class="foot">'+(pl.length?"Geplant: "+pl.map(id=>esc(act(id).name)).join(", "):"Laut Plan Ruhetag")+'. Tippe an, was du gemacht hast.</div>'+
       '<div class="checks">'+activeActs().map(a=>checkRow(a,lg.includes(a.id),pl.includes(a.id)?"Geplant":"",k)).join("")+
       lg.filter(id=>act(id)&&act(id).archived).map(id=>checkRow(act(id),true,"Gelöscht",k)).join("")+'</div>'+
       '<button class="btn ghost" data-open-day="'+k+'">Etwas Neues eintragen</button>';
@@ -2235,7 +2328,9 @@ function startWorkout(tplId){
   if(typeof woMin!=="undefined")woMin=false;
   const t=tplId?tplById(tplId):null;
   G().active={tpl:t?t.id:null,name:t?t.name:"Freies Training",start:Date.now(),entries:(t?t.ex:[]).map(ex=>Object.assign(newEntry(ex,t.sets&&t.sets[ex]),t.ss&&t.ss[ex]?{ss:t.ss[ex]}:{}))};
-  G().active.base=tplSnapOf(G().active.entries);gymConfirm=null;persist();renderGym();$("scroller").scrollTop=0;
+  G().active.base=tplSnapOf(G().active.entries);gymConfirm=null;
+  if(typeof sickComeback==="function")sickComeback(G().active);   // nach Krankheit: Comeback-Training leichter (63-krank.js)
+  persist();renderGym();$("scroller").scrollTop=0;
 }
 function finishWorkout(){
   const a=G().active;if(!a)return;
@@ -2249,6 +2344,7 @@ function finishWorkout(){
   let gid=gymActId();
   if(!gid){gid="gym";const ex=act("gym");if(ex)ex.archived=false;else state.activities.push({id:"gym",name:"Gym",color:COLORS[0],archived:false});syncGymDays()}
   if(gid){const l=(state.log[sess.date]||[]).slice();if(!l.includes(gid)){l.push(gid);state.log[sess.date]=l}}
+  if(typeof sickCbDone==="function")sickCbDone(a);
   persist();render();openSummary(sess.id);
 }
 function showSummary(s,prs){
@@ -2279,8 +2375,8 @@ function weekStrip(){
     (sel!==tk?'<button class="linkbtn" data-g-today>Heute</button>':"")+'<button class="iconbtn2" data-g-wk="1" aria-label="Nächste Woche">'+ICON.up.replace('M4 10l4-4 4 4','M6 4l4 4-4 4')+'</button></div><div class="ws-row">';
   for(let i=0;i<7;i++){
     const d=addDays(mon,i),k=key(d),lg=state.log[k]||[],did=lg.length>0||(musReady&&trainedEntries(k).length>0),pl=gid&&plannedFor(d).includes(gid),tp=tplById(tplIdFor(d));
-    const st=did?"done":(pl&&k<tk?"miss":"");
-    const icon=did?MK_OK:(st==="miss"?MK_X:'<span class="ws-n">'+d.getDate()+'</span>');
+    const st=did?"done":(pl&&k<tk?(sickDay(k)?"sick":"miss"):"");
+    const icon=did?MK_OK:(st==="miss"?MK_X:st==="sick"?skIc():'<span class="ws-n">'+d.getDate()+'</span>');
     h+='<button class="ws-d '+st+(k===sel?" sel":"")+(k===tk?" t":"")+'" data-g-sel="'+k+'" aria-pressed="'+(k===sel)+'" aria-label="'+d.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long"})+(did?", trainiert":st==="miss"?", verpasst":"")+'">'+
       '<span class="ws-w">'+DOW[i]+'</span><span class="ws-c">'+icon+'</span><span class="ws-dots">'+(pl?'<i class="p"></i>':"")+lg.filter(id=>id!==gid).slice(0,2).map(id=>'<i style="background:'+(act(id)?act(id).color:"var(--muted)")+'"></i>').join("")+'</span>'+
       '<span class="ws-tp">'+(pl&&tp?esc(tp.name):"")+'</span></button>';
@@ -2319,6 +2415,7 @@ function dayCards(k){
       rows:sessRows(s),mid:k===tk?recBar({ex:ids},null,"Zielmuskeln jetzt erholt"):"",btns:'<div class="th-btns"><button class="btn ghost" data-g-sess="'+s.id+'">Zusammenfassung</button>'+(st?'<button class="btn ghost" data-g-start="'+st.id+'">Nochmal starten</button>':'')+'</div>'});
   });
   const hero=!sess.length&&tpl&&k===tk&&!(gid&&lg.includes(gid));
+  if(k===tk&&typeof sickInline==="function")h+=sickInline();
   if(hero)h+=(typeof motInline==="function"?motInline():"")+todayHero(tpl,k);
   else if(!sess.length&&tpl){
     const sets=tplTotalSets(tpl),est=tplMinutes(tpl),done=gid&&lg.includes(gid),last=lastSessionOf(tpl.id),sw=!done&&k>=tk&&swapCands(k).length;
@@ -2326,6 +2423,7 @@ function dayCards(k){
     let o;
     if(k===tk)o={eyebrow:"Heute · abgehakt",kind:"ok",badge:okB,btns:'<button class="btn full big" data-g-start="'+tpl.id+'">'+ICON.dumbbell+' Nochmal starten</button>',foot:"Als Gym abgehakt, ohne aufgezeichnetes Workout."};
     else if(k<tk)o=done?{eyebrow:lab+" · abgehakt",kind:"ok",badge:okB,foot:"Als Gym abgehakt, ohne aufgezeichnetes Workout."}
+      :sickDay(k)?{eyebrow:lab+" · krank",kind:"sk",badge:'<span class="wc-badge sk">'+skIc()+'</span>',foot:"Krankheits-Modus: Dieser Tag zählt nicht als verpasst, deine Streak war pausiert."}
       :{eyebrow:lab+" · verpasst",kind:"x",badge:xB,btns:'<button class="btn ghost full" data-open-day="'+k+'">Nachtragen</button>'};
     else o={eyebrow:lab+" · geplant",btns:'<div class="th-btns"><button class="btn ghost" data-open-day="'+k+'">Bearbeiten</button>'+(sw?'<button class="btn ghost" data-g-swap="'+k+'">⇄ Tag tauschen</button>':'')+'</div>',foot:last?'Zuletzt am '+parse(last.date).toLocaleDateString("de-DE",{day:"numeric",month:"short"}):''};
     h+=wlist(Object.assign(base,o));
@@ -2991,12 +3089,12 @@ const FLAME_SVG='<svg viewBox="0 0 54 64" aria-hidden="true"><defs><linearGradie
 const SHARE_IC='<svg viewBox="0 0 24 24"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M6 11H5v9h14v-9h-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function sumHtml(s){
   const d=parse(s.date),tk=key(today()),gid=gymActId(),wk=weekKeys(d),si=wd(d),st=streakAt(s.date),n=sumNums(s);
-  const FZ=streakCalc().ps,cells=wk.map(k=>{const dd=parse(k),tr=k===s.date||done(k)||trainedEntries(k).length>0,pl=gid&&plannedFor(dd).includes(gid);return tr?"on":pl&&k<tk?(FZ.has(k)?"fz":"x"):pl?"pl":"n"});
+  const FZ=streakCalc().ps,cells=wk.map(k=>{const dd=parse(k),tr=k===s.date||done(k)||trainedEntries(k).length>0,pl=gid&&plannedFor(dd).includes(gid);return tr?"on":pl&&k<tk?(sickDay(k)?"sk":FZ.has(k)?"fz":"x"):pl?"pl":"n"});
   let a=si,b=si;while(a>0&&cells[a-1]==="on")a--;while(b<6&&cells[b+1]==="on")b++;
   let h='<div class="sum-flame">'+FLAME_SVG+'</div><div class="sum-num">'+st+'</div><div class="sum-sub">'+(st===1?"Training in Folge!":"Trainings in Folge!")+'</div>'+
     '<div class="foot sum-date">'+d.toLocaleDateString("de-DE",{weekday:"long",day:"numeric",month:"long",year:"numeric"})+(s.mci?" · aus MCI":" · "+new Date(s.start).toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})+" Uhr")+'</div>';
   h+='<section class="sweek glass">'+wk.map((k,i)=>'<span class="dw" style="grid-column:'+(i+1)+'">'+DOW[i]+'</span>').join("")+(b>a?'<span class="band" style="grid-column:'+(a+1)+' / '+(b+2)+'"></span>':"")+
-    wk.map((k,i)=>'<span class="dc" style="grid-column:'+(i+1)+'"><span class="bx '+cells[i]+(k===s.date?" me":"")+'">'+(cells[i]==="on"||cells[i]==="pl"?MK_OK:cells[i]==="x"?MK_X:cells[i]==="fz"?frzIc(1):parse(k).getDate())+'</span></span>').join("")+'</section>';
+    wk.map((k,i)=>'<span class="dc" style="grid-column:'+(i+1)+'"><span class="bx '+cells[i]+(k===s.date?" me":"")+'">'+(cells[i]==="on"||cells[i]==="pl"?MK_OK:cells[i]==="x"?MK_X:cells[i]==="fz"?frzIc(1):cells[i]==="sk"?skIc():parse(k).getDate())+'</span></span>').join("")+'</section>';
   if(typeof motPostHtml==="function")h+=motPostHtml(s);
   h+='<section class="sstats glass"><div><b>'+(n.vol?fmt(uW(Math.round(n.vol)))+" "+UL()+"":"–")+'</b><span>Bewegt</span></div><div><b>'+(n.dms?durH(n.dms):"–")+'</b><span>Dauer</span></div><div><b>'+(n.sets||"–")+'</b><span>Sätze</span></div></section>';
   h+='<section class="panel glass"><h2 class="h2">Trainierte Muskeln</h2>'+bodyPair(sessLoads(s),6,1)+'<div class="mlegend"><span>wenig</span><i></i><span>viel</span></div></section>';
@@ -3553,7 +3651,7 @@ function focusView(a){
 function overviewView(a){
   const s=woStats(a),n=a.entries.length,dn=a.entries.filter(isDoneEx).length,t=a.tpl&&tplById(a.tpl);
   let h='<section class="wo-head glass"><div class="row between"><div class="eyebrow-t"><i class="live"></i>Läuft</div><span class="row" style="gap:2px"><button class="linkbtn wo-minb" data-wo-min>'+MIN_IC+'Kurz raus</button><button class="linkbtn danger" data-g-cancel>Abbrechen</button></span></div>'+
-    '<h2 class="wo-title">'+esc(a.name)+'</h2>'+
+    '<h2 class="wo-title">'+esc(a.name)+'</h2>'+cbNote(a)+
     (n?'<div class="segs">'+a.entries.map(e=>{const d=e.sets.filter(x=>x.done).length;return '<i class="'+(e.sets.length&&d===e.sets.length?"on":d?"half":"")+'"></i>'}).join("")+'</div>':"")+
     '<div class="wo-meta"><div><span class="lbl">Zeit</span><b id="wo-timer">'+durClock(Date.now()-a.start)+'</b></div><div class="r"><span class="lbl">Übung</span><b>'+(n?Math.min(n,dn+1):0)+' / '+n+'</b></div></div>'+
     '<div class="wo-stats" id="wo-stats"><span><b>'+s.done+'</b>/'+s.all+' Sätze</span><span><b>'+fmt(uW(s.vol))+'</b> '+UL()+' Volumen</span></div>'+
@@ -3662,7 +3760,7 @@ function settingsInner(){
 }
 function planView(){
   const g=G(),t=today(),w=wd(t),S=SPLITS[g.split],L=planLoads(),goal=goalSets();
-  let h='<header class="titlebar"><div><div class="date">'+esc(S.name)+'</div><h1 class="brand">Training</h1></div><div class="streakpill glass"><svg viewBox="0 0 54 64" aria-hidden="true"><path d="M27 2c4 10 16 16 16 34a16 16 0 0 1-32 0c0-8 4-13 8-17 0 6 3 9 6 10-2-9 0-19 2-27z" fill="var(--tint)"/><path d="M27 32c2 5 7 8 7 15a7 7 0 0 1-14 0c0-5 3-8 5-10 0 3 1 4 2 5 0-4 0-7 0-10z" fill="#ffd27a"/></svg><b>'+streaks().cur+'</b></div></header>';
+  let h='<header class="titlebar"><div><div class="date">'+esc(S.name)+'</div><h1 class="brand">Training</h1></div><div class="streakpill glass'+(streakCalc().paused?' paused':'')+'"'+(streakCalc().paused?' title="Streak pausiert"':'')+'><svg viewBox="0 0 54 64" aria-hidden="true"><path d="M27 2c4 10 16 16 16 34a16 16 0 0 1-32 0c0-8 4-13 8-17 0 6 3 9 6 10-2-9 0-19 2-27z" fill="var(--tint)"/><path d="M27 32c2 5 7 8 7 15a7 7 0 0 1-14 0c0-5 3-8 5-10 0 3 1 4 2 5 0-4 0-7 0-10z" fill="#ffd27a"/></svg><b>'+streaks().cur+'</b></div></header>';
   h+='<div class="seg glass" style="grid-template-columns:1fr 1fr">'+[["kraft","Kraft"],["cardio","Cardio"]].map(m=>'<button class="'+(gymMode===m[0]?"on":"")+'" data-gm="'+m[0]+'">'+m[1]+'</button>').join("")+'</div>';
   if(gymMode==="cardio")return h+cardioView();
   h+=weekStrip()+dayCards(gymSel||key(t));
@@ -4116,7 +4214,7 @@ function habitStreak(a){
   if(a.quota){let n=0;for(let d=t,i=0;i<520;i++,d=addDays(d,-7)){const c=weekDone(a,d);if(c>=a.quota)n++;else if(i>0)break;if(weekKeys(d)[0]<first)break}return {n,u:n===1?"Woche":"Wochen"}}
   const any=state.plans.some(p=>(p.days[a.id]||[]).length);let n=0;
   for(let d=t,i=0;i<3000;i++,d=addDays(d,-1)){const k=key(d);if(k<first)break;
-    if((state.log[k]||[]).includes(a.id))n++;else if(k!==tk&&(!any||plannedA(a,d)))break}
+    if((state.log[k]||[]).includes(a.id))n++;else if(k!==tk&&!sickDay(k)&&(!any||plannedA(a,d)))break}
   return {n,u:n===1?"Tag":"Tage"};
 }
 function hMeta(a){if(!isHabit(a))return "";const s=habitStreak(a),t=today(),parts=[];
@@ -4144,7 +4242,7 @@ function renderToday(){
   $("today-sub").textContent=planned.length||quota.length?(left?left+" offen":"Alles erledigt 🔒"):"Ruhetag";
   const mon=addDays(t,-wd(t)),FZ=streakCalc().ps;let w="";
   for(let i=0;i<7;i++){const d=addDays(mon,i),dk=key(d),p=plannedFor(d).length,dn=done(dk);
-    const cls=dn?"done":(p&&dk<k?(FZ.has(dk)?"miss frz":"miss"):(p?"plan":""));
+    const cls=dn?"done":(p&&dk<k?(sickDay(dk)?"miss sick":FZ.has(dk)?"miss frz":"miss"):(p?"plan":""));
     w+='<div class="wk '+cls+(dk===k?" today":"")+'"><i></i>'+DOW[i]+'</div>'}
   $("week").innerHTML=w;
   try{renderWeekReview()}catch(e){console.warn(e)}
@@ -4230,6 +4328,8 @@ function dcInsight(D){
   return "Nach ein paar Check-ins mit Training zeigt dir Locked In hier, wie dein Schlaf deine Leistung beeinflusst.";
 }
 function dcBrief(d,sc){
+  // krank: kein Trainingsplan, nur Erholung (63-krank.js)
+  {const p=sickNow();if(p)return "<b>"+(p.kind==="v"?"Verletzt":"Krankheits-Modus")+":</b> Heute ist Erholung dran. Dein Training und deine Streak sind pausiert, nichts geht verloren.";}
   const t=today(),k=key(t),g=G(),gid=gymActId(),planned=plannedFor(t),logged=state.log[k]||[];
   const trainDay=!!gid&&planned.includes(gid),tpl=trainDay?tplById(tplIdFor(t)):null;
   const doneGym=(gid&&logged.includes(gid))||sessions.some(s=>s.date===k&&!s.mci)||false;
@@ -4255,6 +4355,7 @@ function dcBrief(d,sc){
   return out.join(" ");
 }
 function dcFocus(D){
+  {const p=sickNow();if(p)return "Schlaf ist jetzt dein bestes Training: Im Schlaf erholt sich dein Körper am besten. Trink über den Tag verteilt genug, zum Beispiel Wasser oder Tee.";}
   const t=today(),k=key(t),h=new Date().getHours(),yk=key(addDays(t,-1)),F=state.food,fg=F&&F.goals||{};
   const planned=plannedFor(t),logged=state.log[k]||[],left=planned.filter(id=>!logged.includes(id)).length,cur=streaks().cur;
   if(h>=18&&left&&cur>0){const r=streakCalc();return "Deine Streak von <b>"+cur+" "+(cur===1?"Tag":"Tagen")+"</b> hängt an "+(left===1?"einem offenen Punkt":left+" offenen Punkten")+". Noch "+(24-h)+" Stunden."+(r.on&&r.tok?" Schaffst du es nicht, springt dein Streak-Schutz ein.":"")}
@@ -4284,7 +4385,7 @@ function renderDay(){
   if(!step){let bars="";const mon=addDays(t,-wd(t));for(let i=0;i<7;i++){const dk=key(addDays(mon,i)),v=D[dk]&&D[dk].s;bars+='<div class="dc-bar'+(dk===k?" now":"")+'"><i style="height:'+(v?v*15:5)+'%"'+(v?"":' class="nil"')+'></i><span>'+DOW[i]+'</span></div>'}
     x+='<div class="dc-sleep"><div class="dc-fh">Schlaf diese Woche</div><div class="dc-bars">'+bars+'</div><div class="dc-ins">'+dcInsight(D)+'</div></div>'}
   el.innerHTML=x;
-  if(typeof renderMot==="function")renderMot();
+  if(typeof renderMot==="function"){renderMot();renderSick()}
 }
 $("day-card").addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;e.stopPropagation();const k=key(today());state.daily=state.daily||{};
@@ -4687,7 +4788,7 @@ function stBody(){
       '<div class="accprev"><span class="accprev-btn">Workout starten</span><span class="accprev-dot"></span><span class="accprev-txt">Akzent</span></div>'+
       '<div class="foot">Die Hauptfarbe färbt Knöpfe, Streak und Markierungen, die Nebenfarbe den Verlauf.'+(S.accent||S.accent2?' <button class="linkbtn" data-st-accreset>Standardfarben</button>':'')+'</div>'+
       '<div class="act-name">Leiste</div>'+seg("data-st-nav",np,[["bottom","Unten"],["top","Oben"]])+
-      (np==="bottom"?'<div class="row between"><label class="small" for="st-lift">Abstand vom unteren Rand</label><span class="small muted" id="st-lift-val">'+lift+' px</span></div><input type="range" class="slider" id="st-lift" min="0" max="140" step="2" value="'+lift+'">':'')+tabCfgHtml())+
+      (np==="bottom"?'<div class="row between"><label class="small" for="st-lift">Abstand vom unteren Rand</label><span class="small muted" id="st-lift-val">'+lift+' px</span></div><input type="range" class="slider" id="st-lift" min="0" max="140" step="2" value="'+lift+'">':'')+tabCfgHtml()+homeCfgHtml())+
     sec("Training",'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',settingsInner()+
       '<button class="btn ghost full" data-st-quiz>Ziele &amp; Plan neu einrichten</button>')+
     sec("Streak",'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c2 5 7 7 7 13a7 7 0 0 1-14 0c0-4 2-6 4-8 0 3 1 4 3 5-1-4 0-7 0-10z" fill="currentColor"/></svg>',frzSetHtml())+
@@ -5056,7 +5157,7 @@ var J_IC='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10.5a2 2 0
 function jPrompt(k,d){const n=Math.floor(parse(k).getTime()/864e5)+(d.pOff||0);return d.pq&&d.pa?d.pq:J_PROMPTS[((n%J_PROMPTS.length)+J_PROMPTS.length)%J_PROMPTS.length]}
 function jRtDone(k,r){const d=jDay(k),x=(d.rt||{})[r.id]||[];return r.items.filter(i=>x.includes(i.id)).length}
 function jRtStreak(r){if(!r.items.length)return 0;let n=0,d=today();if(jRtDone(key(d),r)<r.items.length)d=addDays(d,-1);
-  for(let i=0;i<400;i++){if(jRtDone(key(d),r)>=r.items.length){n++;d=addDays(d,-1)}else break}return n}
+  for(let i=0;i<400;i++){if(jRtDone(key(d),r)>=r.items.length){n++;d=addDays(d,-1)}else if(sickDay(key(d))){d=addDays(d,-1)}else break}return n}
 function jOpts(attr,list,cur,off){return '<div class="dc-opts jopts" style="grid-template-columns:repeat('+list.length+',1fr)">'+list.map((o,i)=>{const v=off?i:i+1;return '<button class="'+(cur===v?"on":"")+'" '+attr+'="'+v+'" aria-pressed="'+(cur===v)+'"><span>'+o[0]+'</span><small>'+o[1]+'</small></button>'}).join("")+'</div>'}
 function jQ(t,inner){return '<div class="jq"><div class="jq-t">'+t+'</div>'+inner+'</div>'}
 function jDoneList(k){
@@ -5638,13 +5739,15 @@ function frzBody(){
   const last=r.prot.slice(-5).reverse();
   if(last.length)h+='<div class="act-name">Zuletzt geschützt</div><div class="frz-list">'+last.map(k=>'<button class="frz-row" data-frz-day="'+k+'">'+frzIc(1)+'<span class="frz-row-t"><b>'+parse(k).toLocaleDateString("de-DE",{weekday:"short",day:"numeric",month:"long"})+'</b><span class="foot">'+esc(frzMissed(k))+'</span></span>'+CHEV+'</button>').join("")+'</div>'+
     '<div class="foot">Doch geschafft und nur vergessen abzuhaken? Tippe auf den Tag und trag es nach. Dann bekommst du den Schutz zurück.</div>';
-  h+='<div class="foot">Warum? Laut einer Studie zur Gewohnheitsbildung (Lally u. a., 2010) bremst ein einzelner verpasster Tag eine neue Gewohnheit kaum. Wichtig ist, danach weiterzumachen.</div>'+
+  h+='<div class="sk-tip">Krank oder verletzt? Dann nutz lieber den <button class="linkbtn" data-sk-open style="padding:0">Krankheits-Modus</button>. Er pausiert deine Streak, ohne einen Schutz zu verbrauchen.</div>'+
+    '<div class="foot">Warum? Laut einer Studie zur Gewohnheitsbildung (Lally u. a., 2010) bremst ein einzelner verpasster Tag eine neue Gewohnheit kaum. Wichtig ist, danach weiterzumachen.</div>'+
     '<div class="tgls"><button class="tgl'+(r.on?" on":"")+'" data-frz-tg role="switch" aria-checked="'+r.on+'"><span class="tg-t"><b>Streak-Schutz verwenden</b><span class="foot">Aus: Jeder verpasste geplante Tag beendet deine Streak.</span></span><i></i></button></div>';
   return h;
 }
 function openFrz(){
   sheet("Streak-Schutz",frzBody(),(e,close)=>{
     if(e.target.closest("[data-frz-tg]")){frzToggle();$("sheet-body").innerHTML=frzBody();return}
+    if(e.target.closest("[data-sk-open]")){close();openSick();return}
     const d=e.target.closest("[data-frz-day]");if(d){close();openDay(d.dataset.frzDay)}
   });
 }
@@ -5653,7 +5756,8 @@ function frzSetHtml(){
   const r=streakCalc(),sa=(state.settings.streakActs||[]).filter(id=>act(id)&&!act(id).archived);
   return '<button class="st-link" data-frz-acts><span class="st-link-t"><b>Was zählt für die Streak</b><span class="foot">'+esc(sa.length?sa.map(id=>act(id).name).join(", "):"Alle Aktivitäten")+'</span></span>'+CHEV+'</button>'+
     '<div class="tgls"><button class="tgl'+(r.on?" on":"")+'" data-frz-tg role="switch" aria-checked="'+r.on+'"><span class="tg-t"><b>Streak-Schutz</b><span class="foot">Verpasst du einen geplanten Tag, rettet ein Schutz deine Streak. Für alle '+r.every+' Tage Streak gibt es einen neuen, höchstens '+r.max+'.</span></span><i></i></button></div>'+
-    (r.on?'<button class="st-link" data-frz-open><span class="st-link-t"><b>Dein Schutz: '+r.tok+' von '+r.max+'</b><span class="foot">'+(r.tok>=r.max?"Vorrat voll":"Nächster in "+r.next+" Streak-"+(r.next===1?"Tag":"Tagen"))+'</span></span>'+CHEV+'</button>':'');
+    (r.on?'<button class="st-link" data-frz-open><span class="st-link-t"><b>Dein Schutz: '+r.tok+' von '+r.max+'</b><span class="foot">'+(r.tok>=r.max?"Vorrat voll":"Nächster in "+r.next+" Streak-"+(r.next===1?"Tag":"Tagen"))+'</span></span>'+CHEV+'</button>':'')+
+    '<button class="st-link" data-sk-open><span class="st-link-t"><b>Krankheits-Modus</b><span class="foot">'+(sickNow()?"Läuft gerade · Streak pausiert":"Krank oder verletzt? Pausiert deine Streak")+'</span></span>'+CHEV+'</button>';
 }
 $("frz-stat").addEventListener("click",e=>{e.stopPropagation();openFrz()});
 $("page-set").addEventListener("click",e=>{
@@ -5697,9 +5801,11 @@ function motMood(){const tr=[],rs=[];Object.keys(J().days).forEach(k=>{const s=j
 function motCtx(){
   if(!appReady)return null;
   const t=today(),k=key(t),g=G();if(g.active||!motPlanned(k)||motTrained(k))return null;
+  // krank: kein Druck (63-krank.js)
+  if(sickDay(k))return null;
   const d=J().days[k]||{};if(d.mh)return null;
   const now=new Date(),h=now.getHours()+now.getMinutes()/60,dl=(state.daily||{})[k]||{},u=motUsual(),lateAt=(u!=null?u:17)+1;
-  let miss=0;for(let i=1;i<=14&&miss<3;i++){const dk=key(addDays(t,-i));if(!motPlanned(dk))continue;if(motTrained(dk))break;miss++}
+  let miss=0;for(let i=1;i<=14&&miss<3;i++){const dk=key(addDays(t,-i));if(!motPlanned(dk)||sickDay(dk))continue;if(motTrained(dk))break;miss++}
   const base={k,h,u,miss,tpl:heroTpl()};
   if(d.cm)return Object.assign(base,{v:h<d.cm?"commit":h<d.cm+.25?"now":"broken",cm:d.cm});
   if((dl.e&&dl.e<=2||d.mood&&d.mood<=2||d.stress>=4)&&h>=Math.min(12,lateAt-4))return Object.assign(base,{v:"low"});
@@ -5781,6 +5887,8 @@ function motClick(e){
   if("motCancel" in d){motUi=null;renderMot();if(page==="gym")rgKeep();return true}
   if("motAt" in d){const x=jDay(k,true);x.cm=+d.motAt;persist();motUi=null;renderMot();if(page==="gym")rgKeep();toast("Abgemacht: "+motHH(x.cm)+" Uhr. Locked In erinnert dich hier daran.");return true}
   if("motWhy" in d){const x=jDay(k,true);x.skip=jToggle(x.skip,d.motWhy);x.mh=1;delete x.cm;persist();motUi=null;renderMot();const r=streakCalc();
+    // krank oder verletzt: gleich den Krankheits-Modus anbieten (pausiert die Streak, statt Schutz zu verbrauchen)
+    if(d.motWhy==="Krank / verletzt"&&!sickNow()){openSick();return true}
     motToast("Okay, heute Pause","Ruh dich aus. Morgen ist Comeback-Tag."+(r.on&&r.tok?" Dein Streak-Schutz fängt heute ab.":""));return true}
   return false;
 }
@@ -5813,7 +5921,12 @@ $("page-gym").addEventListener("click",e=>{
 },true);
 // Journal: Abschnitt „Dein Training“ an Gym-Tagen
 function jGymHtml(k){
-  const tk=key(today()),tr=motTrained(k),pl=motPlanned(k),d=jDay(k);
+  const tk=key(today()),tr=motTrained(k),pl=motPlanned(k),d=jDay(k),sp=!tr&&typeof skOf==="function"?skOf(k):null;
+  // Krankheitstag: Befinden statt Trainingsfragen (63-krank.js)
+  if(sp){const v=sp.f[k],F=k===tk?SK_FEEL:SK_FEEL.slice(0,4);
+    return '<section class="panel glass jgym"><h2 class="h2">'+(sp.kind==="v"?"🩹 Verletzt":"🤒 Gute Besserung")+'</h2>'+
+      jQ("Wie ging’s dir "+(k===tk?"heute":"an diesem Tag")+"?",'<div class="dc-opts jopts" style="grid-template-columns:repeat('+F.length+',1fr)">'+F.map((o,i)=>'<button class="'+(v===i+1?"on":"")+'" data-sk-feel="'+(i+1)+'" data-sk-day="'+k+'"><span>'+o[0]+'</span><small>'+o[1]+'</small></button>').join("")+'</div>')+
+      '<div class="foot">Deine Streak ist an diesem Tag pausiert. '+(k===tk?'„Wieder fit“ beendet den Krankheits-Modus.':'')+'</div></section>'}
   if(tr)return '<section class="panel glass jgym"><h2 class="h2">Dein Training</h2>'+
     jQ("Was hat dich heute motiviert, ins Gym zu gehen?",'<div class="exchips jchips">'+MOT_TAGS.map(t=>'<button class="fchip'+((d.mot||[]).includes(t)?" on":"")+'" data-jm-tag="'+esc(t)+'">'+esc(t)+'</button>').join("")+'</div>'+
       '<input class="field jin" data-jm-t="motx" maxlength="200" placeholder="In deinen Worten (optional)" value="'+esc(d.motx||"")+'">')+
@@ -5823,7 +5936,11 @@ function jGymHtml(k){
   if(pl&&(k<tk||d.mh))return '<section class="panel glass jgym"><h2 class="h2">Training ausgefallen</h2>'+
     jQ("Was hat dich abgehalten?",'<div class="exchips jchips">'+MOT_SKIP.map(t=>'<button class="fchip'+((d.skip||[]).includes(t)?" on":"")+'" data-jm-skip="'+esc(t)+'">'+esc(t)+'</button>').join("")+'</div>')+
     '<div class="foot">Ehrlich sein hilft: Wenn du weißt, was dich abhält, findest du leichter einen Weg. Locked In nutzt das beim nächsten Mal.</div></section>';
-  if(pl&&k===tk)return '<section class="panel glass jgym"><h2 class="h2">Heute ist Gym-Tag</h2><div class="foot">Nach dem Training fragt dich das Journal hier, was dich motiviert hat. Fehlt dir gerade die Motivation, schau auf „Heute“.</div></section>';
+  // Gym-Tag, noch nicht trainiert: die Frage steht trotzdem schon da
+  if(pl&&k===tk)return '<section class="panel glass jgym"><h2 class="h2">Heute ist Gym-Tag</h2>'+
+    jQ("Was motiviert dich heute, ins Gym zu gehen?",'<div class="exchips jchips">'+MOT_TAGS.map(t=>'<button class="fchip'+((d.mot||[]).includes(t)?" on":"")+'" data-jm-tag="'+esc(t)+'">'+esc(t)+'</button>').join("")+'</div>'+
+      '<input class="field jin" data-jm-t="motx" maxlength="200" placeholder="In deinen Worten (optional)" value="'+esc(d.motx||"")+'">')+
+    '<div class="foot">Nach dem Training kommen hier noch dein Gefühl danach und eine Nachricht an dich dazu. Fehlt dir gerade die Motivation, schau auf „Heute“.</div></section>';
   return "";
 }
 $("page-journal").addEventListener("click",e=>{
@@ -5837,13 +5954,20 @@ $("page-journal").addEventListener("input",e=>{const f=e.target.dataset&&e.targe
 // Zusammenfassung direkt nach dem Training: Wie fühlst du dich? Nachricht an dich
 function motPostHtml(s){
   if(s.mci||s.date<key(addDays(today(),-1)))return "";const d=jDay(s.date),p=d.post;
-  return '<section class="panel glass mpost"><h2 class="h2">Wie fühlst du dich jetzt?</h2>'+jOpts("data-mp-post",MOT_POST,p)+
+  return '<section class="panel glass mpost"><h2 class="h2">Was hat dich heute motiviert, ins Gym zu gehen?</h2>'+
+    '<div class="exchips jchips">'+MOT_TAGS.map(t=>'<button class="fchip'+((d.mot||[]).includes(t)?" on":"")+'" data-mp-tag="'+esc(t)+'">'+esc(t)+'</button>').join("")+'</div>'+
+    '<input class="field jin" data-mp-motx maxlength="200" placeholder="In deinen Worten (optional)" value="'+esc(d.motx||"")+'" style="flex:none">'+
+    '<h2 class="h2" style="margin-top:6px">Wie fühlst du dich jetzt?</h2>'+jOpts("data-mp-post",MOT_POST,p)+
     (p>=4?'<div class="act-name">Halt das fest</div><textarea class="fnote jta" data-mp-msg maxlength="300" placeholder="Schreib deinem Ich, das mal keinen Bock hat, einen Satz. Zum Beispiel: Du bereust es nie.">'+esc(d.msg||"")+'</textarea><div class="foot">Fehlt dir mal die Motivation, zeigt dir Locked In genau diesen Satz.</div>'
       :p?'<div class="foot">Gespeichert. Gerade die zähen Tage machen dich stärker.</div>':'<div class="foot">Deine Antwort hilft dir später, wenn die Motivation mal fehlt.</div>')+'</section>';
 }
-$("sum-root").addEventListener("click",e=>{const b=e.target.closest("[data-mp-post]");if(!b||!sumId)return;const s=sessionById(sumId);if(!s)return;
-  const x=jDay(s.date,true),v=+b.dataset.mpPost;x.post=x.post===v?undefined:v;x.ts=Date.now();persist();drawSummary()});
-$("sum-root").addEventListener("input",e=>{if(!e.target.dataset||!("mpMsg" in e.target.dataset)||!sumId)return;const s=sessionById(sumId);if(s)motSet(s.date,"msg",e.target.value,300)});
+$("sum-root").addEventListener("click",e=>{const b=e.target.closest("[data-mp-post],[data-mp-tag]");if(!b||!sumId)return;const s=sessionById(sumId);if(!s)return;
+  const x=jDay(s.date,true);
+  if("mpTag" in b.dataset){x.mot=jToggle(x.mot,b.dataset.mpTag);if(!x.mot.length)delete x.mot}
+  else{const v=+b.dataset.mpPost;x.post=x.post===v?undefined:v}
+  x.ts=Date.now();persist();drawSummary()});
+$("sum-root").addEventListener("input",e=>{const ds=e.target.dataset;if(!ds||!sumId)return;const s=sessionById(sumId);if(!s)return;
+  if("mpMsg" in ds)motSet(s.date,"msg",e.target.value,300);else if("mpMotx" in ds)motSet(s.date,"motx",e.target.value,200)});
 
 // ---------- Geräte & Hersteller: verschiedene Maschinen pro Übung ----------
 // Jeder Hersteller baut anders (Hebel, Übersetzung, Schlitten), deshalb sind Gewichte zwischen Maschinen nicht vergleichbar.
@@ -5967,6 +6091,189 @@ $("page-set").addEventListener("click",e=>{const b=e.target.closest("[data-g-mac
 $("page-stats").addEventListener("click",e=>{const b=e.target.closest("[data-s-mach]");if(!b||!statDetail)return;const v=b.dataset.sMach;
   statMach=v==="*"?null:{ex:statDetail,m:v||null};const y=$("scroller").scrollTop;renderStats();$("scroller").scrollTop=y});
 
+// ---------- Krankheits-Modus: Streak pausieren, gesund werden, Comeback ----------
+// Starten: Link „Krank? Streak pausieren“ auf „Heute“, Einstellungen → Streak, Streak-Schutz-Fenster, oder „Heute geht nicht“ → „Krank / verletzt“.
+// Während der Krankheit: Streak pausiert (Zahl bleibt stehen, kein Schutz verbraucht), Karte „Gute Besserung“ mit Befinden, Verlauf,
+// Rat nach der Hals-Regel (Mayo Clinic, Harvard Health), Trinken und kleine Erholungs-Liste. Keine Motivations-Karte, kein Druck.
+// Wieder fit: Comeback-Plan, die nächsten 1–3 Trainings werden automatisch leichter (erst halbe Sätze, dann drei Viertel).
+// Daten: state.sick (siehe 05-plan-streak-logic.js), state.settings.cb = {n, done} für den Comeback-Plan.
+// Wird früh aufgerufen (renderHeader beim Start): nur Funktionen und var, kein const/let außerhalb.
+var SK_SYM={k:["Schnupfen","Halsschmerzen","Husten","Fieber","Gliederschmerzen","Magen-Darm","Kopfschmerzen","Sonstiges"],v:["Schulter","Rücken","Knie","Arm / Hand","Bein / Fuß","Sonstiges"]};
+var SK_FEEL=[["😵","Übel"],["🤒","Schlecht"],["😐","Geht so"],["🙂","Besser"],["💪","Wieder fit"]];
+var SK_COL=["#e5484d","#f2994a","#f2c94c","#7bd88f","#2fbf71"];
+var SK_TODO=[["sleep","Früh schlafen gehen"],["warm","Etwas Warmes essen"],["air","10 Minuten frische Luft"]];
+function skIc(){return '<svg class="sk-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4.5a2.5 2.5 0 0 1 5 0v8.6a4.5 4.5 0 1 1-5 0z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12.5 9v6.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="12.5" cy="16.8" r="2" fill="currentColor"/></svg>'}
+function skDays(p){return Math.max(1,Math.round((parse(p.to||key(today()))-parse(p.from))/864e5)+1)}
+function skFever(p){return !!p&&p.kind==="k"&&p.sym.includes("Fieber")}
+function skOf(k){return sickList().find(p=>k>=p.from&&k<=(p.to||key(today())))||null}
+function skShort(k){return parse(k).toLocaleDateString("de-DE",{day:"numeric",month:"short"})}
+// Rat nach der „Hals-Regel“: nur Schnupfen/Halsschmerzen ohne Fieber = leicht bewegen ok; Fieber oder Beschwerden im Körper = Pause
+function skAdvice(p,feel){
+  if(!p)return "";
+  if(p.kind==="v")return "Trainier nur, was nicht weh tut, und lass die Verletzung ärztlich oder physiotherapeutisch anschauen. Andere Körperteile kannst du oft weiter trainieren, das zählt dann ganz normal.";
+  const S=p.sym||[];
+  if(S.includes("Fieber"))return "<b>Mit Fieber kein Training.</b> Ruh dich aus und trink viel. Zurück ins Gym erst, wenn du 24 Stunden ohne Fieber bist, und zwar ohne fiebersenkende Mittel. Sport mit Fieber kann das Herz belasten.";
+  const below=["Husten","Gliederschmerzen","Magen-Darm"].filter(x=>S.includes(x));
+  if(below.length)return "<b>Heute Pause.</b> "+below.join(" und ")+(below.length===1?" betrifft":" betreffen")+" den ganzen Körper. Er braucht die Energie jetzt zum Gesundwerden.";
+  if(S.length&&S.every(x=>x==="Schnupfen"||x==="Halsschmerzen"))return feel&&feel>=3?"Nur Schnupfen oder Halsschmerzen, kein Fieber und es geht dir besser? Ein Spaziergang oder ein leichtes Training mit halber Intensität ist meist okay. Fühlst du dich danach schlechter, mach Pause."
+    :"Nur Schnupfen oder Halsschmerzen? Leichte Bewegung ist dann meist okay, wenn du dich fit genug fühlst. Heute steht aber Erholung im Vordergrund.";
+  return "Hör auf deinen Körper: Erholung geht vor. Schlaf viel, trink genug und steig erst wieder ein, wenn es dir besser geht.";
+}
+// Streak-Karte auf „Heute“: pausiert anzeigen, Link zum Starten
+function sickHeader(){
+  const p=sickNow(),st=document.querySelector(".streak"),b=$("sick-start");
+  if(st)st.classList.toggle("paused",!!p);if(b)b.hidden=!!p;
+}
+function sickNote(k){const p=skOf(k);return p?'<div class="sk-note">'+skIc()+'<span><b>'+(p.kind==="v"?"Verletzt":"Krank")+'</b>, Streak pausiert. Dieser Tag zählt nicht als verpasst.</span></div>':""}
+// Karte „Gute Besserung“ auf „Heute“
+function renderSick(){
+  const el=$("sick-card");if(!el)return;sickHeader();const p=appReady?sickNow():null;
+  el.hidden=!p;if(!p){el.innerHTML="";return}
+  const k=key(today()),n=skDays(p),feel=p.f[k],nm=(prof().name||"").trim(),cur=streaks().cur,F=foodTotals(k),wg=(state.food&&state.food.goals&&state.food.goals.water)||2500,done=p.c[k]||[];
+  const days=[];for(let i=Math.max(0,n-7);i<n;i++)days.push(key(addDays(parse(p.from),i)));
+  const vals=days.filter(d=>p.f[d]).length;
+  let h='<div class="row between"><div class="eyebrow">'+skIc()+(p.kind==="v"?"Verletzt":"Krankheits-Modus")+' · Tag '+n+'</div><button class="linkbtn" data-sk-edit>Bearbeiten</button></div>'+
+    '<div class="dc-hi">Gute Besserung'+(nm?", "+esc(nm):"")+'.</div>'+
+    '<div class="small">Deine Streak ist pausiert bei <b>'+cur+(cur===1?' Tag':' Tagen')+'</b>. Geplante Tage zählen nicht als verpasst, und dein Streak-Schutz bleibt übrig.</div>'+
+    '<div class="dc-q"><div class="dc-qt">Wie geht’s dir heute?</div><div class="dc-opts" style="grid-template-columns:repeat(5,1fr)">'+SK_FEEL.map((o,i)=>'<button class="'+(feel===i+1?"on":"")+'" data-sk-feel="'+(i+1)+'"><span>'+o[0]+'</span><small>'+o[1]+'</small></button>').join("")+'</div></div>';
+  if(vals>=2)h+='<div><div class="dc-fh">Dein Verlauf</div><div class="dc-bars">'+days.map(d=>{const v=p.f[d];return '<div class="dc-bar'+(d===k?" now":"")+'"><i style="height:'+(v?v*20:6)+'%'+(v?';background:'+SK_COL[v-1]:'')+'"'+(v?'':' class="nil"')+'></i><span>'+DOW[wd(parse(d))]+'</span></div>'}).join("")+'</div></div>';
+  h+='<div class="sk-tip">'+skAdvice(p,feel)+'</div>'+
+    '<div class="dc-fh">Heute fürs Gesundwerden</div><div class="checks sk-todo">'+
+    '<div class="check sk-water"><span class="nm">Trinken <b>'+fmt(Math.round(F.water/100)/10)+' / '+fmt(wg/1000)+' l</b><span class="hbar"><i style="width:'+Math.min(100,Math.round(F.water/wg*100))+'%;background:#3e9bff"></i></span></span><button class="btn ghost" data-sk-water>+ 250 ml</button></div>'+
+    SK_TODO.filter(t=>t[0]!=="air"||!skFever(p)).map(t=>{const on=done.includes(t[0]);return '<button class="check'+(on?" on":"")+'" data-sk-todo="'+t[0]+'" aria-pressed="'+on+'"><span class="box">'+CHECK+'</span><span class="nm">'+t[1]+'</span></button>'}).join("")+'</div>'+
+    '<button class="btn full" data-sk-fit>💪 Ich bin wieder fit</button>'+
+    '<div class="foot">'+(n>=10?'<b>Schon '+n+' Tage.</b> Wenn es nicht besser wird, lass dich ärztlich durchchecken. ':'')+'Brustschmerzen, Herzstolpern oder Atemnot? Lass das sofort ärztlich abklären.</div>';
+  el.innerHTML=h;
+}
+// Training-Tab: Hinweis bei Krankheit oder laufendem Comeback-Plan
+function sickInline(){
+  const p=sickNow(),c=state.settings.cb;
+  if(p)return '<section class="panel glass sk-inl">'+'<div class="eyebrow">'+skIc()+(p.kind==="v"?"Verletzt":"Krankheits-Modus")+' · Tag '+skDays(p)+'</div><div class="small">Dein Training und deine Streak sind pausiert. '+skAdvice(p,p.f[key(today())])+'</div><button class="btn ghost full" data-sk-fit>💪 Ich bin wieder fit</button></section>';
+  if(c&&(c.done||0)<c.n)return '<section class="panel glass sk-inl cb"><div class="eyebrow">💪 Comeback-Plan</div><div class="small">Training '+((c.done||0)+1)+' von '+c.n+' wird automatisch leichter: '+((c.done||0)===0?'halb so viele Sätze und 10 % weniger Gewicht.':'drei Viertel der Sätze.')+' Hör auf deinen Körper.</div></section>';
+  return "";
+}
+function cbNote(a){return a&&a.cb?'<div class="cbnote">💪 Comeback-Training '+a.cb.i+' von '+a.cb.n+': '+(a.cb.i===1?'halb so viele Sätze, 10 % weniger Gewicht.':'drei Viertel der Sätze.')+' Hör auf deinen Körper.</div>':""}
+// Comeback: beim Start eines Workouts Sätze und Gewicht senken (wird in startWorkout aufgerufen)
+function sickComeback(a){
+  const c=state.settings.cb;if(!a||!c||(c.done||0)>=c.n)return;
+  const i=c.done||0,f=i===0?.5:.75,wf=i===0?.9:1;
+  a.entries.forEach(en=>{const keep=Math.max(1,Math.round(en.sets.filter(s=>s.type!=="w").length*f));let n=0;
+    en.sets=en.sets.filter(s=>s.type==="w"||(++n)<=keep);
+    if(wf<1)en.sets.forEach(s=>{const w=num(s.w);if(w>0)s.w=String(rndW(w*wf))});delete en.auto;delete en.bumped});
+  a.cb={i:i+1,n:c.n};
+}
+// … und nach dem Workout zählen (wird in finishWorkout aufgerufen)
+function sickCbDone(a){
+  const c=state.settings.cb;if(!a||!a.cb||!c)return;c.done=Math.max(c.done||0,a.cb.i);
+  if(c.done>=c.n){delete state.settings.cb;setTimeout(()=>toast("Comeback geschafft 💪 Ab jetzt wieder volles Training."),2600)}
+}
+// Wieder fit: Zeitraum beenden (heute zählt wieder normal) und Comeback-Plan anbieten
+function sickEnd(){
+  const p=sickNow();if(!p)return;const tk=key(today());
+  if(p.from>=tk){state.sick=sickList().filter(x=>x!==p);persist();render();renderSick();toast("Schön, dass es dir wieder gut geht!");return}
+  p.to=key(addDays(today(),-1));persist();render();renderSick();openComeback(p);
+}
+function openComeback(p){
+  const n=skDays(p),cbN=n<=3?1:n<=7?2:3,cur=streaks().cur,fe=skFever(p);
+  const steps=[];for(let i=0;i<cbN;i++)steps.push('<div class="cb-step"><b>'+(i+1)+'</b><span>'+(i===0?'Halb so viele Sätze, 10 % weniger Gewicht':'Drei Viertel der Sätze, normales Gewicht')+'</span></div>');
+  steps.push('<div class="cb-step"><b>✓</b><span>Danach wieder wie gewohnt</span></div>');
+  const body='<div class="cb-hero"><div class="cb-big">💪</div><b>Willkommen zurück!</b><span class="foot">Du warst '+n+(n===1?' Tag':' Tage')+' '+(p.kind==="v"?"verletzt":"krank")+'. Deine Streak läuft weiter bei '+cur+(cur===1?' Tag':' Tagen')+'.</span></div>'+
+    '<div class="act-name">Dein Comeback-Plan</div><div class="cb-list">'+steps.join("")+'</div>'+
+    (fe?'<div class="sk-tip"><b>Du hattest Fieber:</b> Trainier erst, wenn du 24 Stunden ohne Fieber bist, und zwar ohne fiebersenkende Mittel.</div>':'')+
+    '<div class="foot">Warum langsam? Nach einer Krankheit braucht dein Körper ein paar Tage, bis er wieder voll belastbar ist. Harvard Health rät, erst mal ungefähr die Hälfte zu machen und dann zu steigern. Bist du nach einem Training richtig erschöpft, mach 2 bis 3 Tage Pause.</div>'+
+    '<button class="btn full big" data-cb-yes>Comeback-Plan starten</button><button class="btn ghost full" data-cb-no>Ohne Plan, ich bin topfit</button>';
+  sheet("Wieder fit",body,(e,close)=>{
+    if(e.target.closest("[data-cb-yes]")){state.settings.cb={n:cbN,done:0};persist();close();render();toast("Comeback-Plan aktiv: Dein nächstes Training wird automatisch leichter.");return}
+    if(e.target.closest("[data-cb-no]")){delete state.settings.cb;persist();close();render()}
+  });
+}
+// Starten / bearbeiten
+function openSick(){
+  const cur=sickNow(),tk=key(today()),lim=key(addDays(today(),-14));
+  const ed=cur?{kind:cur.kind,sym:cur.sym.slice(),from:cur.from}:{kind:"k",sym:[],from:tk};let ask=false;
+  const body=()=>{
+    const opts=[[tk,"Heute"],[key(addDays(today(),-1)),"Gestern"],[key(addDays(today(),-2)),"Vorgestern"]],past=sickList().filter(p=>p.to).slice(-5).reverse();
+    let h=(cur?'':'<div class="small">Bist du krank oder verletzt, pausiert Locked In deine Streak. Geplante Tage zählen dann nicht als verpasst und brauchen keinen Streak-Schutz. Deine Zahl bleibt stehen, bis du wieder fit bist.</div>')+
+      '<div class="seg" style="grid-template-columns:1fr 1fr;background:var(--fill)"><button class="'+(ed.kind==="k"?"on":"")+'" data-sk-kind="k">🤒 Krank</button><button class="'+(ed.kind==="v"?"on":"")+'" data-sk-kind="v">🩹 Verletzt</button></div>'+
+      '<div class="act-name">'+(ed.kind==="v"?"Wo?":"Was hast du?")+'</div><div class="exchips">'+SK_SYM[ed.kind].map(x=>'<button class="fchip'+(ed.sym.includes(x)?" on":"")+'" data-sk-sym="'+esc(x)+'">'+esc(x)+'</button>').join("")+'</div>'+
+      '<div class="act-name">Seit wann?</div><div class="exchips">'+opts.map(o=>'<button class="fchip'+(ed.from===o[0]?" on":"")+'" data-sk-from="'+o[0]+'">'+o[1]+'</button>').join("")+'</div>'+
+      '<div class="row st-hrow"><label class="small" for="sk-date">Datum</label><input type="date" class="field" id="sk-date" min="'+lim+'" max="'+tk+'" value="'+ed.from+'"></div>'+
+      (ed.sym.length?'<div class="sk-tip">'+skAdvice(ed,null)+'</div>':'')+
+      '<div class="foot">Brustschmerzen, Herzstolpern oder Atemnot? Lass das sofort ärztlich abklären. Locked In ersetzt keinen Arztbesuch.</div>';
+    if(!cur)h+='<button class="btn full big" data-sk-go>Krankheits-Modus starten</button>';
+    else h+='<button class="btn full" data-sk-save>Speichern</button><button class="btn ghost full" data-sk-fit>💪 Ich bin wieder fit</button>'+
+      (ask?'<div class="confirm"><div class="small">Krankheits-Modus löschen? Die Tage zählen dann wieder ganz normal, auch für deine Streak.</div><div class="row"><button class="btn danger" data-sk-del-yes>Löschen</button><button class="btn ghost" data-sk-del-no>Abbrechen</button></div></div>'
+        :'<button class="linkbtn danger" data-sk-del style="align-self:center">Löschen (war ein Versehen)</button>');
+    if(past.length)h+='<div class="act-name">Frühere Pausen</div><div class="sk-hist">'+past.map(p=>'<div><b>'+skShort(p.from)+(p.to!==p.from?' – '+skShort(p.to):'')+'</b><span class="foot">'+skDays(p)+(skDays(p)===1?' Tag':' Tage')+(p.sym.length?' · '+esc(p.sym.join(", ")):'')+'</span></div>').join("")+'</div>';
+    return h;
+  };
+  const redraw=()=>{$("sheet-body").innerHTML=body()};
+  sheet(cur?"Krankheits-Modus":"Krank oder verletzt?",body(),(e,close)=>{
+    const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+    if("skKind" in d){if(ed.kind!==d.skKind){ed.kind=d.skKind;ed.sym=[]}redraw();return}
+    if("skSym" in d){ed.sym=jToggle(ed.sym,d.skSym);redraw();return}
+    if("skFrom" in d){ed.from=d.skFrom;redraw();return}
+    if("skGo" in d){const p={id:"k"+uid(),from:ed.from,to:null,kind:ed.kind,sym:ed.sym.slice(),f:{},c:{}};state.sick=sickList().concat(p);
+      persist();close();render();renderSick();const r=streakCalc();toast("Gute Besserung! Deine Streak ist pausiert bei "+r.cur+(r.cur===1?" Tag.":" Tagen."));return}
+    if("skSave" in d){cur.kind=ed.kind;cur.sym=ed.sym.slice();cur.from=ed.from;persist();close();render();renderSick();toast("Gespeichert");return}
+    if("skFit" in d){close();sickEnd();return}
+    if("skDel" in d){ask=true;redraw();return}
+    if("skDelNo" in d){ask=false;redraw();return}
+    if("skDelYes" in d){state.sick=sickList().filter(x=>x!==cur);persist();close();render();renderSick();toast("Krankheits-Modus gelöscht");return}
+  });
+  $("sheet-body").addEventListener("change",e=>{if(e.target.id!=="sk-date")return;const v=e.target.value;if(/^\d{4}-\d{2}-\d{2}$/.test(v)&&v>=lim&&v<=tk){ed.from=v;redraw()}});
+}
+// Befinden eintragen (Karte auf „Heute“ und Journal). 5 = Wieder fit beendet den Modus
+function sickFeel(k,v){
+  const p=skOf(k);if(!p)return;if(p.f[k]===v&&v!==5)delete p.f[k];else p.f[k]=v;persist();
+  if(v===5&&k===key(today())){sickEnd();return}
+  renderSick();if(page==="journal")jKeep();
+}
+// Training-Tab: Klicks kommen dort nicht bis zum Dokument durch (der Training-Tab stoppt sie)
+$("page-gym").addEventListener("click",e=>{const b=e.target.closest("[data-sk-fit]");if(b)sickEnd()});
+document.addEventListener("click",e=>{
+  if(!e.target.isConnected||e.target.closest("#sheet-root"))return;
+  const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(b.id==="sick-start"||"skOpen" in d||"skEdit" in d){e.stopPropagation();openSick();return}
+  if("skFit" in d){e.stopPropagation();sickEnd();return}
+  if("skFeel" in d){e.stopPropagation();sickFeel(d.skDay||key(today()),+d.skFeel);return}
+  if("skWater" in d){e.stopPropagation();const k=key(today()),F=state.food,x=F.days[k]=F.days[k]||{items:[]};if(!Array.isArray(x.items))x.items=[];
+    x.items.push({id:"f"+uid(),ts:Date.now(),n:"Wasser",water:250});persist();renderSick();toast("+250 ml Wasser");return}
+  if("skTodo" in d){e.stopPropagation();const p=sickNow();if(!p)return;const k=key(today());p.c[k]=jToggle(p.c[k],d.skTodo);persist();renderSick();return}
+});
+
+// ---------- Startseite anpassen: Karten auf „Heute“ sortieren und ausblenden ----------
+// state.settings.home = {order:[…], off:[…]}. Die Karten bleiben im HTML an ihrem Platz, nur die Reihenfolge (CSS order) ändert sich.
+// Krankheits-, Motivations- und Speicher-Warnkarte stehen immer oben, wenn sie gebraucht werden.
+// Wird früh aufgerufen (renderHeader beim Start): nur Funktionen, kein const/let außerhalb.
+function homeDef(){return {day:["day-card","Dein Tag","☀️"],today:["today-card","Heute-Liste","✅"],quote:["quote-card","Zitat des Tages","💬"],badge:["badge-card","Abzeichen","🏅"],mus:["mus-card","Muskeln diese Woche","💪"]}}
+function homeCfg(){
+  const D=homeDef(),all=Object.keys(D),h=state.settings.home||{};
+  let order=Array.isArray(h.order)?h.order.filter((x,i,a)=>D[x]&&a.indexOf(x)===i):[];all.forEach(x=>{if(!order.includes(x))order.push(x)});
+  let off=Array.isArray(h.off)?h.off.filter(x=>D[x]):[];if(off.length>=all.length)off=[];
+  return {order,off};
+}
+function applyHome(){
+  const D=homeDef(),c=homeCfg();
+  c.order.forEach((id,i)=>{const el=$(D[id][0]);if(!el)return;el.style.order=String(10+i);el.classList.toggle("hc-off",c.off.includes(id))});
+}
+function homeCfgHtml(){
+  const D=homeDef(),c=homeCfg(),on=c.order.filter(x=>!c.off.includes(x)),off=c.order.filter(x=>c.off.includes(x));
+  const up='<svg viewBox="0 0 16 16"><path d="M3.5 10l4.5-4.5 4.5 4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',dn='<svg viewBox="0 0 16 16"><path d="M3.5 6l4.5 4.5 4.5-4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const row=(id,o,i)=>'<div class="tcr'+(o?"":" off")+'"><span class="tcr-ic hc-ic">'+D[id][2]+'</span><span class="tcr-n">'+D[id][1]+'</span>'+
+    (o?'<button class="tcr-b" data-hc-mv="'+id+'" data-d="-1" aria-label="'+D[id][1]+' weiter nach oben"'+(i===0?" disabled":"")+'>'+up+'</button><button class="tcr-b" data-hc-mv="'+id+'" data-d="1" aria-label="'+D[id][1]+' weiter nach unten"'+(i===on.length-1?" disabled":"")+'>'+dn+'</button>':'')+
+    '<button class="tgl tcr-tg'+(o?" on":"")+'" data-hc-tg="'+id+'" role="switch" aria-checked="'+o+'" aria-label="'+D[id][1]+' anzeigen"><i></i></button></div>';
+  return '<div class="act-name">Karten auf „Heute“</div><div class="tabcfg">'+on.map((id,i)=>row(id,true,i)).join("")+off.map(id=>row(id,false,0)).join("")+'</div>'+
+    '<div class="foot">Sortiere die Karten der Startseite mit den Pfeilen oder blende aus, was du nicht brauchst. Die Streak steht immer oben.</div>';
+}
+$("page-set").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;const d=b.dataset,c=homeCfg();
+  if("hcTg" in d){const id=d.hcTg;if(c.off.includes(id))c.off=c.off.filter(x=>x!==id);else{if(c.order.length-c.off.length<=1){toast("Mindestens eine Karte muss sichtbar bleiben.");return}c.off.push(id)}}
+  else if("hcMv" in d){const on=c.order.filter(x=>!c.off.includes(x)),i=on.indexOf(d.hcMv),j=i+(+d.d);if(i<0||j<0||j>=on.length)return;[on[i],on[j]]=[on[j],on[i]];c.order=on.concat(c.off)}
+  else return;
+  state.settings.home=c;persist();applyHome();stDraw();
+});
+
 // ---------- Start: läuft als Allerletztes, wenn alle Teile der App geladen sind ----------
 // Alles, was andere Teile braucht (Leiste, Startseite, Workout-Insel), gehört hierher und nicht in die einzelnen Dateien.
 appReady=true;
@@ -5976,6 +6283,7 @@ buildTabs();
   if(hp)setPage(hp);else if(!T.includes(page))setPage(T[0]);}
 islandTick();
 renderMot();
+renderSick();
 setTimeout(()=>placeInd(true),60);
 storeBoot();
 if(typeof tipSoon==="function")tipSoon(1600);
